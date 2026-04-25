@@ -1,0 +1,65 @@
+import Link from "next/link";
+
+type ContactCTAProps = {
+  title: string;
+  description: string;
+  whatsappHref: string;
+  email: string;
+  briefQuestions: readonly string[];
+};
+
+export default function ContactCTA({
+  title,
+  description,
+  whatsappHref,
+  email,
+  briefQuestions,
+}: ContactCTAProps) {
+  return (
+    <section
+      id="contacto"
+      className="section-anchor section-block section-shell"
+    >
+      <div className="surface-card-strong p-6 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+          <div>
+            <p className="section-eyebrow">Contacto</p>
+            <h2 className="mt-4 text-[clamp(2rem,4vw,2.8rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#171717]">
+              {title}
+            </h2>
+            <p className="mt-5 max-w-2xl text-[1.05rem] leading-8 text-[#4d4d4d]">
+              {description}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link className="button-primary" href={whatsappHref}>
+                Hablar por WhatsApp
+              </Link>
+              <a className="button-secondary" href={email}>
+                Enviar email
+              </a>
+            </div>
+          </div>
+
+          <article className="rounded-[12px] bg-[#fafafa] p-5 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] md:p-6">
+            <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+              Mini brief
+            </p>
+            <div className="mt-5 space-y-3">
+              {briefQuestions.map((question, index) => (
+                <div
+                  key={question}
+                  className="rounded-[8px] bg-white px-4 py-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]"
+                >
+                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-[#666666]">
+                    Punto {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-2 text-[0.98rem] leading-7 text-[#171717]">{question}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}

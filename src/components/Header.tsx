@@ -1,0 +1,98 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+
+type HeaderProps = {
+  brandName: string;
+  navigation: { label: string; href: string }[];
+  whatsappHref: string;
+};
+
+export default function Header({
+  brandName,
+  navigation,
+  whatsappHref,
+}: HeaderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-transparent bg-white/88 backdrop-blur-xl">
+      <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
+        <Link
+          href="/"
+          className="text-[0.98rem] font-semibold tracking-[-0.03em] text-[#171717]"
+        >
+          {brandName}
+        </Link>
+
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Principal">
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm text-[#4d4d4d] hover:text-[#171717]"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden md:block">
+          <Link className="button-primary" href={whatsappHref}>
+            Hablar por WhatsApp
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          className="surface-card flex h-11 w-11 items-center justify-center md:hidden"
+          aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <span className="sr-only">Menú</span>
+          <span className="flex w-5 flex-col gap-1.5">
+            <span
+              className={`h-px bg-[#171717] transition-transform ${
+                isOpen ? "translate-y-[7px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px bg-[#171717] transition-opacity ${
+                isOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`h-px bg-[#171717] transition-transform ${
+                isOpen ? "-translate-y-[7px] -rotate-45" : ""
+              }`}
+            />
+          </span>
+        </button>
+      </div>
+
+      {isOpen ? (
+        <div className="border-t border-[#ebebeb] bg-white md:hidden">
+          <div className="section-shell flex flex-col gap-4 py-5">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-base text-[#4d4d4d] hover:text-[#171717]"
+                onClick={closeMenu}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link className="button-primary mt-2" href={whatsappHref} onClick={closeMenu}>
+              Hablar por WhatsApp
+            </Link>
+          </div>
+        </div>
+      ) : null}
+    </header>
+  );
+}
