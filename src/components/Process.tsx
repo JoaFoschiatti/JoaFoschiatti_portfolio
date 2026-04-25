@@ -23,7 +23,10 @@ export default function Process({ steps }: ProcessProps) {
               style={{ backgroundColor: step.color }}
               aria-hidden
             />
-            <p className="mt-5 font-mono text-[0.72rem] uppercase tracking-[0.16em]" style={{ color: step.color }}>
+            <p
+              className="mt-5 font-mono text-[0.72rem] uppercase tracking-[0.16em]"
+              style={{ color: step.labelColor ?? step.color }}
+            >
               {step.label}
             </p>
             <h3 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">

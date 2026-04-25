@@ -7,7 +7,7 @@
   --color-subtle: #666666;
   --color-line: #ebebeb;
   --color-surface: #fafafa;
-  --color-link: #0072f5;
+  --color-link: #005bb8;
   --color-focus: hsla(212, 100%, 48%, 1);
   --workflow-understand: #0a72ef;
   --workflow-preview: #de1d8d;
@@ -190,10 +190,13 @@ summary:focus-visible {
 
 .inline-link {
   color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .inline-link:hover {
-  color: #0059c9;
+  color: #004c99;
 }
 
 .hairline {

@@ -22,10 +22,10 @@ export default function Footer({
           <p className="mt-3 max-w-xl text-sm leading-7 text-[#666666]">{summary}</p>
         </div>
         <div className="flex flex-wrap items-center gap-4 text-sm text-[#4d4d4d]">
-          <a aria-label="Ir al perfil de GitHub" href={githubUrl} target="_blank" rel="noreferrer">
+          <a href={githubUrl} target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a aria-label="Enviar un correo electrónico" href={`mailto:${email}`}>
+          <a href={`mailto:${email}`}>
             {email}
           </a>
         </div>

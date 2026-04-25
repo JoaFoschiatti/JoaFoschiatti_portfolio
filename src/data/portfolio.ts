@@ -42,6 +42,7 @@ export type ProcessStep = {
   title: string;
   description: string;
   color: string;
+  labelColor?: string;
 };
 
 export type TrustCard = {
@@ -60,7 +61,8 @@ export const profile = {
   fullName: "Joaquín Sánchez Foschiatti",
   location: "Rosario / Santa Fe / Argentina",
   siteUrl: "",
-  whatsappNumber: "TODO_COMPLETAR_NUMERO",
+  whatsappNumber: "5493482555038",
+  whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
     "Desarrollo páginas y sistemas de gestión para negocios que quieren operar mejor.",
   heroSubtitle:
@@ -301,6 +303,7 @@ export const processSteps = [
     description:
       "Relevo el flujo actual, los problemas, los usuarios y las prioridades antes de escribir código.",
     color: "#0a72ef",
+    labelColor: "#0a5ec0",
   },
   {
     label: "PROBAR",
@@ -308,6 +311,7 @@ export const processSteps = [
     description:
       "Diseño, desarrollo y valido una versión concreta para ajustar con feedback real.",
     color: "#de1d8d",
+    labelColor: "#b4237c",
   },
   {
     label: "PUBLICAR",
@@ -315,6 +319,7 @@ export const processSteps = [
     description:
       "Deploy, dominio, base de datos, backups, documentación y mejoras posteriores.",
     color: "#ff5b4f",
+    labelColor: "#d92d20",
   },
 ] satisfies ProcessStep[];
 
