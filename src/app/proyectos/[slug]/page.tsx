@@ -34,21 +34,26 @@ export async function generateMetadata(
   return {
     title: `${project.name} — ${project.category}`,
     description: project.description,
-    alternates: profile.siteUrl
-      ? {
-          canonical: `${profile.siteUrl}/proyectos/${project.slug}`,
-        }
-      : undefined,
+    alternates: {
+      canonical: `${profile.siteUrl}/proyectos/${project.slug}`,
+    },
     openGraph: {
       title: `${project.name} — ${project.category}`,
       description: project.description,
+      url: `${profile.siteUrl}/proyectos/${project.slug}`,
       type: "article",
       locale: "es_AR",
+      images: [
+        {
+          url: `${profile.siteUrl}/opengraph-image`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.name} — ${project.category}`,
       description: project.description,
+      images: [`${profile.siteUrl}/twitter-image`],
     },
   };
 }

@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JoaFoschiatti Portfolio
 
-## Getting Started
+Portfolio en Next.js (App Router + TypeScript) con página principal one-page y páginas de caso por proyecto.
 
-First, run the development server:
+## Deploy en Vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Dominio principal:** https://joafoschiatti.com
+- **Dominio secundario:** https://www.joafoschiatti.com
+- **Canonical:** https://joafoschiatti.com
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Pasos resumidos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Importar/conectar este repositorio en Vercel.
+2. Ir a **Project Settings > Domains**.
+3. Agregar `joafoschiatti.com`.
+4. Agregar `www.joafoschiatti.com`.
+5. Configurar `joafoschiatti.com` como dominio principal/canónico.
+6. Configurar redirect de `www` hacia `joafoschiatti.com` desde Vercel (si el dashboard lo permite).
+7. Copiar exactamente los DNS que muestre Vercel para el proyecto/dominio.
+8. En Spaceship: **Advanced DNS Manager > DNS records > Custom records**.
+9. Crear o actualizar los registros exactamente como los mostró Vercel.
+10. Verificar HTTPS, sitemap, robots, metadata social y CTA de WhatsApp.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Importante
 
-## Learn More
+- No hardcodear como única verdad registros DNS si no fueron obtenidos del dashboard/CLI de Vercel.
+- Si Vercel muestra un CNAME con punto final (`.`), copiarlo exactamente como aparece.
+- Si hay conflicto con registros existentes, reemplazar únicamente los que colisionen con `@` (apex) o `www`, sin borrar MX/TXT de email.
 
-To learn more about Next.js, take a look at the following resources:
+### DNS a configurar en Spaceship
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Esta tabla debe completarse con los valores **exactos** que devuelva Vercel para este proyecto.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Host/Name | Type | Value | TTL (si aplica) | Acción |
+|---|---|---|---|---|
+| @ | (según Vercel) | (según Vercel) | (según Vercel) | crear o reemplazar si hay conflicto |
+| www | (según Vercel) | (según Vercel) | (según Vercel) | crear o reemplazar si hay conflicto |
 
-## Deploy on Vercel
+### Verificación final sugerida
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `https://joafoschiatti.com` responde con HTTPS válido.
+- `https://www.joafoschiatti.com` redirige o resuelve de forma consistente a `https://joafoschiatti.com`.
+- `https://joafoschiatti.com/robots.txt` y `https://joafoschiatti.com/sitemap.xml` accesibles.
+- Metadata canonical/Open Graph/Twitter sin `localhost`, `127.0.0.1` ni `vercel.app` como URL canónica pública.
