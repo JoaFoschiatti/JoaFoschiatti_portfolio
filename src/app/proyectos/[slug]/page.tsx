@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CaseScreenshots from "@/components/CaseScreenshots";
 import MockupCard from "@/components/MockupCard";
 import SectionHeading from "@/components/SectionHeading";
 import {
@@ -77,11 +78,13 @@ export default async function ProjectPage(props: ProjectPageProps) {
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-3">
+                {project.evidenceBadges?.map((badge) => (
+                  <span key={badge} className="evidence-pill">
+                    {badge}
+                  </span>
+                ))}
                 <span className="pill">{project.category}</span>
                 <span className="pill">{project.status}</span>
-                {project.visibility === "private" ? (
-                  <span className="pill">Caso privado</span>
-                ) : null}
               </div>
               <Link
                 href="/#proyectos"
@@ -136,6 +139,8 @@ export default async function ProjectPage(props: ProjectPageProps) {
           </p>
         </article>
       </section>
+
+      <CaseScreenshots screenshots={project.screenshots} />
 
       <section className="section-anchor section-block section-shell pt-6">
         <SectionHeading

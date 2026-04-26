@@ -6,6 +6,7 @@ type HeroProps = {
   subtitle: string;
   badges: readonly string[];
   microcopy: string;
+  proof: string;
   whatsappHref: string;
 };
 
@@ -14,20 +15,24 @@ export default function Hero({
   subtitle,
   badges,
   microcopy,
+  proof,
   whatsappHref,
 }: HeroProps) {
   return (
-    <section className="section-shell section-block pt-10 md:pt-16">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <div>
-          <p className="section-eyebrow">Webs y herramientas internas para negocios reales</p>
-          <h1 className="mt-5 max-w-4xl text-[clamp(3rem,8vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[#171717]">
+    <section className="section-shell hero-section">
+      <div className="grid min-w-0 items-center gap-12 lg:grid-cols-[minmax(0,1.24fr)_minmax(0,0.76fr)]">
+        <div className="min-w-0">
+          <p className="section-eyebrow">Webs y sistemas para negocios reales</p>
+          <h1 className="mt-5 max-w-[20.5rem] text-[clamp(2.45rem,5vw,3.5rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-[#171717] sm:max-w-4xl">
             {title}
           </h1>
-          <p className="mt-6 max-w-3xl text-[clamp(1.05rem,1.9vw,1.22rem)] leading-8 text-[#4d4d4d]">
+          <p className="mt-6 max-w-[20.5rem] text-[clamp(1.05rem,1.9vw,1.22rem)] leading-8 text-[#4d4d4d] sm:max-w-3xl">
             {subtitle}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <p className="mt-5 block max-w-[20.5rem] rounded-[8px] bg-[#fafafa] px-4 py-3 text-sm leading-6 text-[#171717] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] sm:max-w-2xl">
+            {proof}
+          </p>
+          <div className="mt-8 flex max-w-[20.5rem] flex-col gap-3 sm:max-w-none sm:flex-row">
             <Link className="button-primary" href={whatsappHref}>
               Hablar por WhatsApp
             </Link>
@@ -35,19 +40,21 @@ export default function Hero({
               Ver proyectos
             </Link>
           </div>
-          <div className="mt-8 flex flex-wrap gap-2">
+          <div className="mt-8 flex max-w-[20.5rem] flex-wrap gap-2 sm:max-w-none">
             {badges.map((badge) => (
               <span key={badge} className="pill">
                 {badge}
               </span>
             ))}
           </div>
-          <p className="mt-7 max-w-2xl text-sm leading-7 text-[#666666]">
+          <p className="mt-7 max-w-[20.5rem] text-sm leading-7 text-[#666666] sm:max-w-2xl">
             {microcopy}
           </p>
         </div>
 
-        <MockupCard variant="operations-overview" size="hero" />
+        <div className="min-w-0 max-w-[20.5rem] sm:max-w-none">
+          <MockupCard variant="operations-overview" size="hero" />
+        </div>
       </div>
     </section>
   );

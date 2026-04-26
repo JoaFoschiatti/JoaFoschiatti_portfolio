@@ -20,7 +20,7 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-40 border-b border-transparent bg-white/88 backdrop-blur-xl">
-      <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
+      <div className="section-shell flex min-h-[72px] max-w-[20.5rem] items-center justify-between gap-6 sm:max-w-none">
         <Link
           href="/"
           className="text-[0.98rem] font-semibold tracking-[-0.03em] text-[#171717]"
@@ -76,7 +76,7 @@ export default function Header({
 
       {isOpen ? (
         <div className="border-t border-[#ebebeb] bg-white md:hidden">
-          <div className="section-shell flex flex-col gap-4 py-5">
+          <div className="section-shell flex max-w-[20.5rem] flex-col gap-4 py-5 sm:max-w-none">
             {navigation.map((item) => (
               <Link
                 key={item.href}

@@ -82,7 +82,7 @@ export default function MockupCard({
             <Panel title="Stock bajo" value="Cristales 1.67 • Reposición sugerida" />
             <Panel title="Vencimiento" value="DDJJ municipal • 3 días" tone="dark" />
           </div>
-          <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-4 grid gap-3 2xl:grid-cols-[1.15fr_0.85fr]">
             <div className="rounded-[10px] bg-white p-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
               <div className="flex items-center justify-between">
                 <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-[#666666]">
@@ -115,10 +115,10 @@ export default function MockupCard({
                   ["Caja", "al día"],
                   ["Clientes", "historial"],
                   ["Reportes", "listos"],
-                  ["Automatización", "en revisión"],
+                  ["Bots", "en revisión"],
                 ].map(([label, status]) => (
-                  <div key={label} className="flex items-center justify-between">
-                    <span className="text-sm text-[#171717]">{label}</span>
+                  <div key={label} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+                    <span className="min-w-0 text-sm text-[#171717]">{label}</span>
                     <span className="font-mono text-[0.64rem] uppercase tracking-[0.12em] text-[#666666] whitespace-nowrap">
                       {status}
                     </span>

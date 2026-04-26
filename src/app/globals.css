@@ -41,6 +41,7 @@ body {
     var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  overflow-x: clip;
   text-rendering: optimizeLegibility;
 }
 
@@ -94,8 +95,31 @@ summary:focus-visible {
   padding-block: clamp(4.5rem, 8vw, 7rem);
 }
 
+.hero-section {
+  padding-block: clamp(3.25rem, 6vw, 5.25rem) clamp(3rem, 5vw, 4.5rem);
+}
+
+.section-block-continuation {
+  padding-block: 0 clamp(4.5rem, 8vw, 7rem);
+}
+
 .section-anchor {
   scroll-margin-top: 7rem;
+}
+
+.section-band {
+  width: 100%;
+}
+
+.section-band-muted {
+  background: linear-gradient(180deg, #fafafa 0%, #f7f7f7 100%);
+  box-shadow:
+    inset 0 1px 0 var(--color-line),
+    inset 0 -1px 0 var(--color-line);
+}
+
+.section-band-continuation {
+  box-shadow: inset 0 -1px 0 var(--color-line);
 }
 
 .section-eyebrow {
@@ -154,6 +178,22 @@ summary:focus-visible {
   line-height: 1;
   color: var(--color-subtle);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.evidence-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background: #ffffff;
+  padding: 0.42rem 0.78rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-foreground);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .button-primary,

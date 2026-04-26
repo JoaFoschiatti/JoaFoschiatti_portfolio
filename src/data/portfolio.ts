@@ -16,6 +16,13 @@ export type Service = {
   tags: string[];
 };
 
+export type ProjectScreenshot = {
+  src: string;
+  title: string;
+  description: string;
+  alt: string;
+};
+
 export type Project = {
   slug: string;
   featured: boolean;
@@ -35,6 +42,8 @@ export type Project = {
   visibility: "public" | "private";
   caseLabel: string;
   mockup: MockupVariant;
+  evidenceBadges?: string[];
+  screenshots?: ProjectScreenshot[];
 };
 
 export type ProcessStep = {
@@ -46,6 +55,11 @@ export type ProcessStep = {
 };
 
 export type TrustCard = {
+  title: string;
+  description: string;
+};
+
+export type ClientType = {
   title: string;
   description: string;
 };
@@ -70,6 +84,8 @@ export const profile = {
     "Construyo webs comerciales, sistemas de turnos, POS, stock, reportes y automatizaciones para comercios, profesionales y pymes.",
   heroMicrocopy:
     "Del diseño a producción, con foco en sistemas simples de usar y mantenibles.",
+  heroProof:
+    "Sistemas usados para stock, turnos, caja, pedidos y operación diaria.",
   heroBadges: [
     "Webs",
     "POS",
@@ -179,6 +195,7 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "comanda",
+    evidenceBadges: ["Pantallas del sistema"],
   },
   {
     slug: "optica-focus",
@@ -203,6 +220,7 @@ export const projects = [
     visibility: "private",
     caseLabel: "Ver caso",
     mockup: "optica-focus",
+    evidenceBadges: ["Caso privado", "Pantallas reales"],
   },
   {
     slug: "turnos-online",
@@ -236,6 +254,7 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "turnos-online",
+    evidenceBadges: ["En producción"],
   },
   {
     slug: "cumpliros",
@@ -269,6 +288,7 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "cumpliros",
+    evidenceBadges: ["MVP"],
   },
   {
     slug: "soc-analyst-course",
@@ -278,7 +298,7 @@ export const projects = [
     category: "Criterio técnico y seguridad",
     status: "Repositorio público",
     description:
-      "Además de desarrollo web y sistemas de gestión, documento y estudio prácticas de ciberseguridad defensiva: logs, SIEM, respuesta a incidentes, threat intelligence y análisis de malware.",
+      "Además de desarrollo web y sistemas de gestión, trabajo con buenas prácticas de documentación, logs, backups y seguridad defensiva.",
     problem:
       "Ordenar una ruta de estudio práctica y utilizable para análisis defensivo.",
     solution:
@@ -343,17 +363,39 @@ export const trustCards = [
 ] satisfies TrustCard[];
 
 export const clientTypes = [
-  "Restaurantes, bares y rotiserías",
-  "Ópticas y comercios con stock",
-  "Profesionales con agenda",
-  "Pymes con procesos administrativos",
-  "Emprendedores que necesitan una web comercial",
-  "Equipos que quieren automatizar tareas repetitivas",
-] as const;
+  {
+    title: "Restaurantes, bares y rotiserías",
+    description: "Mesas, pedidos, cocina, caja y menú QR.",
+  },
+  {
+    title: "Ópticas y comercios con stock",
+    description: "Productos, precios, cuentas corrientes y backups.",
+  },
+  {
+    title: "Profesionales con agenda",
+    description: "Turnos, clientes, horarios y recordatorios.",
+  },
+  {
+    title: "Pymes con procesos administrativos",
+    description: "Documentación, reportes, tareas y vencimientos.",
+  },
+  {
+    title: "Emprendedores que necesitan una web comercial",
+    description: "Landing, WhatsApp, formulario y presencia online.",
+  },
+  {
+    title: "Equipos que quieren automatizar tareas repetitivas",
+    description: "APIs, bots, paneles internos y flujos automáticos.",
+  },
+] satisfies ClientType[];
 
-export const featuredProjects = projects.filter((project) => project.featured);
-export const securityProjects = projects.filter((project) => project.security);
+export const featuredProjects: Project[] = projects.filter(
+  (project) => project.featured,
+);
+export const securityProjects: Project[] = projects.filter(
+  (project) => project.security,
+);
 
-export function getProjectBySlug(slug: string) {
+export function getProjectBySlug(slug: string): Project | undefined {
   return featuredProjects.find((project) => project.slug === slug);
 }
