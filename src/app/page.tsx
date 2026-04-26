@@ -74,6 +74,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Process steps={processSteps} />
+
       <section
         id="proyectos"
         className="section-anchor section-block section-shell"
@@ -86,15 +88,13 @@ export default function Home() {
           {primaryProject ? (
             <ProjectCard project={primaryProject} variant="featured" />
           ) : null}
-          <div className="grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
+          <div className="grid gap-6">
             {secondaryProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <ProjectCard key={project.slug} project={project} variant="horizontal" />
             ))}
           </div>
         </div>
       </section>
-
-      <Process steps={processSteps} />
 
       <TrustSection
         title="Tecnología con foco en uso real."

@@ -4,7 +4,7 @@ import type { Project } from "@/data/portfolio";
 
 type ProjectCardProps = {
   project: Project;
-  variant?: "standard" | "featured";
+  variant?: "standard" | "featured" | "horizontal";
 };
 
 function EvidenceBadges({ project }: { project: Project }) {
@@ -48,6 +48,7 @@ export default function ProjectCard({
   variant = "standard",
 }: ProjectCardProps) {
   const featured = variant === "featured";
+  const horizontal = variant === "horizontal";
 
   if (featured) {
     return (
@@ -82,6 +83,47 @@ export default function ProjectCard({
               ))}
             </div>
             <div className="mt-8">
+              <ProjectActions project={project} />
+            </div>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  if (horizontal) {
+    return (
+      <article className="surface-card-strong box-border max-w-full min-w-0 p-5 md:p-7">
+        <div className="grid min-w-0 gap-7 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
+          <MockupCard variant={project.mockup} />
+          <div className="min-w-0">
+            <EvidenceBadges project={project} />
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <span className="pill">{project.category}</span>
+              <span className="pill">{project.status}</span>
+            </div>
+            <h3 className="mt-5 text-[clamp(1.65rem,3vw,2.15rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[#171717]">
+              {project.name}
+            </h3>
+            <p className="mt-4 max-w-2xl text-[1.02rem] leading-8 text-[#4d4d4d]">
+              {project.description}
+            </p>
+            <div className="mt-5">
+              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+                Problema
+              </p>
+              <p className="mt-2 max-w-2xl text-[0.98rem] leading-7 text-[#4d4d4d]">
+                {project.problem}
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.modules.map((module) => (
+                <span key={module} className="pill">
+                  {module}
+                </span>
+              ))}
+            </div>
+            <div className="mt-7">
               <ProjectActions project={project} />
             </div>
           </div>

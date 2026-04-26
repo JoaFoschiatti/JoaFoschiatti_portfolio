@@ -9,7 +9,7 @@ export default function Process({ steps }: ProcessProps) {
   return (
     <section
       id="proceso"
-      className="section-anchor section-band section-band-muted"
+      className="section-anchor"
     >
       <div className="section-block section-shell">
         <SectionHeading

@@ -98,8 +98,8 @@ export const profile = {
   ],
   navigation: [
     { label: "Servicios", href: "/#servicios" },
-    { label: "Proyectos", href: "/#proyectos" },
     { label: "Proceso", href: "/#proceso" },
+    { label: "Proyectos", href: "/#proyectos" },
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavigationItem[],
   briefQuestions: [

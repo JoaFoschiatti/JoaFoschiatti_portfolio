@@ -8,8 +8,8 @@ type TrustSectionProps = {
 
 export default function TrustSection({ title, cards }: TrustSectionProps) {
   return (
-    <section className="section-band section-band-muted section-band-continuation">
-      <div className="section-block-continuation section-shell">
+    <section className="section-band section-band-muted">
+      <div className="section-block section-shell">
         <SectionHeading
           title={title}
           description="Pensado para que el dueño, el empleado o el profesional lo pueda usar sin complicarse."
