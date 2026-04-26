@@ -28,7 +28,7 @@ export default function Header({
           {brandName}
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-5 md:flex lg:gap-8" aria-label="Principal">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -40,7 +40,7 @@ export default function Header({
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Link className="button-primary" href={whatsappHref}>
             Hablar por WhatsApp
           </Link>

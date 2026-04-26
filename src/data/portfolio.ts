@@ -70,6 +70,35 @@ export type ClientType = {
   description: string;
 };
 
+export type StartOption = {
+  label: string;
+  title: string;
+  description: string;
+  items: string[];
+};
+
+export type BriefOption = {
+  label: string;
+  value: string;
+};
+
+export type BriefBuilderOptions = {
+  industries: readonly BriefOption[];
+  needs: readonly BriefOption[];
+  states: readonly BriefOption[];
+  urgencies: readonly BriefOption[];
+};
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type SystemUseCase = {
+  title: string;
+  description: string;
+};
+
 export const seo = {
   title: "Joaquín Sánchez Foschiatti — Webs y sistemas de gestión para negocios",
   description:
@@ -106,6 +135,7 @@ export const profile = {
     { label: "Servicios", href: "/#servicios" },
     { label: "Proceso", href: "/#proceso" },
     { label: "Proyectos", href: "/#proyectos" },
+    { label: "Sistema a medida", href: "/sistemas-a-medida" },
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavigationItem[],
   briefQuestions: [
@@ -158,6 +188,125 @@ export const services = [
     tags: ["APIs", "WhatsApp", "Bots", "Dashboards"],
   },
 ] satisfies Service[];
+
+export const systemsStartOptions = [
+  {
+    label: "Opción 01",
+    title: "Primera versión usable",
+    description:
+      "Para pasar de una idea o proceso manual a una herramienta concreta que ya se pueda probar con usuarios reales.",
+    items: [
+      "Relevamiento del flujo principal",
+      "Diseño de una primera versión simple",
+      "Deploy, ajustes iniciales y próximos pasos",
+    ],
+  },
+  {
+    label: "Opción 02",
+    title: "Sistema de gestión a medida",
+    description:
+      "Para centralizar operación diaria, usuarios, datos, permisos, reportes e integraciones en un sistema propio.",
+    items: [
+      "Módulos pensados para tu operación",
+      "Panel interno y flujos de trabajo",
+      "Base técnica para mantener y escalar",
+    ],
+  },
+  {
+    label: "Opción 03",
+    title: "Mejoras o automatización",
+    description:
+      "Para ordenar un sistema existente, conectar herramientas o reducir tareas repetitivas sin rehacer todo desde cero.",
+    items: [
+      "Automatizaciones con APIs o WhatsApp",
+      "Reportes, formularios y paneles internos",
+      "Mejoras incrementales sobre lo que ya usás",
+    ],
+  },
+] satisfies StartOption[];
+
+export const briefBuilderOptions = {
+  industries: [
+    { label: "Restaurante / bar", value: "restaurante" },
+    { label: "Comercio", value: "comercio" },
+    { label: "Profesional", value: "profesional" },
+    { label: "Pyme", value: "pyme" },
+    { label: "Otro", value: "otro" },
+  ],
+  needs: [
+    { label: "Turnos", value: "turnos" },
+    { label: "Stock", value: "stock" },
+    { label: "Caja", value: "caja" },
+    { label: "Pedidos", value: "pedidos" },
+    { label: "Reportes", value: "reportes" },
+    { label: "Documentos", value: "documentos" },
+    { label: "Automatización", value: "automatizacion" },
+  ],
+  states: [
+    { label: "Idea inicial", value: "idea-inicial" },
+    { label: "Planillas", value: "planillas" },
+    { label: "Mensajes sueltos", value: "mensajes-sueltos" },
+    { label: "Sistema que falla", value: "sistema-que-falla" },
+    { label: "Proceso manual", value: "proceso-manual" },
+  ],
+  urgencies: [
+    { label: "Este mes", value: "este-mes" },
+    { label: "Próximos meses", value: "proximos-meses" },
+    { label: "Explorando", value: "explorando" },
+  ],
+} satisfies BriefBuilderOptions;
+
+export const systemsFaqs = [
+  {
+    question: "¿Necesito tener todo definido antes de escribir?",
+    answer:
+      "No. Alcanza con contar qué proceso querés ordenar, quiénes lo usan y qué problema te está frenando.",
+  },
+  {
+    question: "¿Conviene empezar por una versión chica?",
+    answer:
+      "Sí. Una primera versión usable permite validar el flujo real antes de invertir tiempo en módulos secundarios.",
+  },
+  {
+    question: "¿Se puede combinar web pública y sistema interno?",
+    answer:
+      "Sí. Puede haber una web para captar consultas y un panel interno para turnos, stock, pedidos, clientes o reportes.",
+  },
+  {
+    question: "¿Podés integrar WhatsApp, pagos, APIs o planillas?",
+    answer:
+      "Sí. Se puede conectar WhatsApp, Mercado Pago, formularios, APIs, reportes o importar datos desde planillas cuando tenga sentido.",
+  },
+  {
+    question: "¿Qué pasa después del deploy?",
+    answer:
+      "La idea es dejar el sistema en producción y poder acompañar con ajustes, mantenimiento o nuevas funcionalidades.",
+  },
+  {
+    question: "¿Cómo se define el alcance?",
+    answer:
+      "Primero se entiende el proceso y después se decide qué entra en la primera versión para que sea útil sin volverse pesada.",
+  },
+] satisfies FaqItem[];
+
+export const systemsUseCases = [
+  {
+    title: "Operación diaria",
+    description: "Caja, pedidos, turnos, stock, clientes y tareas en un solo flujo.",
+  },
+  {
+    title: "Gestión interna",
+    description: "Paneles para que el equipo cargue datos, revise estados y trabaje sin planillas dispersas.",
+  },
+  {
+    title: "Integraciones útiles",
+    description: "WhatsApp, pagos, formularios, reportes, APIs y automatizaciones donde aporten valor real.",
+  },
+  {
+    title: "Crecimiento gradual",
+    description: "Primero una versión usable; después mejoras sobre datos y uso real del negocio.",
+  },
+] satisfies SystemUseCase[];
 
 export const projects = [
   {

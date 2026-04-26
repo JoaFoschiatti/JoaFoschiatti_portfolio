@@ -5,6 +5,7 @@ import Process from "@/components/Process";
 import ProjectCard from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
+import StartOptionsSection from "@/components/StartOptionsSection";
 import TrustSection from "@/components/TrustSection";
 import {
   clientTypes,
@@ -14,6 +15,7 @@ import {
   profile,
   securityProjects,
   services,
+  systemsStartOptions,
   trustCards,
   valueStrip,
 } from "@/data/portfolio";
@@ -151,6 +153,15 @@ export default function Home() {
           </article>
         ))}
       </section>
+
+      <StartOptionsSection
+        compact
+        title="Podemos empezar por una versión chica o por ordenar un proceso completo."
+        description="Sin precios cerrados ni paquetes rígidos: primero se entiende el proceso, después se define la primera versión que aporta valor real."
+        options={systemsStartOptions}
+        ctaHref="/sistemas-a-medida"
+        ctaLabel="Ver sistemas a medida"
+      />
 
       <ContactCTA
         title="¿Tenés una idea o un proceso que querés ordenar?"
