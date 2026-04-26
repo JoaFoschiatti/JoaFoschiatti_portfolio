@@ -42,6 +42,12 @@ export type Project = {
   visibility: "public" | "private";
   caseLabel: string;
   mockup: MockupVariant;
+  homeVisual?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   evidenceBadges?: string[];
   screenshots?: ProjectScreenshot[];
 };
@@ -195,6 +201,12 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "comanda",
+    homeVisual: {
+      src: "/project-comanda-visual-v2.png",
+      alt: "Comanda unifica mesas, cocina, caja y pedidos QR o retiro para lograr pedidos claros, cocina visible y caja clara.",
+      width: 1536,
+      height: 1024,
+    },
     evidenceBadges: ["Pantallas del sistema"],
   },
   {
@@ -220,6 +232,12 @@ export const projects = [
     visibility: "private",
     caseLabel: "Ver caso",
     mockup: "optica-focus",
+    homeVisual: {
+      src: "/project-optica-focus-visual-v2.png",
+      alt: "Optica Focus unifica stock, precios y cuenta corriente en un sistema de escritorio con productos, clientes, backups y cuentas claras.",
+      width: 1536,
+      height: 1024,
+    },
     evidenceBadges: ["Caso privado", "Pantallas reales"],
   },
   {
@@ -254,6 +272,12 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "turnos-online",
+    homeVisual: {
+      src: "/project-turnos-online-visual-v2.png",
+      alt: "Turnos online unifica mensajes, horarios manuales y pagos sueltos en una agenda web con clientes, servicios, pagos y recordatorios claros.",
+      width: 1536,
+      height: 1024,
+    },
     evidenceBadges: ["En producción"],
   },
   {
@@ -288,6 +312,12 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "cumpliros",
+    homeVisual: {
+      src: "/project-cumpliros-visual-v2.png",
+      alt: "CumpliRos unifica vencimientos, documentos sueltos y tareas dispersas en un panel operativo con documentos, evidencias y equipo alineado.",
+      width: 1536,
+      height: 1024,
+    },
     evidenceBadges: ["MVP"],
   },
   {

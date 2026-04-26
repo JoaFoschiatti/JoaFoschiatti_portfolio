@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MockupCard from "@/components/MockupCard";
+import HeroTransformationPreview from "@/components/HeroTransformationPreview";
 
 type HeroProps = {
   title: string;
@@ -53,7 +53,7 @@ export default function Hero({
         </div>
 
         <div className="min-w-0 max-w-[20.5rem] sm:max-w-none">
-          <MockupCard variant="operations-overview" size="hero" />
+          <HeroTransformationPreview />
         </div>
       </div>
     </section>
