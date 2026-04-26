@@ -150,6 +150,7 @@ export const profile = {
 export const contactLinks = {
   email: profile.email,
   github: "https://github.com/JoaFoschiatti",
+  instagram: "https://www.instagram.com/joasanchez02/",
   whatsappMessage:
     "Hola Joaquín, vi tu portfolio y quiero consultar por una web o sistema para mi negocio.",
 } as const;

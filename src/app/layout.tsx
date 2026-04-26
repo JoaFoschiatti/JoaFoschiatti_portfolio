@@ -79,6 +79,7 @@ export default function RootLayout({
             location={profile.location}
             email={contactLinks.email}
             githubUrl={contactLinks.github}
+            instagramUrl={contactLinks.instagram}
             summary={profile.footerSummary}
           />
         </div>
