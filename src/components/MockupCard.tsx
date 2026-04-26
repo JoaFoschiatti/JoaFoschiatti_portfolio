@@ -38,7 +38,7 @@ function Panel({
       >
         {title}
       </p>
-      <p className="mt-3 break-words text-[1rem] font-semibold tracking-[-0.03em]">
+      <p className="mt-3 break-normal text-[1rem] font-semibold leading-snug tracking-[-0.03em]">
         {value}
       </p>
     </div>
@@ -236,6 +236,17 @@ export default function MockupCard({
   }
 
   if (variant === "turnos-online") {
+    const expanded = size === "large";
+    const compactSchedule = [
+      ["09:00", "Consulta"],
+      ["11:00", "Corte"],
+      ["16:30", "Nuevo paciente"],
+    ];
+    const summaryPanels = [
+      ["Clientes", "Historial centralizado"],
+      ["Recordatorios", "WhatsApp"],
+      ["Pagos", "Mercado Pago"],
+    ] as const;
     const weeklySchedule = [
       {
         hour: "09:00",
@@ -261,12 +272,8 @@ export default function MockupCard({
             <MetaPill>SaaS</MetaPill>
           </div>
           <div className="mt-4 box-border max-w-full min-w-0 rounded-[8px] bg-white p-3 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] sm:p-4">
-            <div className="grid gap-2 md:hidden">
-              {[
-                ["09:00", "Consulta"],
-                ["11:00", "Corte"],
-                ["16:30", "Nuevo paciente"],
-              ].map(([hour, label]) => (
+            <div className={expanded ? "grid gap-2 md:hidden" : "grid gap-2"}>
+              {compactSchedule.map(([hour, label]) => (
                 <div
                   key={`${hour}-${label}`}
                   className="grid grid-cols-[auto_1fr] items-center gap-3 rounded-[7px] bg-[#fafafa] px-3 py-2.5"
@@ -276,44 +283,51 @@ export default function MockupCard({
                 </div>
               ))}
             </div>
-            <div className="hidden md:block">
-              <div className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 text-[0.62rem] uppercase tracking-[0.12em] text-[#666666] lg:gap-2 lg:text-[0.68rem] lg:tracking-[0.14em]">
-                <span className="min-w-0">Hora</span>
-                {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day) => (
-                  <span key={day} className="min-w-0 text-center">
-                    {day}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-2.5 grid gap-1.5 lg:mt-3 lg:gap-2">
-                {weeklySchedule.map((slot) => (
-                  <div
-                    key={slot.hour}
-                    className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 lg:gap-2"
-                  >
-                    <span className="min-w-0 font-mono text-[0.68rem] text-[#666666] lg:text-[0.72rem]">
-                      {slot.hour}
+            {expanded ? (
+              <div className="hidden md:block">
+                <div className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 text-[0.62rem] uppercase tracking-[0.12em] text-[#666666] lg:gap-2 lg:text-[0.68rem] lg:tracking-[0.14em]">
+                  <span className="min-w-0">Hora</span>
+                  {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day) => (
+                    <span key={day} className="min-w-0 text-center">
+                      {day}
                     </span>
-                    {slot.entries.map((entry, index) => (
-                      <div
-                        key={`${slot.hour}-${index}`}
-                        className={
-                          entry === "-"
-                            ? "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-transparent lg:px-2 lg:py-2 lg:text-xs"
-                            : "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-[#171717] text-ellipsis whitespace-nowrap lg:px-2 lg:py-2 lg:text-xs"
-                        }
-                      >
-                        {entry}
-                      </div>
-                    ))}
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="mt-2.5 grid gap-1.5 lg:mt-3 lg:gap-2">
+                  {weeklySchedule.map((slot) => (
+                    <div
+                      key={slot.hour}
+                      className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 lg:gap-2"
+                    >
+                      <span className="min-w-0 font-mono text-[0.68rem] text-[#666666] lg:text-[0.72rem]">
+                        {slot.hour}
+                      </span>
+                      {slot.entries.map((entry, index) => (
+                        <div
+                          key={`${slot.hour}-${index}`}
+                          className={
+                            entry === "-"
+                              ? "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-transparent lg:px-2 lg:py-2 lg:text-xs"
+                              : "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-[#171717] text-ellipsis whitespace-nowrap lg:px-2 lg:py-2 lg:text-xs"
+                          }
+                        >
+                          {entry}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <Panel title="Clientes" value="Historial centralizado" />
-              <Panel title="Recordatorios" value="WhatsApp" />
-              <Panel title="Pagos" value="Mercado Pago" tone="dark" />
+            ) : null}
+            <div className={expanded ? "mt-4 grid gap-3 md:grid-cols-3" : "mt-4 grid gap-3"}>
+              {summaryPanels.map(([title, value]) => (
+                <Panel
+                  key={title}
+                  title={title}
+                  value={value}
+                  tone={title === "Pagos" ? "dark" : "neutral"}
+                />
+              ))}
             </div>
           </div>
         </div>
