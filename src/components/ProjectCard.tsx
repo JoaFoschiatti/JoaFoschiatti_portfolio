@@ -8,7 +8,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="surface-card-strong p-5 md:p-6">
+    <article className="surface-card-strong box-border max-w-full min-w-0 p-5 md:p-6">
       <MockupCard variant={project.mockup} />
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <span className="pill">{project.category}</span>

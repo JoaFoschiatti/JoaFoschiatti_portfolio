@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { contactLinks, profile, seo } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: profile.siteUrl ? new URL(profile.siteUrl) : undefined,
+  metadataBase: new URL(profile.siteUrl),
   title: {
     default: seo.title,
     template: `%s | ${profile.fullName}`,
@@ -40,19 +29,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: seo.title,
     description: seo.description,
+    url: profile.siteUrl,
+    siteName: profile.brandName,
     type: "website",
     locale: "es_AR",
+    images: [
+      {
+        url: `${profile.siteUrl}/opengraph-image`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: seo.title,
     description: seo.description,
+    images: [`${profile.siteUrl}/twitter-image`],
   },
-  alternates: profile.siteUrl
-    ? {
-        canonical: profile.siteUrl,
-      }
-    : undefined,
+  alternates: {
+    canonical: profile.siteUrl,
+  },
 };
 
 export default function RootLayout({
@@ -65,10 +60,7 @@ export default function RootLayout({
     "/#contacto";
 
   return (
-    <html
-      lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full bg-white text-[#171717]`}
-    >
+    <html lang="es" className="h-full bg-white text-[#171717]">
       <body className="min-h-full bg-white font-sans text-[#171717]">
         <a className="skip-link" href="#contenido">
           Saltar al contenido

@@ -38,14 +38,16 @@ function Panel({
       >
         {title}
       </p>
-      <p className="mt-3 text-[1rem] font-semibold tracking-[-0.03em]">{value}</p>
+      <p className="mt-3 break-words text-[1rem] font-semibold tracking-[-0.03em]">
+        {value}
+      </p>
     </div>
   );
 }
 
 function MetaPill({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-[#666666] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
+    <span className="inline-flex max-w-full items-center truncate rounded-full bg-white px-2.5 py-1 font-mono text-[0.66rem] uppercase tracking-[0.14em] text-[#666666] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
       {children}
     </span>
   );
@@ -56,7 +58,7 @@ export default function MockupCard({
   size = "compact",
 }: MockupCardProps) {
   const outerClassName = cn(
-    "surface-card-strong overflow-hidden p-4 md:p-5",
+    "surface-card-strong box-border max-w-full min-w-0 overflow-hidden p-4 md:p-5",
     size === "hero" && "min-h-[420px]",
     size === "large" && "min-h-[360px]",
   );
@@ -251,41 +253,62 @@ export default function MockupCard({
 
     return (
       <div className={outerClassName}>
-        <div className="rounded-[10px] bg-[#fafafa] p-4">
+        <div className="box-border max-w-full min-w-0 rounded-[10px] bg-[#fafafa] p-4">
           <div className="flex items-center justify-between">
             <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-[#666666]">
               Turnos online
             </p>
             <MetaPill>SaaS</MetaPill>
           </div>
-          <div className="mt-4 rounded-[8px] bg-white p-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
-            <div className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))] gap-2 text-[0.68rem] uppercase tracking-[0.14em] text-[#666666]">
-              <span>Hora</span>
-              {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day) => (
-                <span key={day}>{day}</span>
-              ))}
-            </div>
-            <div className="mt-3 grid gap-2">
-              {weeklySchedule.map((slot) => (
+          <div className="mt-4 box-border max-w-full min-w-0 rounded-[8px] bg-white p-3 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] sm:p-4">
+            <div className="grid gap-2 md:hidden">
+              {[
+                ["09:00", "Consulta"],
+                ["11:00", "Corte"],
+                ["16:30", "Nuevo paciente"],
+              ].map(([hour, label]) => (
                 <div
-                  key={slot.hour}
-                  className="grid grid-cols-[58px_repeat(5,minmax(0,1fr))] gap-2"
+                  key={`${hour}-${label}`}
+                  className="grid grid-cols-[auto_1fr] items-center gap-3 rounded-[7px] bg-[#fafafa] px-3 py-2.5"
                 >
-                  <span className="font-mono text-[0.72rem] text-[#666666]">{slot.hour}</span>
-                  {slot.entries.map((entry, index) => (
-                    <div
-                      key={`${slot.hour}-${index}`}
-                      className={
-                        entry === "-"
-                          ? "rounded-[7px] bg-[#fafafa] px-2 py-2 text-xs text-transparent"
-                          : "rounded-[7px] bg-[#fafafa] px-2 py-2 text-xs text-[#171717]"
-                      }
-                    >
-                      {entry}
-                    </div>
-                  ))}
+                  <span className="font-mono text-[0.68rem] text-[#666666]">{hour}</span>
+                  <span className="truncate text-sm text-[#171717]">{label}</span>
                 </div>
               ))}
+            </div>
+            <div className="hidden md:block">
+              <div className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 text-[0.62rem] uppercase tracking-[0.12em] text-[#666666] lg:gap-2 lg:text-[0.68rem] lg:tracking-[0.14em]">
+                <span className="min-w-0">Hora</span>
+                {["Lun", "Mar", "Mié", "Jue", "Vie"].map((day) => (
+                  <span key={day} className="min-w-0 text-center">
+                    {day}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-2.5 grid gap-1.5 lg:mt-3 lg:gap-2">
+                {weeklySchedule.map((slot) => (
+                  <div
+                    key={slot.hour}
+                    className="grid grid-cols-[54px_repeat(5,minmax(0,1fr))] gap-1.5 lg:gap-2"
+                  >
+                    <span className="min-w-0 font-mono text-[0.68rem] text-[#666666] lg:text-[0.72rem]">
+                      {slot.hour}
+                    </span>
+                    {slot.entries.map((entry, index) => (
+                      <div
+                        key={`${slot.hour}-${index}`}
+                        className={
+                          entry === "-"
+                            ? "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-transparent lg:px-2 lg:py-2 lg:text-xs"
+                            : "min-w-0 overflow-hidden rounded-[7px] bg-[#fafafa] px-1 py-1.5 text-[0.62rem] text-[#171717] text-ellipsis whitespace-nowrap lg:px-2 lg:py-2 lg:text-xs"
+                        }
+                      >
+                        {entry}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <Panel title="Clientes" value="Historial centralizado" />

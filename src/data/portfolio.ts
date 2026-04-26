@@ -60,7 +60,8 @@ export const profile = {
   brandName: "JoaFoschiatti",
   fullName: "Joaquín Sánchez Foschiatti",
   location: "Rosario / Santa Fe / Argentina",
-  siteUrl: "",
+  siteUrl: "https://joafoschiatti.com",
+  email: "joasanchezfoschiatti@gmail.com",
   whatsappNumber: "5493482555038",
   whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
@@ -95,7 +96,7 @@ export const profile = {
 } as const;
 
 export const contactLinks = {
-  email: "joasanchezfoschiatti@gmail.com",
+  email: profile.email,
   github: "https://github.com/JoaFoschiatti",
   whatsappMessage:
     "Hola Joaquín, vi tu portfolio y quiero consultar por una web o sistema para mi negocio.",
