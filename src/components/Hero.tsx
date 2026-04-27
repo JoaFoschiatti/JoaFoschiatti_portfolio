@@ -29,10 +29,10 @@ export default function Hero({
           <p className="mt-6 max-w-[20.5rem] text-[clamp(1.05rem,1.9vw,1.22rem)] leading-8 text-[#4d4d4d] sm:max-w-3xl">
             {subtitle}
           </p>
-          <p className="mt-5 block max-w-[20.5rem] rounded-[8px] bg-[#fafafa] px-4 py-3 text-sm leading-6 text-[#171717] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] sm:max-w-2xl">
+          <p className="mx-auto mt-5 block w-full max-w-[20.5rem] rounded-[8px] bg-[#fafafa] px-4 py-3 text-sm leading-6 text-[#171717] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] sm:mx-0 sm:max-w-2xl">
             {proof}
           </p>
-          <div className="mt-8 flex max-w-[20.5rem] flex-col gap-3 sm:max-w-none sm:flex-row">
+          <div className="mx-auto mt-8 flex w-full max-w-[20.5rem] flex-col gap-3 sm:mx-0 sm:max-w-none sm:flex-row">
             <Link className="button-primary" href={whatsappHref}>
               Hablar por WhatsApp
             </Link>
@@ -40,19 +40,19 @@ export default function Hero({
               Ver proyectos
             </Link>
           </div>
-          <div className="mt-8 flex max-w-[20.5rem] flex-wrap gap-2 sm:max-w-none">
+          <div className="mx-auto mt-8 flex w-full max-w-[20.5rem] flex-wrap gap-2 sm:mx-0 sm:max-w-none">
             {badges.map((badge) => (
               <span key={badge} className="pill">
                 {badge}
               </span>
             ))}
           </div>
-          <p className="mt-7 max-w-[20.5rem] text-sm leading-7 text-[#666666] sm:max-w-2xl">
+          <p className="mx-auto mt-7 w-full max-w-[20.5rem] text-sm leading-7 text-[#666666] sm:mx-0 sm:max-w-2xl">
             {microcopy}
           </p>
         </div>
 
-        <div className="min-w-0 max-w-[20.5rem] sm:max-w-none">
+        <div className="mx-auto w-full min-w-0 max-w-[20.5rem] sm:mx-0 sm:max-w-none">
           <HeroTransformationPreview />
         </div>
       </div>
