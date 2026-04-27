@@ -117,7 +117,7 @@ export default function CustomSystemsPage() {
         </div>
       </section>
 
-      <section className="section-band section-band-cool">
+      <section className="section-band section-band-cool hero-adjacent-band hero-adjacent-content-band">
         <div className="section-block section-shell">
           <SectionHeading
             eyebrow="Qué puede resolver"

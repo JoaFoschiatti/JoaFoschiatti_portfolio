@@ -52,7 +52,7 @@ export default function Footer({
   summary,
 }: FooterProps) {
   return (
-    <footer className="border-t border-[var(--color-line)] bg-[var(--color-surface-soft)] py-8">
+    <footer className="border-t border-[var(--color-line)] bg-transparent py-8">
       <div className="section-shell flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-[1rem] font-medium text-[var(--color-foreground)]">{name}</p>

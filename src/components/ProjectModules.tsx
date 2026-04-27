@@ -62,15 +62,27 @@ export default function ProjectModules({
             <button
               key={module}
               type="button"
-              className="surface-card group flex min-h-24 w-full flex-col items-start justify-between p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]"
+              className="module-screen-card group flex w-full flex-col overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]"
               onClick={() => setActiveScreenshot(screenshot)}
               aria-label={`Ver pantalla de ${module}`}
             >
-              <span className="text-[1rem] font-medium text-[#171717]">
-                {module}
+              <span className="module-screen-preview">
+                <Image
+                  src={screenshot.src}
+                  alt=""
+                  width={screenshot.width}
+                  height={screenshot.height}
+                  sizes="(min-width: 1280px) 280px, (min-width: 640px) 50vw, calc(100vw - 2rem)"
+                  className="h-full w-full object-cover"
+                />
               </span>
-              <span className="mt-5 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-[#666666] group-hover:text-[#171717]">
-                Ver pantalla
+              <span className="flex w-full items-end justify-between gap-4 px-5 py-4">
+                <span className="text-[1rem] font-medium text-[#171717]">
+                  {module}
+                </span>
+                <span className="shrink-0 font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-[#666666] group-hover:text-[#171717]">
+                  Ver pantalla
+                </span>
               </span>
             </button>
           );

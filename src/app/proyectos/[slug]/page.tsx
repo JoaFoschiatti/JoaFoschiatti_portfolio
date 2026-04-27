@@ -75,7 +75,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
   return (
     <>
       <section className="section-block section-shell pt-12 md:pt-20">
-        <div className="surface-card-strong contact-card p-6 md:p-8">
+        <div className="case-hero-card p-6 md:p-8 lg:p-10">
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -89,14 +89,14 @@ export default async function ProjectPage(props: ProjectPageProps) {
               </div>
               <Link
                 href="/#proyectos"
-                className="mt-6 inline-flex text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+                className="mt-6 inline-flex text-sm text-[#b7c5d0] hover:text-white"
               >
                 Volver a proyectos
               </Link>
-              <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[var(--color-foreground)]">
+              <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[#f8fbfb]">
                 {project.name}
               </h1>
-              <p className="mt-5 max-w-3xl text-[1.08rem] leading-8 text-[var(--color-muted)]">
+              <p className="mt-5 max-w-3xl text-[1.08rem] leading-8 text-[#c6d1da]">
                 {project.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -115,13 +115,15 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 ) : null}
               </div>
             </div>
-            <MockupCard variant={project.mockup} size="large" />
+            <div className="case-hero-visual">
+              <MockupCard variant={project.mockup} size="large" />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-shell grid gap-6 pb-8 md:grid-cols-2">
-        <article className="surface-card p-6 md:p-7">
+      <section className="section-shell grid gap-6 pb-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <article className="case-context-card case-context-card-problem p-6 md:p-7">
           <p className="section-eyebrow">Problema</p>
           <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
             Qué ordena este sistema
@@ -130,7 +132,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
             {project.problem}
           </p>
         </article>
-        <article className="surface-card p-6 md:p-7">
+        <article className="case-context-card case-context-card-solution p-6 md:p-7">
           <p className="section-eyebrow">Solución</p>
           <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
             Cómo lo planteo
@@ -144,14 +146,18 @@ export default async function ProjectPage(props: ProjectPageProps) {
       <CaseScreenshots screenshots={project.screenshots} />
 
       <section className="section-anchor section-block section-shell pt-6">
-        <SectionHeading
-          title="Módulos principales"
-          description="La idea no es sumar pantallas por sumar, sino cubrir los puntos que hacen falta en la operación diaria."
-        />
-        <ProjectModules
-          modules={project.modules}
-          moduleScreenshots={project.moduleScreenshots}
-        />
+        <div className="case-modules-gallery">
+          <div className="case-modules-heading">
+            <SectionHeading
+              title="Módulos principales"
+              description="La idea no es sumar pantallas por sumar, sino cubrir los puntos que hacen falta en la operación diaria."
+            />
+          </div>
+          <ProjectModules
+            modules={project.modules}
+            moduleScreenshots={project.moduleScreenshots}
+          />
+        </div>
       </section>
 
       <section className="section-shell grid gap-6 pb-8 md:grid-cols-[1.1fr_0.9fr]">

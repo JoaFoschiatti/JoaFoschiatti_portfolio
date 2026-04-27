@@ -335,50 +335,6 @@ export default function MockupCard({
     );
   }
 
-  return (
-    <div className={outerClassName}>
-      <div className="rounded-[10px] bg-[#fafafa] p-4">
-        <div className="flex items-center justify-between">
-          <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-[#666666]">
-            CumpliRos
-          </p>
-          <MetaPill>MVP</MetaPill>
-        </div>
-        <div className="mt-4 grid gap-3">
-          <div className="rounded-[8px] bg-white p-4 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-[#171717]">Próximos vencimientos</p>
-              <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[#666666]">
-                Semáforo
-              </span>
-            </div>
-            <div className="mt-4 space-y-3">
-              {[
-                ["DDJJ municipal", "48 hs", "urgente"],
-                ["Renovación de habilitación", "7 días", "seguimiento"],
-                ["Seguro del local", "12 días", "adjuntar póliza"],
-              ].map(([title, due, state]) => (
-                <div
-                  key={title}
-                  className="rounded-[8px] bg-[#fafafa] px-3 py-3 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.03)]"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-[#171717]">{title}</p>
-                    <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[#666666]">
-                      {due}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm text-[#666666]">{state}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Panel title="Documentación" value="Evidencias y checklist" />
-            <Panel title="Colaboración" value="Dueño • contador • gestor" tone="dark" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const _exhaustive: never = variant;
+  return _exhaustive;
 }

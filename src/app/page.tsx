@@ -43,7 +43,7 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
-      <section className="value-strip-band">
+      <section className="value-strip-band hero-adjacent-band hero-adjacent-card-band">
         <div className="section-shell py-5 md:py-6">
           <div className="surface-card value-strip-card overflow-hidden px-5 py-4 md:px-6">
             <div className="flex gap-3 overflow-x-auto pb-1">

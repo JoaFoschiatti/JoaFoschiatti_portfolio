@@ -2,8 +2,7 @@ export type MockupVariant =
   | "operations-overview"
   | "comanda"
   | "optica-focus"
-  | "turnos-online"
-  | "cumpliros";
+  | "turnos-online";
 
 export type NavigationItem = {
   label: string;
@@ -444,12 +443,12 @@ export const projects = [
       "Ordenar productos, precios y cuentas corrientes en una herramienta simple para la operación diaria.",
     solution:
       "Se trabaja como una aplicación de escritorio orientada a caja y administración interna, con una interfaz directa para revisar stock, actualizar precios, gestionar clientes y mantener respaldos.",
-    modules: ["Stock", "Precios", "Clientes", "Cuenta corriente", "Backups"],
+    modules: ["Inicio", "Stock", "Precios", "Cuenta corriente", "Reportes", "Backups"],
     stackLabel: "Stack visible",
     stack: ["Electron", "SQLite", "Tailwind"],
     notes: [
-      "Caso privado. No se publica repositorio ni capturas reales del cliente.",
-      "La preview del portfolio es una representación neutra del tipo de sistema, no una pantalla productiva del cliente.",
+      "Caso privado. No se publican datos reales del cliente ni información operativa sensible.",
+      "Las capturas usan datos demo neutros para mostrar el tipo de operación sin exponer la base productiva.",
     ],
     visibility: "private",
     caseLabel: "Ver caso",
@@ -460,7 +459,69 @@ export const projects = [
       width: 1536,
       height: 1024,
     },
-    evidenceBadges: ["Caso privado", "Pantallas reales"],
+    evidenceBadges: ["Caso privado", "Pantallas con datos demo"],
+    moduleScreenshots: [
+      {
+        module: "Inicio",
+        src: "/cases/optica-focus/inicio.png",
+        title: "Inicio operativo",
+        description:
+          "Resumen inicial con alertas de stock, accesos rápidos y una vista corta para decidir qué revisar primero.",
+        alt: "Pantalla de inicio de Óptica Focus con alertas, accesos rápidos y variantes críticas.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Stock",
+        src: "/cases/optica-focus/stock.png",
+        title: "Stock por graduación",
+        description:
+          "Control de lentes de contacto por marca, modelo y graduación, con mínimos, estado y acciones rápidas de mostrador.",
+        alt: "Pantalla de stock de Óptica Focus con lentes de contacto, graduaciones, mínimos y acciones de ajuste.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Precios",
+        src: "/cases/optica-focus/precios.png",
+        title: "Lista de precios",
+        description:
+          "Gestión de cristales por laboratorio, categoría, costo, venta, margen e historial de actualizaciones.",
+        alt: "Pantalla de precios de Óptica Focus con cristales, laboratorios, costos, ventas y márgenes.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Cuenta corriente",
+        src: "/cases/optica-focus/cuenta-corriente.png",
+        title: "Cuenta corriente",
+        description:
+          "Seguimiento de órdenes con saldos pendientes, pagos, estado del pedido y acciones de cobro o historial.",
+        alt: "Pantalla de cuenta corriente de Óptica Focus con órdenes, pagos, saldos y estados.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Reportes",
+        src: "/cases/optica-focus/reportes.png",
+        title: "Reportes mensuales",
+        description:
+          "Cierre mensual con órdenes creadas, cobrado, facturado, saldos pendientes y movimientos de stock exportables.",
+        alt: "Pantalla de reportes de Óptica Focus con resumen mensual, métricas de órdenes y movimientos.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Backups",
+        src: "/cases/optica-focus/backups.png",
+        title: "Backups y configuración",
+        description:
+          "Configuración local con backups de SQLite, diagnóstico, carpeta externa sincronizada y estado de actualización.",
+        alt: "Pantalla de configuración de Óptica Focus con backups locales, diagnóstico y estado de actualización.",
+        width: 1440,
+        height: 900,
+      },
+    ],
   },
   {
     slug: "turnos-online",
@@ -478,20 +539,25 @@ export const projects = [
     modules: [
       "Turnos",
       "Clientes",
-      "Servicios",
+      "Historial",
       "Reportes",
-      "WhatsApp",
-      "Pagos",
+      "Servicios",
+      "Configuración",
     ],
     stackLabel: "Capacidades verificadas",
-    stack: ["Turnos", "Clientes", "Servicios", "Reportes", "WhatsApp", "Pagos"],
-    notes: [
-      "Para la evidencia pública se enlaza el repositorio AgendaFlow.",
-      "El portfolio evita sobre-especificar stack por coexistencia de versiones y prioriza el caso de negocio.",
+    stack: [
+      "Turnos",
+      "Clientes",
+      "Historial",
+      "Reportes",
+      "Servicios",
+      "Configuración",
     ],
-    repoUrl: "https://github.com/JoaFoschiatti/AgendaFlow",
-    repoLabel: "Ver repo",
-    visibility: "public",
+    notes: [
+      "Caso privado. No se publica repositorio ni información operativa sensible del proyecto real.",
+      "Las capturas usan datos demo neutros para mostrar el flujo de turnos, clientes, reportes y configuración.",
+    ],
+    visibility: "private",
     caseLabel: "Ver caso",
     mockup: "turnos-online",
     homeVisual: {
@@ -500,47 +566,69 @@ export const projects = [
       width: 1536,
       height: 1024,
     },
-    evidenceBadges: ["En producción"],
-  },
-  {
-    slug: "cumpliros",
-    featured: true,
-    security: false,
-    name: "CumpliRos",
-    category: "Gestión de vencimientos y documentación",
-    status: "MVP / Producto en desarrollo",
-    description:
-      "PWA para ordenar habilitaciones, DDJJ, tributos, documentación, tareas, evidencias y colaboración entre dueño, contador y gestor.",
-    problem:
-      "Reducir olvidos, vencimientos dispersos y documentación desordenada en comercios y pymes.",
-    solution:
-      "Se plantea como una capa operativa para registrar obligaciones, documentos y seguimiento, con tablero, semáforo de riesgo y coordinación entre las personas que intervienen en la gestión.",
-    modules: [
-      "Vencimientos",
-      "Documentación",
-      "Tareas",
-      "Evidencias",
-      "Auditoría",
-      "Notificaciones",
+    evidenceBadges: ["Caso privado", "Pantallas con datos demo"],
+    moduleScreenshots: [
+      {
+        module: "Turnos",
+        src: "/cases/turnos-online/turnos.png",
+        title: "Agenda semanal",
+        description:
+          "Vista de turnos por semana con estados, horarios, servicios, clientes y acciones rápidas para la operación diaria.",
+        alt: "Pantalla de Turnos online con agenda semanal, turnos por día, estados y acciones rápidas.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Clientes",
+        src: "/cases/turnos-online/clientes.png",
+        title: "Gestión de clientes",
+        description:
+          "Listado de clientes con búsqueda, datos de contacto, historial resumido y acceso a nuevas cargas.",
+        alt: "Pantalla de Turnos online con listado de clientes, búsqueda y datos de contacto.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Historial",
+        src: "/cases/turnos-online/historial.png",
+        title: "Historial de turnos",
+        description:
+          "Consulta histórica con filtros, estados y detalle de turnos pasados o cancelados para seguimiento.",
+        alt: "Pantalla de Turnos online con historial de turnos, filtros y estados.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Reportes",
+        src: "/cases/turnos-online/reportes.png",
+        title: "Reportes del negocio",
+        description:
+          "Métricas de actividad, ingresos, servicios más usados y clientes frecuentes para entender el mes.",
+        alt: "Pantalla de Turnos online con reportes, métricas, ingresos y gráficos de servicios.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Servicios",
+        src: "/cases/turnos-online/servicios.png",
+        title: "Servicios configurables",
+        description:
+          "Configuración de servicios con duración, precio, color operativo y opciones para adaptar la agenda.",
+        alt: "Pantalla de Turnos online con configuración de servicios, duración, precio y color.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Configuración",
+        src: "/cases/turnos-online/configuracion.png",
+        title: "Configuración general",
+        description:
+          "Ajustes de negocio, horario laboral, apariencia, notificaciones, seguridad y respaldo de datos.",
+        alt: "Pantalla de Turnos online con configuración del negocio, horarios, apariencia y respaldo de datos.",
+        width: 1440,
+        height: 900,
+      },
     ],
-    stackLabel: "Stack visible",
-    stack: ["TypeScript", "PWA", "SaaS"],
-    notes: [
-      "Proyecto orientado a comercios y pymes con operación física en Rosario y Santa Fe.",
-      "Se presenta como MVP en evolución, con foco en cumplimiento operativo y colaboración.",
-    ],
-    repoUrl: "https://github.com/JoaFoschiatti/CumpliRos",
-    repoLabel: "Ver repo",
-    visibility: "public",
-    caseLabel: "Ver caso",
-    mockup: "cumpliros",
-    homeVisual: {
-      src: "/project-cumpliros-visual-v2.png",
-      alt: "CumpliRos unifica vencimientos, documentos sueltos y tareas dispersas en un panel operativo con documentos, evidencias y equipo alineado.",
-      width: 1536,
-      height: 1024,
-    },
-    evidenceBadges: ["MVP"],
   },
   {
     slug: "soc-analyst-course",
