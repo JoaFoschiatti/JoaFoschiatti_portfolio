@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import BriefBuilder from "@/components/BriefBuilder";
 import SectionHeading from "@/components/SectionHeading";
@@ -46,7 +47,7 @@ export default function CustomSystemsPage() {
         <div className="section-shell hero-section grid min-w-0 items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <div className="min-w-0">
             <p className="section-eyebrow">Sistemas a medida</p>
-            <h1 className="mt-5 max-w-4xl text-[clamp(2.45rem,5vw,3.65rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#f8fbfb]">
+            <h1 className="mt-5 max-w-[20.5rem] text-[clamp(2.2rem,5vw,3.65rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#f8fbfb] sm:max-w-4xl">
               Ordená un proceso real en un sistema simple de usar.
             </h1>
             <p className="mt-6 max-w-3xl text-[clamp(1.05rem,1.9vw,1.22rem)] leading-8 text-[#c6d1da]">
@@ -74,46 +75,16 @@ export default function CustomSystemsPage() {
             </div>
           </div>
 
-          <aside className="hero-visual-frame rounded-[16px] p-5 md:p-6">
-            <p className="section-eyebrow">Del proceso suelto al sistema</p>
-            <div className="mt-6 grid gap-5">
-              <div className="border-b border-[var(--color-line)] pb-5">
-                <p className="text-[1.15rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                  Antes
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {["Planillas", "Mensajes", "Tareas manuales"].map((item) => (
-                    <span key={item} className="pill">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="border-b border-[var(--color-line)] pb-5">
-                <p className="font-mono text-[0.74rem] uppercase tracking-[0.16em] text-[var(--color-subtle)]">
-                  Se convierte en
-                </p>
-                <p className="mt-3 text-[1.7rem] font-semibold leading-tight tracking-[-0.05em] text-[var(--color-foreground)]">
-                  Un sistema propio con datos, usuarios y flujo claro.
-                </p>
-              </div>
-              <div>
-                <p className="text-[1.15rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                  Resultado
-                </p>
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  {["Operación al día", "Menos pasos manuales", "Mejor seguimiento"].map(
-                    (item) => (
-                      <div key={item} className="text-[0.92rem] leading-6 text-[var(--color-muted)]">
-                        <span className="status-dot mr-2 inline-block text-[var(--color-accent-teal)]" />
-                        {item}
-                      </div>
-                    ),
-                  )}
-                </div>
-              </div>
-            </div>
-          </aside>
+          <div className="hero-visual-frame custom-systems-hero-visual">
+            <Image
+              src="/sistemas-a-medida-visual-v2.png"
+              alt="Proceso operativo disperso que se transforma en un sistema a medida claro y conectado"
+              width={1448}
+              height={1086}
+              priority
+              sizes="(min-width: 1024px) 46vw, 100vw"
+            />
+          </div>
         </div>
       </section>
 

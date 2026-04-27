@@ -173,6 +173,19 @@ summary:focus-visible {
   box-shadow: 0 16px 54px -38px rgba(17, 24, 32, 0.6);
 }
 
+.custom-systems-hero-visual {
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+}
+
+.custom-systems-hero-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: none;
+}
+
 .section-block-continuation {
   padding-block: 0 clamp(4.5rem, 8vw, 7rem);
 }
