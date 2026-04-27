@@ -45,16 +45,16 @@ export default function StartOptionsSection({
           {options.map((option) => (
             <article key={option.title} className="surface-card p-5 md:p-6">
               <p className="section-eyebrow">{option.label}</p>
-              <h3 className="mt-4 text-[1.35rem] font-semibold tracking-[-0.04em] text-[#171717]">
+              <h3 className="mt-4 text-[1.35rem] font-semibold tracking-[-0.04em] text-[var(--color-foreground)]">
                 {option.title}
               </h3>
-              <p className="mt-3 text-[0.98rem] leading-7 text-[#4d4d4d]">
+              <p className="mt-3 text-[0.98rem] leading-7 text-[var(--color-muted)]">
                 {option.description}
               </p>
-              <ul className="mt-5 grid gap-3 text-[0.92rem] leading-6 text-[#4d4d4d] sm:grid-cols-3">
+              <ul className="mt-5 grid gap-3 text-[0.92rem] leading-6 text-[var(--color-muted)] sm:grid-cols-3">
                 {option.items.map((item) => (
                   <li key={item} className="flex gap-2">
-                    <span className="status-dot mt-2 shrink-0 text-[#171717]" aria-hidden />
+                    <span className="status-dot mt-2 shrink-0 text-[var(--color-accent-teal)]" aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}

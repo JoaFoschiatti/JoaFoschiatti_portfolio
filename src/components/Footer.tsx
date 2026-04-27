@@ -52,22 +52,22 @@ export default function Footer({
   summary,
 }: FooterProps) {
   return (
-    <footer className="border-t border-[#ebebeb] py-8">
+    <footer className="border-t border-[var(--color-line)] bg-[var(--color-surface-soft)] py-8">
       <div className="section-shell flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-[1rem] font-medium text-[#171717]">{name}</p>
-          <p className="mt-2 text-sm text-[#666666]">{location}</p>
+          <p className="text-[1rem] font-medium text-[var(--color-foreground)]">{name}</p>
+          <p className="mt-2 text-sm text-[var(--color-subtle)]">{location}</p>
           <a
-            className="mt-2 inline-block text-sm text-[#4d4d4d] hover:text-[#171717]"
+            className="mt-2 inline-block text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
             href={`mailto:${email}`}
           >
             {email}
           </a>
-          <p className="mt-4 max-w-xl text-sm leading-7 text-[#666666]">{summary}</p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-subtle)]">{summary}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-3 text-[#171717]">
+        <div className="flex flex-wrap items-center gap-3 text-[var(--color-foreground)]">
           <a
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)] hover:bg-[#fafafa]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface)] shadow-[inset_0_0_0_1px_rgba(17,24,32,0.08)] hover:bg-[#f2eee7]"
             href={githubUrl}
             target="_blank"
             rel="noreferrer"
@@ -76,7 +76,7 @@ export default function Footer({
             <GitHubIcon />
           </a>
           <a
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)] hover:bg-[#fafafa]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface)] shadow-[inset_0_0_0_1px_rgba(17,24,32,0.08)] hover:bg-[#f2eee7]"
             href={instagramUrl}
             target="_blank"
             rel="noreferrer"

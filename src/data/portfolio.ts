@@ -23,6 +23,12 @@ export type ProjectScreenshot = {
   alt: string;
 };
 
+export type ProjectModuleScreenshot = ProjectScreenshot & {
+  module: string;
+  width: number;
+  height: number;
+};
+
 export type Project = {
   slug: string;
   featured: boolean;
@@ -50,6 +56,7 @@ export type Project = {
   };
   evidenceBadges?: string[];
   screenshots?: ProjectScreenshot[];
+  moduleScreenshots?: ProjectModuleScreenshot[];
 };
 
 export type ProcessStep = {
@@ -323,14 +330,7 @@ export const projects = [
       "Centralizar la operación diaria de un restaurante sin depender de planillas, mensajes sueltos o procesos manuales.",
     solution:
       "La propuesta reúne front de salón, cocina, caja, pedidos remotos y configuración del negocio en una sola base operativa, con foco en tiempos de atención, cobro y visibilidad del estado de cada pedido.",
-    modules: [
-      "Salón y mesas",
-      "Cocina",
-      "Caja",
-      "Delivery/retiro",
-      "Menú QR",
-      "Pagos",
-    ],
+    modules: ["Dashboard", "Mesas", "Cocina", "Caja", "Menú", "Pagos"],
     stackLabel: "Stack visible",
     stack: [
       "React",
@@ -358,6 +358,68 @@ export const projects = [
       height: 1024,
     },
     evidenceBadges: ["Pantallas del sistema"],
+    moduleScreenshots: [
+      {
+        module: "Dashboard",
+        src: "/cases/comanda/dashboard.png",
+        title: "Dashboard operativo",
+        description:
+          "Prioridades, accesos rápidos e indicadores para entender qué necesita atención primero.",
+        alt: "Dashboard de Comanda con prioridades, accesos operativos e indicadores del turno.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Mesas",
+        src: "/cases/comanda/mesas.png",
+        title: "Mesas y salón",
+        description:
+          "Estado del salón, mesas ocupadas, cuentas pendientes y acciones rápidas para la operación diaria.",
+        alt: "Pantalla de mesas de Comanda con resumen del salón, estados y tarjetas de mesas.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Cocina",
+        src: "/cases/comanda/cocina.png",
+        title: "Cola de cocina",
+        description:
+          "Pedidos pendientes y en preparación visibles por prioridad, demora y detalle de productos.",
+        alt: "Pantalla de cocina de Comanda con pedidos pendientes, pedidos en preparación y alertas.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Caja",
+        src: "/cases/comanda/caja.png",
+        title: "Cierre de caja",
+        description:
+          "Estado actual de caja, ventas por medio de pago e historial de cierres para controlar el turno.",
+        alt: "Pantalla de cierre de caja de Comanda con fondo inicial, ventas en efectivo, Mercado Pago e historial.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Menú",
+        src: "/cases/comanda/menu.png",
+        title: "Menú público",
+        description:
+          "Catálogo online con categorías, productos personalizables y carrito para pedidos web.",
+        alt: "Menú público de Comanda con categorías, productos y carrito lateral.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Pagos",
+        src: "/cases/comanda/pagos.png",
+        title: "Pagos Mercado Pago",
+        description:
+          "Resumen de cobros, comisiones, neto recibido y trazabilidad de transacciones aprobadas o rechazadas.",
+        alt: "Pantalla de transacciones Mercado Pago de Comanda con resumen de montos y tabla de pagos.",
+        width: 1440,
+        height: 900,
+      },
+    ],
   },
   {
     slug: "optica-focus",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseScreenshots from "@/components/CaseScreenshots";
 import MockupCard from "@/components/MockupCard";
+import ProjectModules from "@/components/ProjectModules";
 import SectionHeading from "@/components/SectionHeading";
 import {
   contactLinks,
@@ -74,7 +75,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
   return (
     <>
       <section className="section-block section-shell pt-12 md:pt-20">
-        <div className="surface-card-strong p-6 md:p-8">
+        <div className="surface-card-strong contact-card p-6 md:p-8">
           <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -88,14 +89,14 @@ export default async function ProjectPage(props: ProjectPageProps) {
               </div>
               <Link
                 href="/#proyectos"
-                className="mt-6 inline-flex text-sm text-[#4d4d4d] hover:text-[#171717]"
+                className="mt-6 inline-flex text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
               >
                 Volver a proyectos
               </Link>
-              <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[#171717]">
+              <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[var(--color-foreground)]">
                 {project.name}
               </h1>
-              <p className="mt-5 max-w-3xl text-[1.08rem] leading-8 text-[#4d4d4d]">
+              <p className="mt-5 max-w-3xl text-[1.08rem] leading-8 text-[var(--color-muted)]">
                 {project.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -147,13 +148,10 @@ export default async function ProjectPage(props: ProjectPageProps) {
           title="Módulos principales"
           description="La idea no es sumar pantallas por sumar, sino cubrir los puntos que hacen falta en la operación diaria."
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {project.modules.map((module) => (
-            <article key={module} className="surface-card p-5">
-              <p className="text-[1rem] font-medium text-[#171717]">{module}</p>
-            </article>
-          ))}
-        </div>
+        <ProjectModules
+          modules={project.modules}
+          moduleScreenshots={project.moduleScreenshots}
+        />
       </section>
 
       <section className="section-shell grid gap-6 pb-8 md:grid-cols-[1.1fr_0.9fr]">
