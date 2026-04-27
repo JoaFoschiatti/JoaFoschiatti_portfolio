@@ -330,7 +330,7 @@ export const projects = [
       "Centralizar la operación diaria de un restaurante sin depender de planillas, mensajes sueltos o procesos manuales.",
     solution:
       "La propuesta reúne front de salón, cocina, caja, pedidos remotos y configuración del negocio en una sola base operativa, con foco en tiempos de atención, cobro y visibilidad del estado de cada pedido.",
-    modules: ["Dashboard", "Mesas", "Cocina", "Caja", "Menú", "Pagos"],
+    modules: ["Dashboard", "Mesas", "Pedidos", "Cocina", "Caja", "Menú", "Pagos"],
     stackLabel: "Stack visible",
     stack: [
       "React",
@@ -376,6 +376,16 @@ export const projects = [
         description:
           "Estado del salón, mesas ocupadas, cuentas pendientes y acciones rápidas para la operación diaria.",
         alt: "Pantalla de mesas de Comanda con resumen del salón, estados y tarjetas de mesas.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        module: "Pedidos",
+        src: "/cases/comanda/pedidos.png",
+        title: "Gestión de pedidos",
+        description:
+          "Pedidos de mesa, mostrador y delivery con estado, pago, impresión y acciones operativas en una sola vista.",
+        alt: "Pantalla de pedidos de Comanda con tabla de pedidos, estados, pagos, impresión y acciones operativas.",
         width: 1440,
         height: 900,
       },
