@@ -43,9 +43,9 @@ export default function Hero({
             <Link className="button-primary" href={whatsappHref}>
               Hablar por WhatsApp
             </Link>
-            <Link className="button-secondary" href="/#proyectos">
+            <a className="button-secondary" href="#proyectos">
               Ver proyectos
-            </Link>
+            </a>
           </div>
           <div className="mx-auto mt-8 flex w-full max-w-[20.5rem] flex-wrap gap-2 sm:mx-0 sm:max-w-none">
             {badges.map((badge) => (
