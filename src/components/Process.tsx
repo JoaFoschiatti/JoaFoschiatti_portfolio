@@ -1,5 +1,6 @@
 import SectionHeading from "@/components/SectionHeading";
 import type { ProcessStep } from "@/data/portfolio";
+import type { CSSProperties } from "react";
 
 type ProcessProps = {
   steps: ProcessStep[];
@@ -18,9 +19,13 @@ export default function Process({ steps }: ProcessProps) {
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {steps.map((step, index) => (
-            <article key={step.label} className="surface-card p-6 md:p-7">
+            <article
+              key={step.label}
+              className="surface-card process-card p-6 md:p-7"
+              style={{ "--process-color": step.color } as CSSProperties}
+            >
               <div
-                className="h-1 w-16 rounded-full"
+                className="h-1.5 w-16 rounded-full"
                 style={{ backgroundColor: step.color }}
                 aria-hidden
               />
@@ -34,7 +39,7 @@ export default function Process({ steps }: ProcessProps) {
                 {step.title}
               </h3>
               <p className="mt-4 text-[1rem] leading-8 text-[#4d4d4d]">{step.description}</p>
-              <p className="mt-6 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+              <p className="mt-6 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[var(--color-subtle)]">
                 Paso {String(index + 1).padStart(2, "0")}
               </p>
             </article>

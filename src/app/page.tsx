@@ -43,15 +43,15 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
-      <section className="section-shell pb-6 md:pb-8">
+      <section className="section-shell value-strip-card pb-6 md:pb-8">
         <div className="surface-card overflow-hidden px-5 py-4 md:px-6">
           <div className="flex gap-3 overflow-x-auto pb-1">
             {valueStrip.map((item) => (
               <div
                 key={item}
-                className="flex shrink-0 items-center gap-3 text-sm text-[#4d4d4d]"
+                className="flex shrink-0 items-center gap-3 text-sm text-[var(--color-muted)]"
               >
-                <span className="status-dot text-[#171717]" aria-hidden />
+                <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
                 <span>{item}</span>
               </div>
             ))}
@@ -61,7 +61,7 @@ export default function Home() {
 
       <section
         id="servicios"
-        className="section-anchor section-band section-band-muted"
+        className="section-anchor section-band section-band-cool"
       >
         <div className="section-block section-shell">
           <SectionHeading
@@ -115,10 +115,10 @@ export default function Home() {
               className="surface-card p-5"
             >
               <p className="section-eyebrow">Tipo {String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-4 text-[1.15rem] font-semibold tracking-[-0.03em] text-[#171717]">
+              <h3 className="mt-4 text-[1.15rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
                 {clientType.title}
               </h3>
-              <p className="mt-3 text-[0.96rem] leading-7 text-[#4d4d4d]">
+              <p className="mt-3 text-[0.96rem] leading-7 text-[var(--color-muted)]">
                 {clientType.description}
               </p>
             </article>
@@ -132,10 +132,10 @@ export default function Home() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="max-w-3xl">
                 <p className="section-eyebrow">Criterio de seguridad</p>
-                <h2 className="mt-3 text-[1.25rem] font-semibold tracking-[-0.03em] text-[#171717]">
+                <h2 className="mt-3 text-[1.25rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
                   Buenas prácticas para sistemas que se usan todos los días
                 </h2>
-                <p className="mt-3 text-[0.98rem] leading-7 text-[#4d4d4d]">
+                <p className="mt-3 text-[0.98rem] leading-7 text-[var(--color-muted)]">
                   {project.description}
                 </p>
               </div>
@@ -172,7 +172,7 @@ export default function Home() {
       />
 
       <section className="section-shell pb-20 md:pb-24">
-        <div className="surface-card px-5 py-5 text-sm text-[#666666] md:px-6">
+        <div className="surface-card px-5 py-5 text-sm text-[var(--color-subtle)] md:px-6">
           <p>Sistemas que se usan en la operación diaria. Del problema al sistema funcionando.</p>
           <p className="mt-3">
             Si preferís revisar primero los casos, podés volver a{" "}

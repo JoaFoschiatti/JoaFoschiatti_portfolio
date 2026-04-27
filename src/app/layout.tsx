@@ -60,8 +60,8 @@ export default function RootLayout({
     "/#contacto";
 
   return (
-    <html lang="es" className="h-full bg-white text-[#171717]">
-      <body className="min-h-full bg-white font-sans text-[#171717]">
+    <html lang="es" className="h-full bg-[var(--color-background)] text-[var(--color-foreground)]">
+      <body className="min-h-full bg-[var(--color-background)] font-sans text-[var(--color-foreground)]">
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
