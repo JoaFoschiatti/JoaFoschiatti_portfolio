@@ -43,18 +43,20 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
-      <section className="section-shell value-strip-card pb-6 md:pb-8">
-        <div className="surface-card overflow-hidden px-5 py-4 md:px-6">
-          <div className="flex gap-3 overflow-x-auto pb-1">
-            {valueStrip.map((item) => (
-              <div
-                key={item}
-                className="flex shrink-0 items-center gap-3 text-sm text-[var(--color-muted)]"
-              >
-                <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
-                <span>{item}</span>
-              </div>
-            ))}
+      <section className="value-strip-band">
+        <div className="section-shell py-5 md:py-6">
+          <div className="surface-card value-strip-card overflow-hidden px-5 py-4 md:px-6">
+            <div className="flex gap-3 overflow-x-auto pb-1">
+              {valueStrip.map((item) => (
+                <div
+                  key={item}
+                  className="flex shrink-0 items-center gap-3 text-sm text-[var(--color-muted)]"
+                >
+                  <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

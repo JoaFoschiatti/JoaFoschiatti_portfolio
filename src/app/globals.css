@@ -375,10 +375,14 @@ summary:focus-visible {
   background: currentColor;
 }
 
+.value-strip-band {
+  background: linear-gradient(180deg, #f7f5ef 0%, var(--color-background) 100%);
+  box-shadow: inset 0 1px 0 rgba(17, 24, 32, 0.08);
+}
+
 .value-strip-card {
-  margin-top: -1.25rem;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .process-card {
