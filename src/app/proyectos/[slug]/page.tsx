@@ -101,18 +101,8 @@ export default async function ProjectPage(props: ProjectPageProps) {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link className="button-primary" href={whatsappHref}>
-                  Hablar por WhatsApp
+                  Consultar por WhatsApp
                 </Link>
-                {project.repoUrl ? (
-                  <a
-                    className="button-secondary"
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {project.repoLabel ?? "Ver código en GitHub"}
-                  </a>
-                ) : null}
               </div>
             </div>
             <div className="case-hero-visual">
@@ -173,6 +163,18 @@ export default async function ProjectPage(props: ProjectPageProps) {
               </span>
             ))}
           </div>
+          {project.repoUrl ? (
+            <div className="mt-6">
+              <a
+                className="button-secondary"
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Repositorio técnico
+              </a>
+            </div>
+          ) : null}
         </article>
         <article className="surface-card p-6 md:p-7">
           <p className="section-eyebrow">Notas</p>

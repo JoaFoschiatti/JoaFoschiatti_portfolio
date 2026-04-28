@@ -55,10 +55,10 @@ export default function CustomSystemsPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link className="button-primary" href="#brief">
-                Armar brief por WhatsApp
+                Contame tu proceso por WhatsApp
               </Link>
               <Link className="button-secondary" href="/#proyectos">
-                Ver proyectos
+                Ver casos reales
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
@@ -169,7 +169,7 @@ export default function CustomSystemsPage() {
               </h2>
             </div>
             <a className="button-primary shrink-0" href={whatsappHref}>
-              Hablar por WhatsApp
+              Consultar por WhatsApp
             </a>
           </div>
         </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MockupCard from "@/components/MockupCard";
 import type { Project } from "@/data/portfolio";
+import type { ReactNode } from "react";
 
 type ProjectCardProps = {
   project: Project;
@@ -95,12 +96,14 @@ function ProjectContent({
   showStack = false,
   visualPriority = false,
   showRepoLink,
+  mobilePreview,
 }: {
   project: Project;
   variant: ProjectContentVariant;
   showStack?: boolean;
   visualPriority?: boolean;
   showRepoLink: boolean;
+  mobilePreview?: ReactNode;
 }) {
   const featured = variant === "featured";
   const standard = variant === "standard";
@@ -125,6 +128,9 @@ function ProjectContent({
       : standard
         ? "mt-2 text-[0.98rem] leading-7 text-[#4d4d4d]"
         : "mt-2 max-w-2xl text-[0.98rem] leading-7 text-[#4d4d4d]";
+  const resultClassName = visualPriority
+    ? "mt-2 max-w-md text-[0.92rem] leading-6 text-[#4d4d4d]"
+    : "mt-2 max-w-2xl text-[0.98rem] leading-7 text-[#4d4d4d]";
   const actionsClassName = visualPriority
     ? "mt-6"
     : featured
@@ -136,9 +142,7 @@ function ProjectContent({
     ? "flex flex-wrap items-center gap-2"
     : "mt-5 flex flex-wrap items-center gap-3";
   const problemContainerClassName = visualPriority ? "mt-4" : "mt-5";
-  const moduleClassName = visualPriority
-    ? "mt-5 flex flex-wrap gap-2"
-    : "mt-6 flex flex-wrap gap-2";
+  const moduleContainerClassName = visualPriority ? "mt-5" : "mt-6";
 
   return (
     <div className={standard ? "mt-6 flex grow flex-col" : "min-w-0"}>
@@ -149,18 +153,32 @@ function ProjectContent({
       </div>
       <h3 className={titleClassName}>{project.name}</h3>
       <p className={descriptionClassName}>{project.description}</p>
+      {mobilePreview ? <div className="mt-5 lg:hidden">{mobilePreview}</div> : null}
       <div className={problemContainerClassName}>
         <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-          Problema
+          Qué ordena
         </p>
         <p className={problemClassName}>{project.problem}</p>
       </div>
-      <div className={moduleClassName}>
-        {project.modules.map((module) => (
-          <span key={module} className="pill">
-            {module}
-          </span>
-        ))}
+      {project.businessGain ? (
+        <div className="mt-4">
+          <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+            Qué gana el negocio
+          </p>
+          <p className={resultClassName}>{project.businessGain}</p>
+        </div>
+      ) : null}
+      <div className={moduleContainerClassName}>
+        <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+          Módulos
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {project.modules.map((module) => (
+            <span key={module} className="pill">
+              {module}
+            </span>
+          ))}
+        </div>
       </div>
       {showStack ? (
         <div className="mt-6">
@@ -214,10 +232,12 @@ export default function ProjectCard({
             variant="featured"
             visualPriority={hasHomeVisual}
             showRepoLink={showRepoLink}
-          />
-          <ProjectPreview
-            project={project}
-            className={hasHomeVisual ? "-mx-4 mt-1 lg:hidden" : "lg:hidden"}
+            mobilePreview={
+              <ProjectPreview
+                project={project}
+                className={hasHomeVisual ? "-mx-4" : undefined}
+              />
+            }
           />
         </div>
       </article>
@@ -246,10 +266,12 @@ export default function ProjectCard({
             variant="horizontal"
             visualPriority={hasHomeVisual}
             showRepoLink={showRepoLink}
-          />
-          <ProjectPreview
-            project={project}
-            className={hasHomeVisual ? "-mx-4 mt-1 lg:hidden" : "lg:hidden"}
+            mobilePreview={
+              <ProjectPreview
+                project={project}
+                className={hasHomeVisual ? "-mx-4" : undefined}
+              />
+            }
           />
         </div>
       </article>

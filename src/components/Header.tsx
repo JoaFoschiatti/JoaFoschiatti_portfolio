@@ -42,7 +42,7 @@ export default function Header({
 
         <div className="hidden lg:block">
           <Link className="button-primary" href={whatsappHref}>
-            Hablar por WhatsApp
+            Consultar por WhatsApp
           </Link>
         </div>
 
@@ -88,7 +88,7 @@ export default function Header({
               </Link>
             ))}
             <Link className="button-primary mt-2" href={whatsappHref} onClick={closeMenu}>
-              Hablar por WhatsApp
+              Consultar por WhatsApp
             </Link>
           </div>
         </div>

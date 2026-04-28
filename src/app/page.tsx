@@ -3,15 +3,13 @@ import ContactCTA from "@/components/ContactCTA";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
-import ServiceCard from "@/components/ServiceCard";
 import {
   contactLinks,
   featuredProjects,
+  homeProblems,
+  personalTrust,
   processSteps,
   profile,
-  services,
-  trustCards,
-  valueStrip,
 } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 import type { CSSProperties } from "react";
@@ -38,51 +36,16 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
-      <section className="value-strip-band hero-adjacent-band hero-adjacent-card-band">
-        <div className="section-shell py-5 md:py-6">
-          <div className="surface-card value-strip-card overflow-hidden px-5 py-4 md:px-6">
-            <div className="flex gap-3 overflow-x-auto pb-1">
-              {valueStrip.map((item) => (
-                <div
-                  key={item}
-                  className="flex shrink-0 items-center gap-3 text-sm text-[var(--color-muted)]"
-                >
-                  <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="servicios"
-        className="section-anchor section-band section-band-cool"
-      >
-        <div className="section-block section-shell">
-          <SectionHeading
-            title="Soluciones concretas para problemas reales de operación."
-            description="Desde una web para captar consultas hasta un sistema interno para ordenar ventas, stock, turnos o procesos administrativos."
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {services.map((service) => (
-              <ServiceCard key={service.title} service={service} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section
         id="proyectos"
         className="section-anchor section-block section-shell"
       >
         <div className="home-projects-panel">
           <SectionHeading
-            title="Casos reales para entender qué tipo de sistemas construyo."
-            description="Tres ejemplos con pantallas concretas: restaurante, óptica y agenda online. La idea es ver rápido el problema, la solución y cómo se usa."
+            title="Casos reales: problemas convertidos en sistemas."
+            description="Tres ejemplos con pantallas concretas: restaurante, óptica y agenda online. La idea es ver rápido qué problema aparece, qué módulos incluye y qué gana el negocio."
           />
-          <div className="mt-10 space-y-6">
+          <div className="mt-8 space-y-6 md:mt-10">
             {primaryProject ? (
               <ProjectCard
                 project={primaryProject}
@@ -104,20 +67,61 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-shell pb-16 md:pb-20">
+        <div className="home-personal-card">
+          <div className="home-personal-avatar" aria-hidden>
+            JSF
+          </div>
+          <div className="min-w-0">
+            <p className="section-eyebrow">{personalTrust.eyebrow}</p>
+            <h2 className="section-title mt-4">{personalTrust.title}</h2>
+            <p className="section-copy mt-5">{personalTrust.description}</p>
+            <div className="mt-6 grid gap-3">
+              {personalTrust.points.map((point) => (
+                <div key={point} className="home-personal-point">
+                  <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
+                  <span>{point}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="servicios"
+        className="section-anchor section-band section-band-cool"
+      >
+        <div className="section-block section-shell">
+          <SectionHeading
+            title="Procesos que puedo ordenar con software."
+            description="Si hoy dependés de planillas, WhatsApps, papeles o tareas repetidas, probablemente hay una parte del negocio que puede convertirse en una herramienta simple."
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {homeProblems.map((problem) => (
+              <article key={problem.title} className="home-problem-item">
+                <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
+                <h3>{problem.title}</h3>
+                <p>{problem.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section
         id="proceso"
         className="section-anchor section-shell pb-16 md:pb-20"
       >
         <div className="home-compact-proof">
           <div>
-            <p className="section-eyebrow">Proceso y criterio</p>
+            <p className="section-eyebrow">Cómo trabajo</p>
             <h2 className="section-title mt-4">
-              Primero se entiende el problema. Después se construye lo mínimo que ya ordena.
+              Tres pasos para pasar del problema a una herramienta usable.
             </h2>
             <p className="section-copy mt-5">
-              La parte técnica importa, pero no debería tapar lo principal:
-              entender el flujo, probar una primera versión y dejar el sistema
-              listo para uso real.
+              Mantengo el proceso simple: entender qué pasa, construir una
+              primera versión concreta y publicarla con margen para ajustar.
             </p>
             <div className="mt-7">
               <Link className="button-secondary" href="/sistemas-a-medida">
@@ -152,26 +156,13 @@ export default function Home() {
                 </div>
               </article>
             ))}
-
-            <div className="home-trust-panel">
-              {trustCards.map((card) => (
-                <article key={card.title} className="home-trust-item">
-                  <h3 className="text-[1rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-[0.92rem] leading-6 text-[var(--color-muted)]">
-                    {card.description}
-                  </p>
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
       <ContactCTA
         title="¿Tenés una idea o un proceso que querés ordenar?"
-        description="Contame qué parte del negocio querés ordenar: web, turnos, POS, stock, reportes o automatización. La idea es entender primero el problema y después construir algo que realmente se use."
+        description="Contame qué parte del negocio querés ordenar: web, turnos, POS, stock, reportes o automatización. Después de publicar el sistema, puedo acompañarte con mantenimiento, ajustes y nuevas mejoras si lo necesitás."
         whatsappHref={whatsappHref}
         email={`mailto:${contactLinks.email}`}
         briefQuestions={profile.briefQuestions}

@@ -37,6 +37,7 @@ export type Project = {
   status: string;
   description: string;
   problem: string;
+  businessGain?: string;
   solution: string;
   modules: string[];
   stackLabel: string;
@@ -105,6 +106,18 @@ export type SystemUseCase = {
   description: string;
 };
 
+export type HomeProblem = {
+  title: string;
+  description: string;
+};
+
+export type PersonalTrust = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  points: string[];
+};
+
 export const seo = {
   title: "Joaquín Sánchez Foschiatti — Webs y sistemas de gestión para negocios",
   description:
@@ -120,27 +133,25 @@ export const profile = {
   whatsappNumber: "5493482555038",
   whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
-    "Desarrollo páginas y sistemas de gestión para negocios que quieren operar mejor.",
+    "Convertí planillas, WhatsApps y tareas manuales en un sistema simple de usar.",
   heroSubtitle:
-    "Construyo webs comerciales, sistemas de turnos, POS, stock, reportes y automatizaciones para comercios, profesionales y pymes.",
+    "Soy Joaquín Sánchez Foschiatti, Ingeniero en Sistemas. Desarrollo webs, sistemas de gestión y automatizaciones para ordenar turnos, stock, pedidos, caja, reportes y procesos diarios de comercios, profesionales y pymes.",
   heroMicrocopy:
-    "Del diseño a producción, con foco en sistemas simples de usar y mantenibles.",
+    "Primero entiendo el problema real y después construyo una herramienta clara para que se pueda usar todos los días.",
   heroProof:
-    "Sistemas usados para stock, turnos, caja, pedidos y operación diaria.",
+    "Pensado para negocios que necesitan dejar de depender de planillas, mensajes sueltos y tareas repetidas.",
   heroBadges: [
     "Webs",
-    "POS",
-    "Stock",
     "Turnos",
-    "Pagos",
+    "Stock",
+    "Caja",
+    "Pedidos",
+    "Reportes",
     "WhatsApp",
-    "Vercel",
-    "AWS",
   ],
   navigation: [
-    { label: "Servicios", href: "/#servicios" },
-    { label: "Proceso", href: "/#proceso" },
-    { label: "Proyectos", href: "/#proyectos" },
+    { label: "Casos reales", href: "/#proyectos" },
+    { label: "Procesos", href: "/#servicios" },
     { label: "Sistema a medida", href: "/sistemas-a-medida" },
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavigationItem[],
@@ -158,7 +169,7 @@ export const contactLinks = {
   github: "https://github.com/JoaFoschiatti",
   instagram: "https://www.instagram.com/joasanchez02/",
   whatsappMessage:
-    "Hola Joaquín, vi tu portfolio y quiero consultar por una web o sistema para mi negocio.",
+    "Hola Joaquín, vi tu portfolio y quiero contarte un problema de mi negocio para ver si se puede resolver con software.",
 } as const;
 
 export const valueStrip = [
@@ -168,6 +179,59 @@ export const valueStrip = [
   "Código mantenible",
   "Pensado para operación diaria",
 ] as const;
+
+export const homeProblems = [
+  {
+    title: "Turnos",
+    description:
+      "Evitá horarios perdidos, mensajes sueltos y recordatorios manuales.",
+  },
+  {
+    title: "Stock",
+    description:
+      "Dejá de trabajar a ciegas con productos, mínimos, movimientos y alertas.",
+  },
+  {
+    title: "Caja",
+    description: "Ordená cobros, medios de pago, cierres y control diario.",
+  },
+  {
+    title: "Pedidos",
+    description:
+      "Centralizá estados, responsables, cocina, retiro, delivery o flujo interno.",
+  },
+  {
+    title: "Reportes",
+    description: "Mirá ventas, actividad y pendientes sin revisar todo a mano.",
+  },
+  {
+    title: "WhatsApp",
+    description:
+      "Convertí consultas y mensajes repetidos en flujos más ordenados.",
+  },
+  {
+    title: "Automatizaciones",
+    description:
+      "Reducí tareas repetitivas conectando formularios, paneles, APIs o procesos internos.",
+  },
+  {
+    title: "Web comercial",
+    description: "Mostrá tu servicio, captá consultas y explicá mejor qué ofrecés.",
+  },
+] satisfies HomeProblem[];
+
+export const personalTrust = {
+  eyebrow: "Quién está detrás",
+  title:
+    "Soy Joaquín Sánchez Foschiatti. Diseño sistemas simples para problemas reales de operación.",
+  description:
+    "Soy Ingeniero en Sistemas de la Información. Antes de escribir código, busco entender cómo trabaja el negocio, qué se repite, qué se pierde y qué necesita ver cada persona para trabajar mejor.",
+  points: [
+    "Ingeniería aplicada a negocios reales.",
+    "Sistemas pensados para uso diario, no para mostrar tecnología.",
+    "Acompañamiento después de publicar para ajustar y mejorar.",
+  ],
+} satisfies PersonalTrust;
 
 export const services = [
   {
@@ -287,7 +351,7 @@ export const systemsFaqs = [
   {
     question: "¿Qué pasa después del deploy?",
     answer:
-      "La idea es dejar el sistema en producción y poder acompañar con ajustes, mantenimiento o nuevas funcionalidades.",
+      "Después de publicar el sistema, puedo acompañarte con mantenimiento, ajustes y nuevas mejoras si lo necesitás.",
   },
   {
     question: "¿Cómo se define el alcance?",
@@ -327,6 +391,8 @@ export const projects = [
       "Sistema integral para operar salón, cocina, caja, delivery/retiro, menú público con QR, pagos y configuración del negocio.",
     problem:
       "Centralizar la operación diaria de un restaurante sin depender de planillas, mensajes sueltos o procesos manuales.",
+    businessGain:
+      "Pedidos claros, cocina visible y caja ordenada para reducir errores y acelerar el turno.",
     solution:
       "La propuesta reúne front de salón, cocina, caja, pedidos remotos y configuración del negocio en una sola base operativa, con foco en tiempos de atención, cobro y visibilidad del estado de cada pedido.",
     modules: ["Dashboard", "Mesas", "Pedidos", "Cocina", "Caja", "Menú", "Pagos"],
@@ -345,8 +411,6 @@ export const projects = [
       "El portfolio no expone abonos, variables de entorno, credenciales ni guías operativas internas del repositorio.",
       "Se presenta como instalación dedicada y sistema pensado para uso diario en restaurante real.",
     ],
-    repoUrl: "https://github.com/JoaFoschiatti/C0MANDA",
-    repoLabel: "Ver código en GitHub",
     visibility: "public",
     caseLabel: "Ver caso",
     mockup: "comanda",
@@ -436,11 +500,13 @@ export const projects = [
     security: false,
     name: "Óptica Focus",
     category: "Sistema de gestión y stock",
-    status: "En producción",
+    status: "En uso real",
     description:
       "Sistema de escritorio para óptica con gestión de stock, precios, cuenta corriente y backups, utilizado por un cliente real.",
     problem:
       "Ordenar productos, precios y cuentas corrientes en una herramienta simple para la operación diaria.",
+    businessGain:
+      "Stock, precios y saldos visibles para atender mejor y evitar revisar información dispersa.",
     solution:
       "Se trabaja como una aplicación de escritorio orientada a caja y administración interna, con una interfaz directa para revisar stock, actualizar precios, gestionar clientes y mantener respaldos.",
     modules: ["Inicio", "Stock", "Precios", "Cuenta corriente", "Reportes", "Backups"],
@@ -459,7 +525,7 @@ export const projects = [
       width: 1536,
       height: 1024,
     },
-    evidenceBadges: ["Caso privado", "Pantallas con datos demo"],
+    evidenceBadges: ["Pantallas con datos demo"],
     moduleScreenshots: [
       {
         module: "Inicio",
@@ -529,11 +595,13 @@ export const projects = [
     security: false,
     name: "Turnos online para profesionales",
     category: "Sistema SaaS de turnos",
-    status: "En producción",
+    status: "Demo funcional",
     description:
       "Agenda digital para organizar citas, clientes, servicios, horarios, recordatorios, pagos y reportes desde la web.",
     problem:
       "Evitar turnos perdidos, mensajes desordenados y gestión manual de horarios.",
+    businessGain:
+      "Agenda, clientes y pagos en un solo lugar para reducir ausencias y ordenar la atención.",
     solution:
       "El caso apunta a que un profesional o pequeño negocio pueda administrar agenda, clientes y cobros desde la web, con recordatorios y reportes útiles para seguir el trabajo sin depender de chats sueltos.",
     modules: [
@@ -566,7 +634,7 @@ export const projects = [
       width: 1536,
       height: 1024,
     },
-    evidenceBadges: ["Caso privado", "Pantallas con datos demo"],
+    evidenceBadges: ["Pantallas con datos demo"],
     moduleScreenshots: [
       {
         module: "Turnos",
@@ -662,7 +730,7 @@ export const processSteps = [
     label: "ENTENDER",
     title: "Entiendo el negocio",
     description:
-      "Relevo el flujo actual, los problemas, los usuarios y las prioridades antes de escribir código.",
+      "Relevo el flujo actual, los problemas, los usuarios y qué parte conviene ordenar primero.",
     color: "#0a72ef",
     labelColor: "#0a5ec0",
   },
@@ -670,15 +738,15 @@ export const processSteps = [
     label: "PROBAR",
     title: "Construyo una primera versión usable",
     description:
-      "Diseño, desarrollo y valido una versión concreta para ajustar con feedback real.",
+      "Diseño y desarrollo una primera versión concreta para probar con uso real.",
     color: "#de1d8d",
     labelColor: "#b4237c",
   },
   {
     label: "PUBLICAR",
-    title: "Lo pongo en producción",
+    title: "Lo pongo en producción y mejoro",
     description:
-      "Deploy, dominio, base de datos, backups, documentación y mejoras posteriores.",
+      "Lo dejo funcionando y acompaño ajustes, mantenimiento o mejoras cuando haga falta.",
     color: "#ff5b4f",
     labelColor: "#d92d20",
   },

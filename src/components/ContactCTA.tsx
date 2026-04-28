@@ -32,7 +32,7 @@ export default function ContactCTA({
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link className="button-primary" href={whatsappHref}>
-                Hablar por WhatsApp
+                Contame tu problema por WhatsApp
               </Link>
               <a className="button-secondary" href={email}>
                 Enviar email

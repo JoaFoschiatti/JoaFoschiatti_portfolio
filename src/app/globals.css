@@ -548,6 +548,73 @@ summary:focus-visible {
     rgba(255, 253, 248, 0.82) 0px 1px 0px inset;
 }
 
+.home-problem-item {
+  display: grid;
+  gap: 0.55rem;
+  border-radius: 10px;
+  background: rgba(255, 253, 248, 0.86);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
+}
+
+.home-problem-item h3 {
+  font-size: 1.04rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-foreground);
+}
+
+.home-problem-item p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.home-personal-card {
+  display: grid;
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 34%),
+    rgba(255, 253, 248, 0.76);
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  box-shadow:
+    rgba(17, 24, 32, 0.08) 0px 0px 0px 1px,
+    rgba(17, 24, 32, 0.05) 0px 18px 42px -34px,
+    rgba(255, 253, 248, 0.82) 0px 1px 0px inset;
+}
+
+.home-personal-avatar {
+  display: grid;
+  width: clamp(4.5rem, 18vw, 6.25rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 9999px;
+  background:
+    linear-gradient(135deg, rgba(17, 24, 32, 0.96), rgba(30, 43, 58, 0.96));
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #f8fbfb;
+  box-shadow: var(--shadow-card-strong);
+}
+
+.home-personal-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.home-personal-point .status-dot {
+  flex: 0 0 auto;
+  margin-top: 0.58em;
+}
+
 .home-compact-proof {
   display: grid;
   gap: clamp(2rem, 5vw, 4rem);
@@ -594,6 +661,19 @@ summary:focus-visible {
   .home-compact-proof {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: start;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-personal-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding-block: 2.35rem 3rem;
   }
 }
 
