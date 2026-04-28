@@ -1,25 +1,20 @@
 import Link from "next/link";
 import ContactCTA from "@/components/ContactCTA";
 import Hero from "@/components/Hero";
-import Process from "@/components/Process";
 import ProjectCard from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
-import StartOptionsSection from "@/components/StartOptionsSection";
-import TrustSection from "@/components/TrustSection";
 import {
-  clientTypes,
   contactLinks,
   featuredProjects,
   processSteps,
   profile,
-  securityProjects,
   services,
-  systemsStartOptions,
   trustCards,
   valueStrip,
 } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
+import type { CSSProperties } from "react";
 
 export default function Home() {
   const whatsappHref =
@@ -78,92 +73,101 @@ export default function Home() {
         </div>
       </section>
 
-      <Process steps={processSteps} />
-
       <section
         id="proyectos"
         className="section-anchor section-block section-shell"
       >
-        <SectionHeading
-          title="Proyectos que muestran cómo trabajo."
-          description="No son ejercicios aislados: son sistemas pensados para resolver flujos reales de negocio."
-        />
-        <div className="mt-10 space-y-6">
-          {primaryProject ? (
-            <ProjectCard project={primaryProject} variant="featured" />
-          ) : null}
-          <div className="grid gap-6">
-            {secondaryProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} variant="horizontal" />
-            ))}
+        <div className="home-projects-panel">
+          <SectionHeading
+            title="Casos reales para entender qué tipo de sistemas construyo."
+            description="Tres ejemplos con pantallas concretas: restaurante, óptica y agenda online. La idea es ver rápido el problema, la solución y cómo se usa."
+          />
+          <div className="mt-10 space-y-6">
+            {primaryProject ? (
+              <ProjectCard
+                project={primaryProject}
+                variant="featured"
+                showRepoLink={false}
+              />
+            ) : null}
+            <div className="grid gap-6">
+              {secondaryProjects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  project={project}
+                  variant="horizontal"
+                  showRepoLink={false}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <TrustSection
-        title="Tecnología con foco en uso real."
-        cards={trustCards}
-      />
+      <section
+        id="proceso"
+        className="section-anchor section-shell pb-16 md:pb-20"
+      >
+        <div className="home-compact-proof">
+          <div>
+            <p className="section-eyebrow">Proceso y criterio</p>
+            <h2 className="section-title mt-4">
+              Primero se entiende el problema. Después se construye lo mínimo que ya ordena.
+            </h2>
+            <p className="section-copy mt-5">
+              La parte técnica importa, pero no debería tapar lo principal:
+              entender el flujo, probar una primera versión y dejar el sistema
+              listo para uso real.
+            </p>
+            <div className="mt-7">
+              <Link className="button-secondary" href="/sistemas-a-medida">
+                Ver sistemas a medida
+              </Link>
+            </div>
+          </div>
 
-      <section className="section-anchor section-block section-shell">
-        <SectionHeading
-          title="Pensado para negocios que necesitan ordenar su operación."
-          description="Webs y herramientas internas para negocios reales, con foco en tareas que se usan todos los días."
-        />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {clientTypes.map((clientType, index) => (
-            <article
-              key={clientType.title}
-              className="surface-card p-5"
-            >
-              <p className="section-eyebrow">Tipo {String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-4 text-[1.15rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                {clientType.title}
-              </h3>
-              <p className="mt-3 text-[0.96rem] leading-7 text-[var(--color-muted)]">
-                {clientType.description}
-              </p>
-            </article>
-          ))}
+          <div className="grid gap-4">
+            {processSteps.map((step, index) => (
+              <article
+                key={step.label}
+                className="home-step-row"
+                style={{ "--process-color": step.color } as CSSProperties}
+              >
+                <span className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[var(--color-subtle)]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p
+                    className="font-mono text-[0.72rem] uppercase tracking-[0.16em]"
+                    style={{ color: step.labelColor ?? step.color }}
+                  >
+                    {step.label}
+                  </p>
+                  <h3 className="mt-2 text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-[0.95rem] leading-7 text-[var(--color-muted)]">
+                    {step.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+
+            <div className="home-trust-panel">
+              {trustCards.map((card) => (
+                <article key={card.title} className="home-trust-item">
+                  <h3 className="text-[1rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-[0.92rem] leading-6 text-[var(--color-muted)]">
+                    {card.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
-
-      <section className="section-shell pb-10 md:pb-14">
-        {securityProjects.map((project) => (
-          <article key={project.slug} className="surface-card px-5 py-5 md:px-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-3xl">
-                <p className="section-eyebrow">Criterio de seguridad</p>
-                <h2 className="mt-3 text-[1.25rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                  Buenas prácticas para sistemas que se usan todos los días
-                </h2>
-                <p className="mt-3 text-[0.98rem] leading-7 text-[var(--color-muted)]">
-                  {project.description}
-                </p>
-              </div>
-              {project.repoUrl ? (
-                <a
-                  className="inline-link shrink-0 text-sm"
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Ver repo técnico
-                </a>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <StartOptionsSection
-        compact
-        title="Podemos empezar por una versión chica o por ordenar un proceso completo."
-        description="Sin precios cerrados ni paquetes rígidos: primero se entiende el proceso, después se define la primera versión que aporta valor real."
-        options={systemsStartOptions}
-        ctaHref="/sistemas-a-medida"
-        ctaLabel="Ver sistemas a medida"
-      />
 
       <ContactCTA
         title="¿Tenés una idea o un proceso que querés ordenar?"
@@ -172,19 +176,6 @@ export default function Home() {
         email={`mailto:${contactLinks.email}`}
         briefQuestions={profile.briefQuestions}
       />
-
-      <section className="section-shell pb-20 md:pb-24">
-        <div className="surface-card px-5 py-5 text-sm text-[var(--color-subtle)] md:px-6">
-          <p>Sistemas que se usan en la operación diaria. Del problema al sistema funcionando.</p>
-          <p className="mt-3">
-            Si preferís revisar primero los casos, podés volver a{" "}
-            <Link className="inline-link" href="/#proyectos">
-              proyectos destacados
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
     </>
   );
 }

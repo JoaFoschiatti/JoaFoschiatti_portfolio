@@ -6,6 +6,7 @@ import type { Project } from "@/data/portfolio";
 type ProjectCardProps = {
   project: Project;
   variant?: "standard" | "featured" | "horizontal";
+  showRepoLink?: boolean;
 };
 
 type ProjectContentVariant = "standard" | "featured" | "horizontal";
@@ -62,20 +63,26 @@ function ProjectPreview({
   );
 }
 
-function ProjectActions({ project }: { project: Project }) {
+function ProjectActions({
+  project,
+  showRepoLink,
+}: {
+  project: Project;
+  showRepoLink: boolean;
+}) {
   return (
     <div className="flex flex-wrap gap-3">
       <Link className="button-primary" href={`/proyectos/${project.slug}`}>
         {project.caseLabel}
       </Link>
-      {project.repoUrl ? (
+      {showRepoLink && project.repoUrl ? (
         <a
           className="button-secondary"
           href={project.repoUrl}
           target="_blank"
           rel="noreferrer"
         >
-          {project.repoLabel ?? "Ver repo"}
+          {project.repoLabel ?? "Ver código en GitHub"}
         </a>
       ) : null}
     </div>
@@ -87,11 +94,13 @@ function ProjectContent({
   variant,
   showStack = false,
   visualPriority = false,
+  showRepoLink,
 }: {
   project: Project;
   variant: ProjectContentVariant;
   showStack?: boolean;
   visualPriority?: boolean;
+  showRepoLink: boolean;
 }) {
   const featured = variant === "featured";
   const standard = variant === "standard";
@@ -168,7 +177,7 @@ function ProjectContent({
         </div>
       ) : null}
       <div className={actionsClassName}>
-        <ProjectActions project={project} />
+        <ProjectActions project={project} showRepoLink={showRepoLink} />
       </div>
     </div>
   );
@@ -177,6 +186,7 @@ function ProjectContent({
 export default function ProjectCard({
   project,
   variant = "standard",
+  showRepoLink = true,
 }: ProjectCardProps) {
   const featured = variant === "featured";
   const horizontal = variant === "horizontal";
@@ -203,6 +213,7 @@ export default function ProjectCard({
             project={project}
             variant="featured"
             visualPriority={hasHomeVisual}
+            showRepoLink={showRepoLink}
           />
           <ProjectPreview
             project={project}
@@ -234,6 +245,7 @@ export default function ProjectCard({
             project={project}
             variant="horizontal"
             visualPriority={hasHomeVisual}
+            showRepoLink={showRepoLink}
           />
           <ProjectPreview
             project={project}
@@ -247,7 +259,12 @@ export default function ProjectCard({
   return (
     <article className="surface-card-strong box-border flex h-full max-w-full min-w-0 flex-col p-5 md:p-6">
       <ProjectPreview project={project} />
-      <ProjectContent project={project} variant="standard" showStack />
+      <ProjectContent
+        project={project}
+        variant="standard"
+        showStack
+        showRepoLink={showRepoLink}
+      />
     </article>
   );
 }

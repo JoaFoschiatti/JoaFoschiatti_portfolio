@@ -110,7 +110,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {project.repoLabel ?? "Ver repo"}
+                    {project.repoLabel ?? "Ver código en GitHub"}
                   </a>
                 ) : null}
               </div>
