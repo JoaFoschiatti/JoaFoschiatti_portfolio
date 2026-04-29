@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import BackToTopButton from "@/components/BackToTopButton";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
@@ -107,6 +108,7 @@ export default function RootLayout({
             summary={profile.footerSummary}
           />
         </div>
+        <BackToTopButton />
         <StickyMobileCTA whatsappHref={whatsappHref} />
       </body>
     </html>
