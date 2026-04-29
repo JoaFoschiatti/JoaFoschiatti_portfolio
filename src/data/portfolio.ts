@@ -413,10 +413,10 @@ export const projects = [
     visibility: "public",
     caseLabel: "Ver caso",
     homeVisual: {
-      src: "/project-comanda-visual-v2.png",
-      alt: "Comanda unifica mesas, cocina, caja y pedidos QR o retiro para lograr pedidos claros, cocina visible y caja clara.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/comanda-home.png",
+      alt: "Diagrama del sistema Comanda: mesas, cocina y caja se centralizan en una vista única con dashboard de salón, pedidos, caja del día y QR/retiro, más tres tarjetas de resultado (pedidos al instante, cocina coordinada, cobro sin fricción).",
+      width: 1448,
+      height: 1086,
     },
     caseHeroVisual: {
       src: "/projects/comanda.jpg",
@@ -524,10 +524,10 @@ export const projects = [
     visibility: "private",
     caseLabel: "Ver caso",
     homeVisual: {
-      src: "/project-optica-focus-visual-v2.png",
-      alt: "Optica Focus unifica stock, precios y cuenta corriente en un sistema de escritorio con productos, clientes, backups y cuentas claras.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/optica-focus-home.png",
+      alt: "Diagrama del sistema Óptica Focus: inventario, precios y cuenta corriente se integran en un panel de productos, clientes y backups, más tres tarjetas de resultado (inventario visible, precios actualizados, cuenta corriente al día).",
+      width: 1448,
+      height: 1086,
     },
     caseHeroVisual: {
       src: "/projects/optica-focus.jpg",
@@ -639,10 +639,10 @@ export const projects = [
     visibility: "private",
     caseLabel: "Ver caso",
     homeVisual: {
-      src: "/project-turnos-online-visual-v2.png",
-      alt: "Turnos online unifica mensajes, horarios manuales y pagos sueltos en una agenda web con clientes, servicios, pagos y recordatorios claros.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/turnos-online-home.png",
+      alt: "Diagrama de Turnos online: mensajes, horarios manuales y pagos sueltos se unifican en una agenda con clientes, servicios y cobros, más tres tarjetas de resultado (turnos claros, recordatorios listos, cobros visibles).",
+      width: 1448,
+      height: 1086,
     },
     caseHeroVisual: {
       src: "/projects/turnos-online.jpg",

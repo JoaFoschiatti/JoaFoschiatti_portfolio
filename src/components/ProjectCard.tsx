@@ -63,7 +63,6 @@ function ProjectPreview({
         height={project.homeVisual.height}
         className="h-auto w-full rounded-[12px]"
         sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 2rem)"
-        unoptimized
       />
     </figure>
   );
