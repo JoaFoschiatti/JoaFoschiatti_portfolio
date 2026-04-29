@@ -32,7 +32,6 @@ export default function Home() {
         subtitle={profile.heroSubtitle}
         badges={profile.heroBadges}
         microcopy={profile.heroMicrocopy}
-        proof={profile.heroProof}
         whatsappHref={whatsappHref}
       />
 

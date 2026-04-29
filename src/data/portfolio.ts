@@ -135,11 +135,9 @@ export const profile = {
   heroTitle:
     "Convertí planillas, WhatsApps y tareas manuales en un sistema simple de usar.",
   heroSubtitle:
-    "Soy Joaquín Sánchez Foschiatti, Ingeniero en Sistemas. Desarrollo webs, sistemas de gestión y automatizaciones para ordenar turnos, stock, pedidos, caja, reportes y procesos diarios de comercios, profesionales y pymes.",
+    "Ingeniero en Sistemas. Desarrollo webs, sistemas de gestión y automatizaciones para comercios, profesionales y pymes.",
   heroMicrocopy:
     "Primero entiendo el problema real y después construyo una herramienta clara para que se pueda usar todos los días.",
-  heroProof:
-    "Pensado para negocios que necesitan dejar de depender de planillas, mensajes sueltos y tareas repetidas.",
   heroBadges: [
     "Webs",
     "Turnos",
