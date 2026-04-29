@@ -413,6 +413,99 @@ summary:focus-visible {
   transform: scale(1.035);
 }
 
+.modules-mobile-strip {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+  scroll-padding-inline: clamp(1rem, 4vw, 1.5rem);
+  margin-inline: calc(-1 * clamp(1rem, 4vw, 1.5rem));
+  scrollbar-width: none;
+}
+
+.modules-mobile-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.modules-mobile-slide {
+  flex: 0 0 86%;
+  min-width: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.modules-mobile-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.modules-mobile-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(17, 24, 32, 0.18);
+  transition: background 180ms ease, transform 180ms ease;
+  cursor: pointer;
+}
+
+.modules-mobile-dot[data-active="true"] {
+  background: var(--color-accent-teal);
+  transform: scale(1.3);
+}
+
+.modules-mobile-counter {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: rgba(17, 24, 32, 0.55);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background 160ms ease, opacity 160ms ease;
+}
+
+.lightbox-arrow:hover:not(:disabled) {
+  background: rgba(17, 24, 32, 0.75);
+}
+
+.lightbox-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.lightbox-arrow-prev {
+  left: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.lightbox-arrow-next {
+  right: clamp(0.5rem, 2vw, 1.5rem);
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
