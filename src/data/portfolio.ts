@@ -54,6 +54,12 @@ export type Project = {
     width: number;
     height: number;
   };
+  caseHeroVisual?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   evidenceBadges?: string[];
   screenshots?: ProjectScreenshot[];
   moduleScreenshots?: ProjectModuleScreenshot[];
@@ -413,7 +419,13 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "comanda",
     homeVisual: {
-      src: "/projects/comanda-home.jpg",
+      src: "/project-comanda-visual-v2.png",
+      alt: "Comanda unifica mesas, cocina, caja y pedidos QR o retiro para lograr pedidos claros, cocina visible y caja clara.",
+      width: 1536,
+      height: 1024,
+    },
+    caseHeroVisual: {
+      src: "/projects/comanda.jpg",
       alt: "Vista de Comanda con mesas activas, pedido en cocina con platos identificados (milanesa, papas, bebida), totales de caja del día y pedidos QR/Web en curso.",
       width: 1122,
       height: 1402,
@@ -518,7 +530,13 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "optica-focus",
     homeVisual: {
-      src: "/projects/optica-focus-home.jpg",
+      src: "/project-optica-focus-visual-v2.png",
+      alt: "Optica Focus unifica stock, precios y cuenta corriente en un sistema de escritorio con productos, clientes, backups y cuentas claras.",
+      width: 1536,
+      height: 1024,
+    },
+    caseHeroVisual: {
+      src: "/projects/optica-focus.jpg",
       alt: "Vista de Óptica Focus con resumen de stock por producto, sparkline de cuenta corriente con clientes activos y estado del último backup con próximo respaldo programado.",
       width: 1122,
       height: 1402,
@@ -627,7 +645,13 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "turnos-online",
     homeVisual: {
-      src: "/projects/turnos-online-home.jpg",
+      src: "/project-turnos-online-visual-v2.png",
+      alt: "Turnos online unifica mensajes, horarios manuales y pagos sueltos en una agenda web con clientes, servicios, pagos y recordatorios claros.",
+      width: 1536,
+      height: 1024,
+    },
+    caseHeroVisual: {
+      src: "/projects/turnos-online.jpg",
       alt: "Vista de Turnos online con agenda del día (Consulta, Corte, Nuevo paciente con nombres y duración), historial de clientes, recordatorios por WhatsApp e integración de pagos con Mercado Pago.",
       width: 1122,
       height: 1402,

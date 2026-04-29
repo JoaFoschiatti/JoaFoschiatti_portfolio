@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseScreenshots from "@/components/CaseScreenshots";
@@ -100,7 +101,19 @@ export default async function ProjectPage(props: ProjectPageProps) {
               </div>
             </div>
             <div className="case-hero-visual">
-              <MockupCard variant={project.mockup} size="large" />
+              {project.caseHeroVisual ? (
+                <Image
+                  src={project.caseHeroVisual.src}
+                  alt={project.caseHeroVisual.alt}
+                  width={project.caseHeroVisual.width}
+                  height={project.caseHeroVisual.height}
+                  className="h-auto w-full rounded-[12px]"
+                  sizes="(min-width: 1024px) 440px, calc(100vw - 2rem)"
+                  priority
+                />
+              ) : (
+                <MockupCard variant={project.mockup} size="large" />
+              )}
             </div>
           </div>
         </div>
