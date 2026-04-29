@@ -413,10 +413,10 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "comanda",
     homeVisual: {
-      src: "/project-comanda-visual-v2.png",
-      alt: "Comanda unifica mesas, cocina, caja y pedidos QR o retiro para lograr pedidos claros, cocina visible y caja clara.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/comanda-home.jpg",
+      alt: "Vista de Comanda con mesas activas, pedido en cocina con platos identificados (milanesa, papas, bebida), totales de caja del día y pedidos QR/Web en curso.",
+      width: 1122,
+      height: 1402,
     },
     evidenceBadges: ["Pantallas del sistema"],
     moduleScreenshots: [
@@ -518,10 +518,10 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "optica-focus",
     homeVisual: {
-      src: "/project-optica-focus-visual-v2.png",
-      alt: "Optica Focus unifica stock, precios y cuenta corriente en un sistema de escritorio con productos, clientes, backups y cuentas claras.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/optica-focus-home.jpg",
+      alt: "Vista de Óptica Focus con resumen de stock por producto, sparkline de cuenta corriente con clientes activos y estado del último backup con próximo respaldo programado.",
+      width: 1122,
+      height: 1402,
     },
     evidenceBadges: ["Pantallas con datos demo"],
     moduleScreenshots: [
@@ -627,10 +627,10 @@ export const projects = [
     caseLabel: "Ver caso",
     mockup: "turnos-online",
     homeVisual: {
-      src: "/project-turnos-online-visual-v2.png",
-      alt: "Turnos online unifica mensajes, horarios manuales y pagos sueltos en una agenda web con clientes, servicios, pagos y recordatorios claros.",
-      width: 1536,
-      height: 1024,
+      src: "/projects/turnos-online-home.jpg",
+      alt: "Vista de Turnos online con agenda del día (Consulta, Corte, Nuevo paciente con nombres y duración), historial de clientes, recordatorios por WhatsApp e integración de pagos con Mercado Pago.",
+      width: 1122,
+      height: 1402,
     },
     evidenceBadges: ["Pantallas con datos demo"],
     moduleScreenshots: [
