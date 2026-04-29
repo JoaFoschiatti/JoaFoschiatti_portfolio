@@ -735,7 +735,7 @@ export const processSteps = [
     labelColor: "#0a5ec0",
   },
   {
-    label: "PROBAR",
+    label: "AJUSTAR",
     title: "Construyo una primera versión usable",
     description:
       "Diseño y desarrollo una primera versión concreta para probar con uso real.",
@@ -743,7 +743,7 @@ export const processSteps = [
     labelColor: "#b4237c",
   },
   {
-    label: "PUBLICAR",
+    label: "SOLUCIONAR",
     title: "Lo pongo en producción y mejoro",
     description:
       "Lo dejo funcionando y acompaño ajustes, mantenimiento o mejoras cuando haga falta.",
