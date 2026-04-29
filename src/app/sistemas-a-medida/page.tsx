@@ -168,7 +168,12 @@ export default function CustomSystemsPage() {
                 Si hay un proceso que ya te está costando tiempo, empecemos por ahí.
               </h2>
             </div>
-            <a className="button-primary shrink-0" href={whatsappHref}>
+            <a
+              className="button-primary shrink-0"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener"
+            >
               Consultar por WhatsApp
             </a>
           </div>

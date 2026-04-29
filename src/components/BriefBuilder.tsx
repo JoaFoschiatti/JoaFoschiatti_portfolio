@@ -25,7 +25,7 @@ function OptionButton({ option, selected, onClick }: OptionButtonProps) {
       type="button"
       aria-pressed={selected}
       onClick={() => onClick(option.value)}
-      className={`rounded-full px-3 py-2 text-left font-mono text-[0.72rem] font-medium uppercase tracking-[0.12em] ${
+      className={`inline-flex min-h-[2.5rem] items-center rounded-full px-4 py-2 text-left font-mono text-[0.76rem] font-medium uppercase tracking-[0.12em] ${
         selected
           ? "bg-[#171717] text-white shadow-[0_10px_20px_-16px_rgba(0,0,0,0.45)]"
           : "bg-white text-[#666666] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)] hover:bg-[#fafafa] hover:text-[#171717]"
@@ -192,7 +192,12 @@ export default function BriefBuilder({ options, whatsappNumber }: BriefBuilderPr
       </div>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <a className="button-primary" href={whatsappHref}>
+        <a
+          className="button-primary"
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener"
+        >
           Consultar por WhatsApp
         </a>
       </div>

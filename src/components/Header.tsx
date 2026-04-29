@@ -20,7 +20,7 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.88)] backdrop-blur-xl">
-      <div className="section-shell flex min-h-[72px] max-w-[20.5rem] items-center justify-between gap-6 sm:max-w-none">
+      <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
         <Link
           href="/"
           className="text-[0.98rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]"
@@ -41,7 +41,12 @@ export default function Header({
         </nav>
 
         <div className="hidden lg:block">
-          <Link className="button-primary" href={whatsappHref}>
+          <Link
+            className="button-primary"
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener"
+          >
             Consultar por WhatsApp
           </Link>
         </div>
@@ -76,7 +81,7 @@ export default function Header({
 
       {isOpen ? (
         <div className="border-t border-[var(--color-line)] bg-[var(--color-surface)] md:hidden">
-          <div className="section-shell flex max-w-[20.5rem] flex-col gap-4 py-5 sm:max-w-none">
+          <div className="section-shell flex flex-col gap-4 py-5">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -87,7 +92,13 @@ export default function Header({
                 {item.label}
               </Link>
             ))}
-            <Link className="button-primary mt-2" href={whatsappHref} onClick={closeMenu}>
+            <Link
+              className="button-primary mt-2"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener"
+              onClick={closeMenu}
+            >
               Consultar por WhatsApp
             </Link>
           </div>

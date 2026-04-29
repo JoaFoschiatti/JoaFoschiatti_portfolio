@@ -94,7 +94,12 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 {project.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link className="button-primary" href={whatsappHref}>
+                <Link
+                  className="button-primary"
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener"
+                >
                   Consultar por WhatsApp
                 </Link>
               </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AvatarLightbox from "@/components/AvatarLightbox";
 import ContactCTA from "@/components/ContactCTA";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
@@ -68,9 +69,12 @@ export default function Home() {
 
       <section className="section-shell pb-16 md:pb-20">
         <div className="home-personal-card">
-          <div className="home-personal-avatar" aria-hidden>
-            JSF
-          </div>
+          <AvatarLightbox
+            src="/projects/quien-esta-detras.png"
+            alt="Foto de Joaquín Sánchez Foschiatti"
+            width={1254}
+            height={1254}
+          />
           <div className="min-w-0">
             <p className="section-eyebrow">{personalTrust.eyebrow}</p>
             <h2 className="section-title mt-4">{personalTrust.title}</h2>

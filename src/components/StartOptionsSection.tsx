@@ -34,7 +34,12 @@ export default function StartOptionsSection({
           <p className="section-copy mt-5">{description}</p>
           {ctaHref && ctaLabel ? (
             <div className="mt-7">
-              <Link className="button-secondary" href={ctaHref}>
+              <Link
+                className="button-secondary"
+                href={ctaHref}
+                target="_blank"
+                rel="noopener"
+              >
                 {ctaLabel}
               </Link>
             </div>
