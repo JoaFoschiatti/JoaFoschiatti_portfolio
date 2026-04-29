@@ -42,8 +42,8 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-sans: var(--font-geist-sans), "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
 }
 
 html {
@@ -439,21 +439,35 @@ summary:focus-visible {
 
 .modules-mobile-dots {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-top: 1rem;
   justify-content: center;
 }
 
 .modules-mobile-dot {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modules-mobile-dot::before {
+  content: "";
+  display: block;
   width: 7px;
   height: 7px;
   border-radius: 999px;
   background: rgba(17, 24, 32, 0.18);
   transition: background 180ms ease, transform 180ms ease;
-  cursor: pointer;
 }
 
-.modules-mobile-dot[data-active="true"] {
+.modules-mobile-dot[data-active="true"]::before {
   background: var(--color-accent-teal);
   transform: scale(1.3);
 }

@@ -163,7 +163,7 @@ export default function ProjectModules({
                 type="button"
                 className="module-screen-card modules-mobile-slide group flex flex-col overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus)]"
                 onClick={() => setActiveIndex(idx)}
-                aria-label={`Ver pantalla de ${screenshot.module}`}
+                aria-label={`${screenshot.module} — ver pantalla`}
               >
                 <span className="module-screen-preview">
                   <Image
@@ -229,7 +229,7 @@ export default function ProjectModules({
               type="button"
               className="module-screen-card group flex w-full flex-col overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]"
               onClick={() => openLightboxByModule(module)}
-              aria-label={`Ver pantalla de ${module}`}
+              aria-label={`${module} — ver pantalla`}
             >
               <span className="module-screen-preview">
                 <Image

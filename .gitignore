@@ -36,6 +36,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude
+/.claude/
+/lighthouse/
+/redesign/
+next-start-*.log
+next-start-*.err.log
+next-start-*.out.log
 # typescript
 *.tsbuildinfo
 next-env.d.ts
