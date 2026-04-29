@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type HeaderProps = {
@@ -15,14 +16,30 @@ export default function Header({
   whatsappHref,
 }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const closeMenu = () => setIsOpen(false);
+
+  const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    closeMenu();
+    if (pathname === "/") {
+      event.preventDefault();
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.88)] backdrop-blur-xl">
       <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
         <Link
           href="/"
+          onClick={handleBrandClick}
           className="text-[0.98rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]"
         >
           {brandName}
