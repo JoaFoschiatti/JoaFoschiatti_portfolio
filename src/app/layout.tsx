@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import InstagramBrowserHint from "@/components/InstagramBrowserHint";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { contactLinks, profile, seo } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
@@ -90,7 +89,6 @@ export default function RootLayout({
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
-        <InstagramBrowserHint />
         <div className="page-shell">
           <Header
             brandName={profile.brandName}
