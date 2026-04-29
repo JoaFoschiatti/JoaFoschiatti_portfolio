@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseScreenshots from "@/components/CaseScreenshots";
-import MockupCard from "@/components/MockupCard";
 import ProjectModules from "@/components/ProjectModules";
 import SectionHeading from "@/components/SectionHeading";
 import {
@@ -100,8 +99,8 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 </Link>
               </div>
             </div>
-            <div className="case-hero-visual">
-              {project.caseHeroVisual ? (
+            {project.caseHeroVisual ? (
+              <div className="case-hero-visual">
                 <Image
                   src={project.caseHeroVisual.src}
                   alt={project.caseHeroVisual.alt}
@@ -111,10 +110,8 @@ export default async function ProjectPage(props: ProjectPageProps) {
                   sizes="(min-width: 1024px) 440px, calc(100vw - 2rem)"
                   priority
                 />
-              ) : (
-                <MockupCard variant={project.mockup} size="large" />
-              )}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>

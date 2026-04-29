@@ -1,9 +1,3 @@
-export type MockupVariant =
-  | "operations-overview"
-  | "comanda"
-  | "optica-focus"
-  | "turnos-online";
-
 export type NavigationItem = {
   label: string;
   href: string;
@@ -47,7 +41,6 @@ export type Project = {
   repoLabel?: string;
   visibility: "public" | "private";
   caseLabel: string;
-  mockup: MockupVariant;
   homeVisual?: {
     src: string;
     alt: string;
@@ -417,7 +410,6 @@ export const projects = [
     ],
     visibility: "public",
     caseLabel: "Ver caso",
-    mockup: "comanda",
     homeVisual: {
       src: "/project-comanda-visual-v2.png",
       alt: "Comanda unifica mesas, cocina, caja y pedidos QR o retiro para lograr pedidos claros, cocina visible y caja clara.",
@@ -528,7 +520,6 @@ export const projects = [
     ],
     visibility: "private",
     caseLabel: "Ver caso",
-    mockup: "optica-focus",
     homeVisual: {
       src: "/project-optica-focus-visual-v2.png",
       alt: "Optica Focus unifica stock, precios y cuenta corriente en un sistema de escritorio con productos, clientes, backups y cuentas claras.",
@@ -643,7 +634,6 @@ export const projects = [
     ],
     visibility: "private",
     caseLabel: "Ver caso",
-    mockup: "turnos-online",
     homeVisual: {
       src: "/project-turnos-online-visual-v2.png",
       alt: "Turnos online unifica mensajes, horarios manuales y pagos sueltos en una agenda web con clientes, servicios, pagos y recordatorios claros.",
@@ -743,7 +733,6 @@ export const projects = [
     repoLabel: "Ver código en GitHub",
     visibility: "public",
     caseLabel: "Ver caso",
-    mockup: "operations-overview",
   },
 ] satisfies Project[];
 

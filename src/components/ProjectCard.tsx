@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import MockupCard from "@/components/MockupCard";
 import type { Project } from "@/data/portfolio";
 import type { ReactNode } from "react";
 
@@ -34,33 +33,27 @@ function EvidenceBadges({ project }: { project: Project }) {
 
 function ProjectPreview({
   project,
-  size = "compact",
   className,
 }: {
   project: Project;
-  size?: "compact" | "large";
   className?: string;
 }) {
-  if (project.homeVisual) {
-    return (
-      <figure className={className}>
-        <Image
-          src={project.homeVisual.src}
-          alt={project.homeVisual.alt}
-          width={project.homeVisual.width}
-          height={project.homeVisual.height}
-          className="h-auto w-full rounded-[12px]"
-          sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 2rem)"
-          unoptimized
-        />
-      </figure>
-    );
+  if (!project.homeVisual) {
+    return null;
   }
 
   return (
-    <div className={className}>
-      <MockupCard variant={project.mockup} size={size} />
-    </div>
+    <figure className={className}>
+      <Image
+        src={project.homeVisual.src}
+        alt={project.homeVisual.alt}
+        width={project.homeVisual.width}
+        height={project.homeVisual.height}
+        className="h-auto w-full rounded-[12px]"
+        sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 2rem)"
+        unoptimized
+      />
+    </figure>
   );
 }
 
@@ -226,7 +219,7 @@ export default function ProjectCard({
               : "gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]",
           )}
         >
-          <ProjectPreview project={project} size="large" className="hidden lg:block" />
+          <ProjectPreview project={project} className="hidden lg:block" />
           <ProjectContent
             project={project}
             variant="featured"
