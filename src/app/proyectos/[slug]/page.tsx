@@ -45,17 +45,11 @@ export async function generateMetadata(
       url: `${profile.siteUrl}/proyectos/${project.slug}`,
       type: "article",
       locale: "es_AR",
-      images: [
-        {
-          url: `${profile.siteUrl}/opengraph-image`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.name} — ${project.category}`,
       description: project.description,
-      images: [`${profile.siteUrl}/twitter-image`],
     },
   };
 }

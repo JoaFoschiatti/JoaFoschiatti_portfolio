@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { contactLinks, profile, seo } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  themeColor: "#0f766e",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
