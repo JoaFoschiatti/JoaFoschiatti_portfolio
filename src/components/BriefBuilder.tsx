@@ -19,10 +19,6 @@ function getLabel(options: readonly BriefOption[], value: string) {
   return options.find((option) => option.value === value)?.label;
 }
 
-function formatLabels(labels: string[]) {
-  return labels.length ? labels.join(", ") : "A definir";
-}
-
 function OptionButton({ option, selected, onClick }: OptionButtonProps) {
   return (
     <button
@@ -56,18 +52,34 @@ export default function BriefBuilder({ options, whatsappNumber }: BriefBuilderPr
   );
 
   const message = useMemo(() => {
-    const lines = [
+    const lines: string[] = [
       "Hola Joaquín, vi tu portfolio y quiero consultar por un sistema a medida.",
-      "",
-      `Rubro: ${getLabel(options.industries, industry) ?? "A definir"}`,
-      `Quiero ordenar: ${formatLabels(selectedNeedLabels)}`,
-      `Estado actual: ${getLabel(options.states, state) ?? "A definir"}`,
-      `Urgencia: ${getLabel(options.urgencies, urgency) ?? "A definir"}`,
     ];
+
+    const industryLabel = getLabel(options.industries, industry);
+    const stateLabel = getLabel(options.states, state);
+    const urgencyLabel = getLabel(options.urgencies, urgency);
     const trimmedNote = note.trim();
 
+    const selectionLines: string[] = [];
+    if (industryLabel) {
+      selectionLines.push(`Rubro: ${industryLabel}`);
+    }
+    if (selectedNeedLabels.length) {
+      selectionLines.push(`Quiero ordenar: ${selectedNeedLabels.join(", ")}`);
+    }
+    if (stateLabel) {
+      selectionLines.push(`Estado actual: ${stateLabel}`);
+    }
+    if (urgencyLabel) {
+      selectionLines.push(`Urgencia: ${urgencyLabel}`);
+    }
+
+    if (selectionLines.length) {
+      lines.push("", ...selectionLines);
+    }
     if (trimmedNote) {
-      lines.push(`Detalle: ${trimmedNote}`);
+      lines.push("", `Detalle: ${trimmedNote}`);
     }
 
     return lines.join("\n");
