@@ -15,6 +15,18 @@ function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
+function CardEyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
+      <span
+        aria-hidden
+        className="block h-1.5 w-1.5 rounded-full bg-[var(--color-accent-teal)]"
+      />
+      {children}
+    </p>
+  );
+}
+
 function EvidenceBadges({ project }: { project: Project }) {
   if (!project.evidenceBadges?.length) {
     return null;
@@ -148,23 +160,17 @@ function ProjectContent({
       <p className={descriptionClassName}>{project.description}</p>
       {mobilePreview ? <div className="mt-5 lg:hidden">{mobilePreview}</div> : null}
       <div className={problemContainerClassName}>
-        <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-          Qué ordena
-        </p>
+        <CardEyebrow>{project.problemEyebrow ?? "Qué resuelve"}</CardEyebrow>
         <p className={problemClassName}>{project.problem}</p>
       </div>
       {project.businessGain ? (
         <div className="mt-4">
-          <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-            Qué gana el negocio
-          </p>
+          <CardEyebrow>Qué gana el negocio</CardEyebrow>
           <p className={resultClassName}>{project.businessGain}</p>
         </div>
       ) : null}
       <div className={moduleContainerClassName}>
-        <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-          Módulos
-        </p>
+        <CardEyebrow>Módulos</CardEyebrow>
         <div className="mt-3 flex flex-wrap gap-2">
           {project.modules.map((module) => (
             <span key={module} className="pill">
@@ -175,9 +181,7 @@ function ProjectContent({
       </div>
       {showStack ? (
         <div className="mt-6">
-          <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-            {project.stackLabel}
-          </p>
+          <CardEyebrow>{project.stackLabel}</CardEyebrow>
           <div className="mt-3 flex flex-wrap gap-2">
             {project.stack.map((item) => (
               <span key={item} className="pill">

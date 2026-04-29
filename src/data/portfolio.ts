@@ -41,6 +41,7 @@ export type Project = {
   repoLabel?: string;
   visibility: "public" | "private";
   caseLabel: string;
+  problemEyebrow?: string;
   homeVisual?: {
     src: string;
     alt: string;
@@ -385,13 +386,14 @@ export const projects = [
     category: "Sistema POS para restaurantes",
     status: "Próximo a producción",
     description:
-      "Sistema integral para operar salón, cocina, caja, delivery/retiro, menú público con QR, pagos y configuración del negocio.",
+      "Plataforma única para operar salón, cocina, caja, delivery/retiro, menú QR y pagos del restaurante.",
     problem:
-      "Centralizar la operación diaria de un restaurante sin depender de planillas, mensajes sueltos o procesos manuales.",
+      "Unificar salón, cocina y caja en una sola pantalla, sin planillas paralelas ni mensajes sueltos a la cocina.",
     businessGain:
-      "Pedidos claros, cocina visible y caja ordenada para reducir errores y acelerar el turno.",
+      "Pedidos claros, cocina visible y cierre de caja al instante para reducir errores y acelerar la mesa.",
     solution:
-      "La propuesta reúne front de salón, cocina, caja, pedidos remotos y configuración del negocio en una sola base operativa, con foco en tiempos de atención, cobro y visibilidad del estado de cada pedido.",
+      "Reúne front de salón, cocina, caja, pedidos remotos y menú QR en una base operativa única, con foco en tiempos, cobro y visibilidad de cada pedido.",
+    problemEyebrow: "Qué unifica",
     modules: ["Dashboard", "Mesas", "Pedidos", "Cocina", "Caja", "Menú", "Pagos"],
     stackLabel: "Stack visible",
     stack: [
@@ -504,13 +506,14 @@ export const projects = [
     category: "Sistema de gestión y stock",
     status: "En uso real",
     description:
-      "Sistema de escritorio para óptica con gestión de stock, precios, cuenta corriente y backups, utilizado por un cliente real.",
+      "Aplicación de escritorio para óptica con control de stock, precios, cuenta corriente y respaldos, en uso real con un cliente.",
     problem:
-      "Ordenar productos, precios y cuentas corrientes en una herramienta simple para la operación diaria.",
+      "Controlar stock, precios y deudas de clientes desde una sola herramienta, sin papeles sueltos ni planillas paralelas.",
     businessGain:
-      "Stock, precios y saldos visibles para atender mejor y evitar revisar información dispersa.",
+      "Stock al día, precios actualizados y saldos visibles para atender más rápido y dejar de buscar datos dispersos.",
     solution:
-      "Se trabaja como una aplicación de escritorio orientada a caja y administración interna, con una interfaz directa para revisar stock, actualizar precios, gestionar clientes y mantener respaldos.",
+      "Aplicación de escritorio orientada a caja y administración interna: stock por marca y graduación, listas de precios por laboratorio, cuenta corriente por cliente y backups automáticos.",
+    problemEyebrow: "Qué controla",
     modules: ["Inicio", "Stock", "Precios", "Cuenta corriente", "Reportes", "Backups"],
     stackLabel: "Stack visible",
     stack: ["Electron", "SQLite", "Tailwind"],
@@ -604,13 +607,14 @@ export const projects = [
     category: "Sistema SaaS de turnos",
     status: "Demo funcional",
     description:
-      "Agenda digital para organizar citas, clientes, servicios, horarios, recordatorios, pagos y reportes desde la web.",
+      "Agenda web para automatizar citas, recordatorios, cobros y reportes de profesionales y pequeños negocios.",
     problem:
-      "Evitar turnos perdidos, mensajes desordenados y gestión manual de horarios.",
+      "Reemplazar el ida y vuelta por WhatsApp y las planillas con una agenda y recordatorios automáticos.",
     businessGain:
-      "Agenda, clientes y pagos en un solo lugar para reducir ausencias y ordenar la atención.",
+      "Agenda, clientes y pagos en un solo lugar — menos ausencias, menos cancelaciones de último momento, menos tiempo respondiendo mensajes.",
     solution:
-      "El caso apunta a que un profesional o pequeño negocio pueda administrar agenda, clientes y cobros desde la web, con recordatorios y reportes útiles para seguir el trabajo sin depender de chats sueltos.",
+      "Plataforma SaaS para que un profesional administre agenda, clientes y cobros desde la web, con recordatorios automáticos por WhatsApp y reportes simples de actividad e ingresos.",
+    problemEyebrow: "Qué automatiza",
     modules: [
       "Turnos",
       "Clientes",

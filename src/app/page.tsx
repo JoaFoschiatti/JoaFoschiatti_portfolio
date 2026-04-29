@@ -41,8 +41,8 @@ export default function Home() {
       >
         <div className="home-projects-panel">
           <SectionHeading
-            title="Casos reales: problemas convertidos en sistemas."
-            description="Tres ejemplos con pantallas concretas: restaurante, óptica y agenda online. La idea es ver rápido qué problema aparece, qué módulos incluye y qué gana el negocio."
+            title="Casos reales: 3 negocios, 3 problemas, 3 sistemas."
+            description="Restaurante, óptica y agenda online. Vas a ver el problema concreto, las pantallas reales y qué cambia en la operación."
           />
           <div className="mt-8 space-y-6 md:mt-10">
             {primaryProject ? (
