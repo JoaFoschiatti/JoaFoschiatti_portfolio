@@ -66,6 +66,10 @@ export default async function ProjectPage(props: ProjectPageProps) {
     createWhatsAppLink(profile.whatsappNumber, contactLinks.whatsappMessage) ??
     "/#contacto";
 
+  const otherProjects = featuredProjects.filter(
+    (other) => other.slug !== project.slug,
+  );
+
   return (
     <>
       <section className="section-block section-shell pt-12 md:pt-20">
@@ -197,6 +201,39 @@ export default async function ProjectPage(props: ProjectPageProps) {
           </ul>
         </article>
       </section>
+
+      {otherProjects.length > 0 ? (
+        <section className="section-block section-shell">
+          <p className="section-eyebrow">Otros casos</p>
+          <h2 className="section-title mt-4">
+            Seguí explorando otros procesos ordenados.
+          </h2>
+          <p className="section-copy mt-5">
+            Cada negocio tiene su propio cuello de botella. Estos son los otros
+            sistemas que armé.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {otherProjects.map((other) => (
+              <Link
+                key={other.slug}
+                href={`/proyectos/${other.slug}`}
+                className="surface-card-strong group flex flex-col p-6 transition-all hover:-translate-y-0.5"
+              >
+                <p className="section-eyebrow">{other.category}</p>
+                <h3 className="mt-4 text-[1.25rem] font-semibold tracking-[-0.04em] text-[var(--color-foreground)]">
+                  {other.name}
+                </h3>
+                <p className="mt-3 text-[0.96rem] leading-7 text-[var(--color-muted)]">
+                  {other.problem}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-1 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-[var(--color-accent-teal)] transition-all group-hover:gap-2">
+                  Ver caso <span aria-hidden>→</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }
