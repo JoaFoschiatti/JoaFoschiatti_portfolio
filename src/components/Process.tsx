@@ -17,7 +17,7 @@ export default function Process({ steps }: ProcessProps) {
           title="Un proceso simple para llegar a producción."
           description="Diseño, desarrollo y puesta en producción, con foco en una primera versión usable y una operación mantenible."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {steps.map((step, index) => (
             <article
               key={step.label}

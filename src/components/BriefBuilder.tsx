@@ -53,7 +53,7 @@ export default function BriefBuilder({ options, whatsappNumber }: BriefBuilderPr
 
   const message = useMemo(() => {
     const lines: string[] = [
-      "Hola Joaquín, vi tu portfolio y quiero consultar por un sistema a medida.",
+      "Hola Joaquín, vi tu portfolio y quiero consultar por una web, sistema o automatización para ordenar un proceso de mi negocio.",
     ];
 
     const industryLabel = getLabel(options.industries, industry);

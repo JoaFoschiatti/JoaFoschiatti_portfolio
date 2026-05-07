@@ -9,10 +9,20 @@ export default function BackToTopButton() {
 
   useEffect(() => {
     let ticking = false;
+    let contactIntersecting = false;
 
     const update = () => {
       ticking = false;
-      setShow(window.scrollY > SHOW_THRESHOLD);
+      const doc = document.documentElement;
+      const nearEnd =
+        window.scrollY + window.innerHeight >= doc.scrollHeight - 360;
+      const stickyCtaVisible =
+        document.body.dataset.stickyMobileCta === "visible";
+      setShow(
+        !stickyCtaVisible &&
+          window.scrollY > SHOW_THRESHOLD &&
+          (contactIntersecting || nearEnd),
+      );
     };
 
     const onScroll = () => {
@@ -22,9 +32,27 @@ export default function BackToTopButton() {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("sticky-mobile-cta-visibility-change", update);
+
+    const contact = document.querySelector("#contacto");
+    const contactObserver = contact
+      ? new IntersectionObserver(
+          ([entry]) => {
+            contactIntersecting = entry.isIntersecting;
+            update();
+          },
+          { rootMargin: "0px 0px -96px 0px" },
+        )
+      : null;
+
+    contactObserver?.observe(contact as Element);
     update();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("sticky-mobile-cta-visibility-change", update);
+      contactObserver?.disconnect();
+    };
   }, []);
 
   const goTop = () => {

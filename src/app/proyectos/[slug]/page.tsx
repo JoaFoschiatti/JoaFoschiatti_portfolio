@@ -182,7 +182,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 className="button-secondary"
                 href={project.repoUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Repositorio técnico
               </a>

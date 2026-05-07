@@ -36,15 +36,20 @@ export const metadata: Metadata = {
   description: seo.description,
   applicationName: profile.brandName,
   keywords: [
+    "webs comerciales",
+    "sistemas a medida",
+    "automatizaciones",
     "desarrollo web",
     "sistemas de gestión",
     "portfolio",
-    "POS",
-    "stock",
-    "turnos",
-    "automatización",
+    "gestión de stock",
+    "turnos online",
+    "caja",
+    "pedidos",
     "Vercel",
     "Rosario",
+    "pymes",
+    "comercios",
     "Santa Fe",
     "Argentina",
   ],
@@ -96,7 +101,10 @@ export default function RootLayout({
             navigation={profile.navigation}
             whatsappHref={whatsappHref}
           />
-          <main id="contenido" className="flex min-h-[calc(100vh-72px)] flex-col">
+          <main
+            id="contenido"
+            className="site-main flex min-h-[calc(100vh-72px)] flex-col"
+          >
             {children}
           </main>
           <Footer

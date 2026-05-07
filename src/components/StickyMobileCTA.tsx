@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 type StickyMobileCTAProps = {
   whatsappHref: string;
-  /** CSS selector for the section that should hide the sticky CTA when in view (typically the contact section). */
+  /** CSS selector for sections that should hide the sticky CTA when in view. */
   hideSelector?: string;
   /** Minimum scroll position (px) before showing the sticky CTA. */
   showThreshold?: number;
@@ -14,55 +14,76 @@ type StickyMobileCTAProps = {
 
 export default function StickyMobileCTA({
   whatsappHref,
-  hideSelector = "#contacto",
-  showThreshold = 520,
-  label = "Hablar por WhatsApp",
+  hideSelector = "#proyectos, #servicios, #proceso, #faq, #contacto",
+  showThreshold = 760,
+  label = "WhatsApp",
 }: StickyMobileCTAProps) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    let hideElIntersecting = false;
+    let frame = 0;
+
+    const shouldHideForSection = () => {
+      if (!hideSelector) {
+        return false;
+      }
+
+      const topGuard = 72;
+      const bottomGuard = 84;
+      return Array.from(document.querySelectorAll(hideSelector)).some((el) => {
+        const rect = el.getBoundingClientRect();
+
+        return (
+          rect.top < window.innerHeight - bottomGuard &&
+          rect.bottom > topGuard
+        );
+      });
+    };
 
     const update = () => {
+      frame = 0;
       const scrolled = window.scrollY > showThreshold;
-      setShow(scrolled && !hideElIntersecting);
+      setShow(scrolled && !shouldHideForSection());
     };
 
-    const onScroll = () => {
-      window.requestAnimationFrame(update);
+    const requestUpdate = () => {
+      if (frame) {
+        return;
+      }
+      frame = window.requestAnimationFrame(update);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    const hideEl = hideSelector ? document.querySelector(hideSelector) : null;
-    let hideObserver: IntersectionObserver | null = null;
-    if (hideEl) {
-      hideObserver = new IntersectionObserver(
-        ([entry]) => {
-          hideElIntersecting = entry.isIntersecting;
-          update();
-        },
-        { rootMargin: "0px 0px -80px 0px" },
-      );
-      hideObserver.observe(hideEl);
-    }
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
 
     update();
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      hideObserver?.disconnect();
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
     };
   }, [hideSelector, showThreshold]);
 
+  useEffect(() => {
+    document.body.dataset.stickyMobileCta = show ? "visible" : "hidden";
+    window.dispatchEvent(new Event("sticky-mobile-cta-visibility-change"));
+
+    return () => {
+      delete document.body.dataset.stickyMobileCta;
+      window.dispatchEvent(new Event("sticky-mobile-cta-visibility-change"));
+    };
+  }, [show]);
+
   return (
     <div
-      className={`pointer-events-none fixed inset-x-0 bottom-0 z-30 flex justify-center px-3 transition-all duration-200 md:hidden ${
+      className={`pointer-events-none fixed inset-x-0 z-30 flex justify-center px-3 transition-all duration-200 md:hidden ${
         show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
       style={{
-        paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
-        paddingTop: "0.75rem",
+        bottom: "calc(0.75rem + env(safe-area-inset-bottom))",
       }}
       aria-hidden={!show}
     >
@@ -70,7 +91,8 @@ export default function StickyMobileCTA({
         href={whatsappHref}
         target="_blank"
         rel="noopener"
-        className={`button-primary w-full max-w-md shadow-[0_18px_44px_-14px_rgba(15,118,110,0.55),0_8px_24px_-8px_rgba(0,0,0,0.35)] ${
+        aria-label="Consultar por WhatsApp"
+        className={`button-primary w-auto min-w-[8.75rem] max-w-[calc(100%-1.5rem)] px-4 text-[0.88rem] shadow-[0_18px_44px_-14px_rgba(15,118,110,0.55),0_8px_24px_-8px_rgba(0,0,0,0.35)] ${
           show ? "pointer-events-auto" : "pointer-events-none"
         }`}
         tabIndex={show ? undefined : -1}

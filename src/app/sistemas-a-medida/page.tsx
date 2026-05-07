@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import BriefBuilder from "@/components/BriefBuilder";
+import FaqSection from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
 import StartOptionsSection from "@/components/StartOptionsSection";
 import {
@@ -38,7 +39,7 @@ export default function CustomSystemsPage() {
   const whatsappHref =
     createWhatsAppLink(
       profile.whatsappNumber,
-      "Hola Joaquín, vi tu portfolio y quiero consultar por un sistema a medida para mi negocio.",
+      "Hola Joaquín, vi tu portfolio y quiero ordenar un proceso de mi negocio con una web, sistema o automatización.",
     ) ?? "/#contacto";
 
   return (
@@ -54,7 +55,12 @@ export default function CustomSystemsPage() {
               Si hoy dependés de planillas, mensajes sueltos, tareas manuales o sistemas que no acompañan la operación, podemos convertir ese flujo en una herramienta propia.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link className="button-primary" href="#brief">
+              <Link
+                className="button-primary"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener"
+              >
                 Contame tu proceso por WhatsApp
               </Link>
               <Link className="button-secondary" href="/#proyectos">
@@ -66,7 +72,7 @@ export default function CustomSystemsPage() {
                 (item) => (
                   <span
                     key={item}
-                    className="inline-flex items-center rounded-full bg-white/[0.08] px-3 py-1.5 font-mono text-[0.76rem] font-medium leading-none text-[#c8d8d6] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)]"
+                    className="inline-flex cursor-default select-none items-center rounded-full bg-white/[0.08] px-3 py-1.5 font-mono text-[0.76rem] font-medium leading-none text-[#c8d8d6] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)]"
                   >
                     {item}
                   </span>
@@ -139,25 +145,11 @@ export default function CustomSystemsPage() {
         </div>
       </section>
 
-      <section className="section-block section-shell">
-        <SectionHeading
-          eyebrow="Preguntas frecuentes"
-          title="Dudas normales antes de empezar."
-          description="Estas respuestas ayudan a ubicar el alcance sin convertir la consulta inicial en una reunión larga."
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {systemsFaqs.map((faq) => (
-            <details key={faq.question} className="surface-card group p-5 md:p-6">
-              <summary className="cursor-pointer list-none text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                {faq.question}
-              </summary>
-              <p className="mt-4 text-[0.98rem] leading-7 text-[var(--color-muted)]">
-                {faq.answer}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <FaqSection
+        title="Dudas normales antes de empezar."
+        description="Estas respuestas ayudan a ubicar el alcance sin convertir la consulta inicial en una reunión larga."
+        faqs={systemsFaqs}
+      />
 
       <section className="section-shell pb-20 md:pb-24">
         <div className="surface-card-strong contact-card p-6 md:p-8">

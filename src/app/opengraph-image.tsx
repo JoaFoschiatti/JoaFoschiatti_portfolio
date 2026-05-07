@@ -19,7 +19,7 @@ export default function OpenGraphImage() {
           background: "#ffffff",
           color: "#171717",
           fontFamily: "sans-serif",
-          padding: "64px",
+          padding: "48px",
         }}
       >
         <div
@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
             width: "100%",
             borderRadius: "32px",
             border: "1px solid #ebebeb",
-            padding: "54px",
+            padding: "44px",
             boxShadow:
               "rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 8px 24px -14px",
             flexDirection: "column",
@@ -56,23 +56,23 @@ export default function OpenGraphImage() {
             </div>
             <span style={{ color: "#666666" }}>Rosario, Santa Fe, Argentina</span>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             <div
               style={{
-                fontSize: 78,
+                fontSize: 56,
                 fontWeight: 600,
-                lineHeight: 1,
+                lineHeight: 1.03,
                 letterSpacing: "-0.06em",
-                maxWidth: "86%",
+                maxWidth: "92%",
               }}
             >
               {profile.heroTitle}
             </div>
             <div
               style={{
-                maxWidth: "78%",
-                fontSize: 28,
-                lineHeight: 1.45,
+                maxWidth: "86%",
+                fontSize: 26,
+                lineHeight: 1.3,
                 color: "#4d4d4d",
               }}
             >
@@ -87,10 +87,10 @@ export default function OpenGraphImage() {
                   display: "flex",
                   alignItems: "center",
                   borderRadius: "999px",
-                  padding: "10px 16px",
+                  padding: "8px 14px",
                   background: "#fafafa",
                   color: "#666666",
-                  fontSize: 18,
+                  fontSize: 16,
                 }}
               >
                 {badge}

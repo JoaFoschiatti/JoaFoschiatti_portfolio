@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type HeaderProps = {
   brandName: string;
-  navigation: { label: string; href: string }[];
+  navigation: readonly { label: string; href: string }[];
   whatsappHref: string;
 };
 
@@ -34,8 +34,58 @@ export default function Header({
     }
   };
 
+  const handleNavigationClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const shouldDeferForMenu = isOpen;
+    closeMenu();
+
+    if (pathname !== "/" || !href.startsWith("/#")) {
+      return;
+    }
+
+    const targetId = href.slice(2);
+    if (!document.getElementById(targetId)) {
+      return;
+    }
+
+    event.preventDefault();
+    window.history.pushState(null, "", `#${targetId}`);
+    window.setTimeout(() => {
+      const target = document.getElementById(targetId);
+      if (!target) {
+        return;
+      }
+
+      const headerOffset = window.matchMedia("(max-width: 640px)").matches
+        ? 116
+        : 96;
+      const header = document.querySelector("header");
+      const headerHeight =
+        header?.getBoundingClientRect().height ?? headerOffset;
+      const openMenuOffset = Math.max(0, headerHeight - headerOffset);
+      const top =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        headerOffset -
+        openMenuOffset;
+      const html = document.documentElement;
+      const previousScrollBehavior = html.style.scrollBehavior;
+
+      html.style.scrollBehavior = "auto";
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "auto",
+      });
+      window.setTimeout(() => {
+        html.style.scrollBehavior = previousScrollBehavior;
+      }, 0);
+    }, shouldDeferForMenu ? 180 : 0);
+  };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.88)] backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.96)] backdrop-blur-xl md:bg-[rgba(251,250,247,0.9)]">
       <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
         <Link
           href="/"
@@ -51,6 +101,7 @@ export default function Header({
               key={item.href}
               href={item.href}
               className="text-sm text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+              onClick={(event) => handleNavigationClick(event, item.href)}
             >
               {item.label}
             </Link>
@@ -64,7 +115,7 @@ export default function Header({
             target="_blank"
             rel="noopener"
           >
-            Consultar por WhatsApp
+            Hablar por WhatsApp
           </Link>
         </div>
 
@@ -104,7 +155,7 @@ export default function Header({
                 key={item.href}
                 href={item.href}
                 className="text-base text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
-                onClick={closeMenu}
+                onClick={(event) => handleNavigationClick(event, item.href)}
               >
                 {item.label}
               </Link>
@@ -116,7 +167,7 @@ export default function Header({
               rel="noopener"
               onClick={closeMenu}
             >
-              Consultar por WhatsApp
+              Hablar por WhatsApp
             </Link>
           </div>
         </div>

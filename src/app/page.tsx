@@ -1,13 +1,17 @@
 import Link from "next/link";
 import AvatarLightbox from "@/components/AvatarLightbox";
 import ContactCTA from "@/components/ContactCTA";
+import FaqSection from "@/components/FaqSection";
 import Hero from "@/components/Hero";
+import OfferOverview from "@/components/OfferOverview";
 import ProjectCard from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
 import {
   contactLinks,
   featuredProjects,
+  homeFaqs,
   homeProblems,
+  offerCards,
   personalTrust,
   processSteps,
   profile,
@@ -36,14 +40,17 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
+      <OfferOverview offers={offerCards} />
+
       <section
         id="proyectos"
         className="section-anchor section-block section-shell"
       >
         <div className="home-projects-panel">
           <SectionHeading
-            title="Casos reales: 3 negocios, 3 problemas, 3 sistemas."
-            description="Restaurante, óptica y agenda online. Vas a ver el problema concreto, las pantallas reales y qué cambia en la operación."
+            eyebrow="Casos reales"
+            title="Problemas concretos convertidos en herramientas."
+            description="Mirá el resumen rápido y entrá al caso si querés ver el detalle."
           />
           <div className="mt-8 space-y-6 md:mt-10">
             {primaryProject ? (
@@ -98,9 +105,9 @@ export default function Home() {
         <div className="section-block section-shell">
           <SectionHeading
             title="Procesos que puedo ordenar con software."
-            description="Si hoy dependés de planillas, WhatsApps, papeles o tareas repetidas, probablemente hay una parte del negocio que puede convertirse en una herramienta simple."
+            description="Ejemplos de operación diaria que pueden pasar de manual a simple."
           />
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-2 min-[360px]:grid-cols-2 sm:gap-3 lg:grid-cols-4">
             {homeProblems.map((problem) => (
               <article key={problem.title} className="home-problem-item">
                 <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
@@ -120,15 +127,14 @@ export default function Home() {
           <div>
             <p className="section-eyebrow">Cómo trabajo</p>
             <h2 className="section-title mt-4">
-              Tres pasos para pasar del problema a una herramienta usable.
+              Del problema a una primera versión usable.
             </h2>
             <p className="section-copy mt-5">
-              Mantengo el proceso simple: entender qué pasa, construir una
-              primera versión concreta y publicarla con margen para ajustar.
+              Primero entendemos el flujo. Después construimos lo mínimo útil.
             </p>
             <div className="mt-7">
               <Link className="button-secondary" href="/sistemas-a-medida">
-                Ver sistemas a medida
+                Ver qué puedo construir
               </Link>
             </div>
           </div>
@@ -163,9 +169,16 @@ export default function Home() {
         </div>
       </section>
 
+      <FaqSection
+        id="faq"
+        title="Dudas normales antes de escribir."
+        description="Abrí solo lo que necesites resolver antes de consultar."
+        faqs={homeFaqs}
+      />
+
       <ContactCTA
-        title="¿Tenés una idea o un proceso que querés ordenar?"
-        description="Contame qué parte del negocio querés ordenar: web, turnos, POS, stock, reportes o automatización. Después de publicar el sistema, puedo acompañarte con mantenimiento, ajustes y nuevas mejoras si lo necesitás."
+        title="¿Tenés un proceso que querés ordenar?"
+        description="Mandame el problema. No hace falta que tengas definida la solución."
         whatsappHref={whatsappHref}
         email={`mailto:${contactLinks.email}`}
         briefQuestions={profile.briefQuestions}

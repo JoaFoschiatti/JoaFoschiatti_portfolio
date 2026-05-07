@@ -12,7 +12,9 @@ export default function SectionHeading({
   return (
     <div className="max-w-3xl">
       {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
-      <h2 className="section-title">{title}</h2>
+      <h2 className={eyebrow ? "section-title mt-4" : "section-title"}>
+        {title}
+      </h2>
       <p className="section-copy mt-5">{description}</p>
     </div>
   );

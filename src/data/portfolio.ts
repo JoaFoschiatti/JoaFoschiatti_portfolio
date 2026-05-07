@@ -9,6 +9,11 @@ export type Service = {
   tags: string[];
 };
 
+export type OfferCard = {
+  title: string;
+  description: string;
+};
+
 export type ProjectScreenshot = {
   src: string;
   title: string;
@@ -28,11 +33,16 @@ export type Project = {
   security: boolean;
   name: string;
   category: string;
+  projectType?: string;
+  idealFor?: string;
   status: string;
   description: string;
   problem: string;
   businessGain?: string;
   solution: string;
+  homeProblem?: string;
+  homeSolution?: string;
+  homeResult?: string;
   modules: string[];
   stackLabel: string;
   stack: string[];
@@ -119,9 +129,9 @@ export type PersonalTrust = {
 };
 
 export const seo = {
-  title: "Joaquín Sánchez Foschiatti — Webs y sistemas de gestión para negocios",
+  title: "Joaquín Sánchez Foschiatti — Webs, sistemas y automatizaciones",
   description:
-    "Desarrollo páginas web, sistemas POS, stock, turnos, reportes y automatizaciones para comercios, profesionales y pymes.",
+    "Desarrollo webs comerciales, sistemas de gestión a medida y automatizaciones para comercios, profesionales y pymes que quieren ordenar turnos, stock, caja, pedidos, reportes o tareas manuales.",
 } as const;
 
 export const profile = {
@@ -133,11 +143,11 @@ export const profile = {
   whatsappNumber: "5493482555038",
   whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
-    "Convertí planillas, WhatsApps y tareas manuales en un sistema simple de usar.",
+    "Convertí planillas, mensajes de WhatsApp y tareas manuales en una herramienta que ordene tu negocio.",
   heroSubtitle:
-    "Ingeniero en Sistemas. Desarrollo webs, sistemas de gestión y automatizaciones para comercios, profesionales y pymes.",
+    "Webs, sistemas y automatizaciones para comercios, profesionales y pymes que quieren trabajar con menos desorden.",
   heroMicrocopy:
-    "Primero entiendo el problema real y después construyo una herramienta clara para que se pueda usar todos los días.",
+    "No necesitás tener la solución definida. Empezamos por entender qué conviene ordenar primero.",
   heroBadges: [
     "Webs",
     "Turnos",
@@ -146,20 +156,21 @@ export const profile = {
     "Pedidos",
     "Reportes",
     "WhatsApp",
+    "Automatización",
   ],
   navigation: [
-    { label: "Casos reales", href: "/#proyectos" },
-    { label: "Procesos", href: "/#servicios" },
-    { label: "Sistema a medida", href: "/sistemas-a-medida" },
+    { label: "Qué hago", href: "/#que-hago" },
+    { label: "Casos", href: "/#proyectos" },
+    { label: "Proceso", href: "/#proceso" },
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavigationItem[],
   briefQuestions: [
-    "¿Qué problema querés resolver?",
-    "¿Quiénes usarían el sistema?",
-    "¿Necesitás web, turnos, POS, stock o automatización?",
+    "¿Qué querés ordenar?",
+    "¿Cómo lo manejás hoy?",
+    "¿Quién usaría la herramienta?",
   ],
   footerSummary:
-    "Desarrollo web, sistemas de gestión y automatización para negocios.",
+    "Webs, sistemas y automatizaciones para negocios.",
 } as const;
 
 export const contactLinks = {
@@ -167,66 +178,83 @@ export const contactLinks = {
   github: "https://github.com/JoaFoschiatti",
   instagram: "https://www.instagram.com/joasanchez02/",
   whatsappMessage:
-    "Hola Joaquín, vi tu portfolio y quiero contarte un problema de mi negocio para ver si se puede resolver con software.",
+    "Hola Joaquín, vi tu portfolio y quiero ordenar un proceso de mi negocio. Hoy lo manejo con WhatsApp, planillas o tareas manuales y quiero ver si se puede simplificar.",
 } as const;
 
 export const valueStrip = [
   "Sistemas en producción",
   "Deploy en Vercel / AWS",
-  "Integraciones con pagos y APIs",
+  "Integraciones con pagos y herramientas externas",
   "Código mantenible",
   "Pensado para operación diaria",
 ] as const;
 
-export const homeProblems = [
+export const offerCards = [
   {
-    title: "Turnos",
+    title: "Sistemas de gestión",
+    description: "Stock, caja, pedidos, turnos, clientes y reportes.",
+  },
+  {
+    title: "Webs comerciales",
     description:
-      "Evitá horarios perdidos, mensajes sueltos y recordatorios manuales.",
-  },
-  {
-    title: "Stock",
-    description:
-      "Dejá de trabajar a ciegas con productos, mínimos, movimientos y alertas.",
-  },
-  {
-    title: "Caja",
-    description: "Ordená cobros, medios de pago, cierres y control diario.",
-  },
-  {
-    title: "Pedidos",
-    description:
-      "Centralizá estados, responsables, cocina, retiro, delivery o flujo interno.",
-  },
-  {
-    title: "Reportes",
-    description: "Mirá ventas, actividad y pendientes sin revisar todo a mano.",
-  },
-  {
-    title: "WhatsApp",
-    description:
-      "Convertí consultas y mensajes repetidos en flujos más ordenados.",
+      "Una web clara para explicar tu servicio y captar consultas.",
   },
   {
     title: "Automatizaciones",
     description:
-      "Reducí tareas repetitivas conectando formularios, paneles, APIs o procesos internos.",
+      "Menos tareas repetidas entre planillas, formularios y herramientas.",
+  },
+  {
+    title: "Mantenimiento y mejoras",
+    description:
+      "Ajustes, nuevas funciones y acompañamiento después de publicar.",
+  },
+] satisfies OfferCard[];
+
+export const homeProblems = [
+  {
+    title: "Turnos",
+    description: "Agenda y reservas.",
+  },
+  {
+    title: "Stock",
+    description: "Entradas, salidas y alertas.",
+  },
+  {
+    title: "Caja",
+    description: "Ventas, cobros y cierres.",
+  },
+  {
+    title: "Pedidos",
+    description: "Estados y seguimiento.",
+  },
+  {
+    title: "Reportes",
+    description: "Números claros.",
+  },
+  {
+    title: "WhatsApp",
+    description: "Mensajes menos dispersos.",
+  },
+  {
+    title: "Automatizaciones",
+    description: "Menos tareas repetidas.",
   },
   {
     title: "Web comercial",
-    description: "Mostrá tu servicio, captá consultas y explicá mejor qué ofrecés.",
+    description: "Servicio y consultas.",
   },
 ] satisfies HomeProblem[];
 
 export const personalTrust = {
   eyebrow: "Quién está detrás",
   title:
-    "Soy Joaquín Sánchez Foschiatti. Diseño sistemas simples para problemas reales de operación.",
+    "Soy Joaquín. Diseño herramientas simples para problemas reales de operación.",
   description:
-    "Soy Ingeniero en Sistemas de la Información. Antes de escribir código, busco entender cómo trabaja el negocio, qué se repite, qué se pierde y qué necesita ver cada persona para trabajar mejor.",
+    "Soy Ingeniero en Sistemas y trabajo el software desde el uso real del negocio.",
   points: [
     "Ingeniería aplicada a negocios reales.",
-    "Sistemas pensados para uso diario, no para mostrar tecnología.",
+    "Herramientas pensadas para uso diario, no para mostrar tecnología.",
     "Acompañamiento después de publicar para ajustar y mejorar.",
   ],
 } satisfies PersonalTrust;
@@ -245,7 +273,7 @@ export const services = [
     tags: ["Turnos", "Clientes", "Recordatorios", "Pagos"],
   },
   {
-    title: "POS / sistema de gestión",
+    title: "Punto de venta / sistema de gestión",
     description:
       "Caja, pedidos, stock, cuentas corrientes, reportes, usuarios, backups y operación diaria en una herramienta a medida.",
     tags: ["Caja", "Stock", "Reportes", "Usuarios"],
@@ -253,8 +281,8 @@ export const services = [
   {
     title: "Automatizaciones",
     description:
-      "Chatbots, integraciones con WhatsApp, APIs, paneles internos y tareas repetitivas automatizadas.",
-    tags: ["APIs", "WhatsApp", "Bots", "Dashboards"],
+      "Flujos con WhatsApp, formularios, paneles internos y tareas repetitivas automatizadas.",
+    tags: ["WhatsApp", "Formularios", "Paneles", "Reportes"],
   },
 ] satisfies Service[];
 
@@ -287,7 +315,7 @@ export const systemsStartOptions = [
     description:
       "Para ordenar un sistema existente, conectar herramientas o reducir tareas repetitivas sin rehacer todo desde cero.",
     items: [
-      "Automatizaciones con APIs o WhatsApp",
+      "Automatizaciones con WhatsApp o herramientas externas",
       "Reportes, formularios y paneles internos",
       "Mejoras incrementales sobre lo que ya usás",
     ],
@@ -303,9 +331,10 @@ export const briefBuilderOptions = {
     { label: "Otro", value: "otro" },
   ],
   needs: [
+    { label: "Web comercial", value: "web-comercial" },
     { label: "Turnos", value: "turnos" },
     { label: "Stock", value: "stock" },
-    { label: "Caja", value: "caja" },
+    { label: "Caja / punto de venta", value: "caja" },
     { label: "Pedidos", value: "pedidos" },
     { label: "Reportes", value: "reportes" },
     { label: "Documentos", value: "documentos" },
@@ -342,9 +371,9 @@ export const systemsFaqs = [
       "Sí. Puede haber una web para captar consultas y un panel interno para turnos, stock, pedidos, clientes o reportes.",
   },
   {
-    question: "¿Podés integrar WhatsApp, pagos, APIs o planillas?",
+    question: "¿Podés integrar WhatsApp, pagos, formularios o planillas?",
     answer:
-      "Sí. Se puede conectar WhatsApp, Mercado Pago, formularios, APIs, reportes o importar datos desde planillas cuando tenga sentido.",
+      "Sí. Se puede conectar WhatsApp, Mercado Pago, formularios, reportes o importar datos desde planillas cuando tenga sentido.",
   },
   {
     question: "¿Qué pasa después del deploy?",
@@ -355,6 +384,29 @@ export const systemsFaqs = [
     question: "¿Cómo se define el alcance?",
     answer:
       "Primero se entiende el proceso y después se decide qué entra en la primera versión para que sea útil sin volverse pesada.",
+  },
+] satisfies FaqItem[];
+
+export const homeFaqs = [
+  {
+    question: "¿Necesito saber exactamente qué sistema quiero?",
+    answer:
+      "No. Podés venir con el problema, una planilla o una idea general. Primero entendemos el proceso y después definimos una primera versión.",
+  },
+  {
+    question: "¿También hacés webs comerciales?",
+    answer:
+      "Sí. Desarrollo webs para explicar servicios, mostrar negocios y captar consultas por WhatsApp, email o formulario.",
+  },
+  {
+    question: "¿Hacés sistemas desde cero o mejorás algo existente?",
+    answer:
+      "Puedo construir una herramienta desde cero o mejorar procesos existentes, siempre empezando por un alcance claro.",
+  },
+  {
+    question: "¿Qué pasa después de publicar?",
+    answer:
+      "Puedo acompañar con mantenimiento, ajustes y nuevas funciones según lo que aparezca en el uso real.",
   },
 ] satisfies FaqItem[];
 
@@ -369,7 +421,7 @@ export const systemsUseCases = [
   },
   {
     title: "Integraciones útiles",
-    description: "WhatsApp, pagos, formularios, reportes, APIs y automatizaciones donde aporten valor real.",
+    description: "WhatsApp, pagos, formularios, reportes y automatizaciones donde aporten valor real.",
   },
   {
     title: "Crecimiento gradual",
@@ -383,16 +435,21 @@ export const projects = [
     featured: true,
     security: false,
     name: "Comanda",
-    category: "Sistema POS para restaurantes",
+    category: "Sistema para restaurantes",
+    projectType: "Sistema de gestión a medida",
+    idealFor: "Restaurantes, bares y rotiserías",
     status: "Próximo a producción",
     description:
-      "Plataforma única para operar salón, cocina, caja, delivery/retiro, menú QR y pagos del restaurante.",
+      "Herramienta para operar salón, cocina, caja, delivery/retiro, menú QR y pagos del restaurante desde un mismo lugar.",
     problem:
       "Unificar salón, cocina y caja en una sola pantalla, sin planillas paralelas ni mensajes sueltos a la cocina.",
     businessGain:
       "Pedidos claros, cocina visible y cierre de caja al instante para reducir errores y acelerar la mesa.",
     solution:
       "Reúne front de salón, cocina, caja, pedidos remotos y menú QR en una base operativa única, con foco en tiempos, cobro y visibilidad de cada pedido.",
+    homeProblem: "Pedidos, cocina y caja estaban separados.",
+    homeSolution: "Un panel une salón, cocina, caja y pedidos.",
+    homeResult: "Menos errores y cierre de caja más claro.",
     problemEyebrow: "Qué unifica",
     modules: ["Dashboard", "Mesas", "Pedidos", "Cocina", "Caja", "Menú", "Pagos"],
     stackLabel: "Stack visible",
@@ -504,6 +561,8 @@ export const projects = [
     security: false,
     name: "Óptica Focus",
     category: "Sistema de gestión y stock",
+    projectType: "Sistema de gestión comercial",
+    idealFor: "Comercios con stock, clientes y caja",
     status: "En uso real",
     description:
       "Aplicación de escritorio para óptica con control de stock, precios, cuenta corriente y respaldos, en uso real con un cliente.",
@@ -513,6 +572,9 @@ export const projects = [
       "Stock al día, precios actualizados y saldos visibles para atender más rápido y dejar de buscar datos dispersos.",
     solution:
       "Aplicación de escritorio orientada a caja y administración interna: stock por marca y graduación, listas de precios por laboratorio, cuenta corriente por cliente y backups automáticos.",
+    homeProblem: "Stock, precios y cuentas estaban dispersos.",
+    homeSolution: "Una app centraliza productos, clientes y respaldos.",
+    homeResult: "Atención más rápida y datos al día.",
     problemEyebrow: "Qué controla",
     modules: ["Inicio", "Stock", "Precios", "Cuenta corriente", "Reportes", "Backups"],
     stackLabel: "Stack visible",
@@ -604,7 +666,9 @@ export const projects = [
     featured: true,
     security: false,
     name: "Turnos online para profesionales",
-    category: "Sistema SaaS de turnos",
+    category: "Sistema online de turnos",
+    projectType: "Sistema online adaptable",
+    idealFor: "Profesionales con agenda",
     status: "Demo funcional",
     description:
       "Agenda web para automatizar citas, recordatorios, cobros y reportes de profesionales y pequeños negocios.",
@@ -614,6 +678,9 @@ export const projects = [
       "Agenda, clientes y pagos en un solo lugar — menos ausencias, menos cancelaciones de último momento, menos tiempo respondiendo mensajes.",
     solution:
       "Plataforma SaaS para que un profesional administre agenda, clientes y cobros desde la web, con recordatorios automáticos por WhatsApp y reportes simples de actividad e ingresos.",
+    homeProblem: "Los turnos dependían de mensajes y planillas.",
+    homeSolution: "Agenda web con clientes, horarios y recordatorios.",
+    homeResult: "Menos ida y vuelta y agenda más ordenada.",
     problemEyebrow: "Qué automatiza",
     modules: [
       "Turnos",
@@ -743,25 +810,30 @@ export const projects = [
 export const processSteps = [
   {
     label: "ENTENDER",
-    title: "Entiendo el negocio",
-    description:
-      "Relevo el flujo actual, los problemas, los usuarios y qué parte conviene ordenar primero.",
+    title: "Entiendo el problema",
+    description: "Vemos cómo trabaja hoy el negocio.",
     color: "#0a72ef",
     labelColor: "#0a5ec0",
   },
   {
+    label: "PRIORIZAR",
+    title: "Definimos una primera versión",
+    description: "Elegimos qué ordenar primero.",
+    color: "#0f766e",
+    labelColor: "#0f766e",
+  },
+  {
     label: "CONSTRUIR",
-    title: "Construyo una primera versión usable",
-    description:
-      "Diseño y desarrollo una primera versión concreta para probar con uso real.",
+    title: "Diseño y desarrollo",
+    description: "Creo una herramienta simple de usar.",
     color: "#de1d8d",
     labelColor: "#b4237c",
   },
   {
     label: "PUBLICAR",
-    title: "Lo pongo en producción y mejoro",
+    title: "Publico y ajusto",
     description:
-      "Lo dejo funcionando y acompaño ajustes, mantenimiento o mejoras cuando haga falta.",
+      "La dejamos funcionando y mejoramos con el uso real.",
     color: "#ff5b4f",
     labelColor: "#d92d20",
   },
@@ -776,7 +848,7 @@ export const trustCards = [
   {
     title: "Integraciones útiles",
     description:
-      "Mercado Pago, WhatsApp, APIs, facturación, reportes y automatización de tareas repetitivas.",
+      "Mercado Pago, WhatsApp, formularios, facturación, reportes y automatización de tareas repetitivas.",
   },
   {
     title: "Código mantenible",
@@ -808,7 +880,7 @@ export const clientTypes = [
   },
   {
     title: "Equipos que quieren automatizar tareas repetitivas",
-    description: "APIs, bots, paneles internos y flujos automáticos.",
+    description: "Formularios, paneles internos, reportes y flujos automáticos.",
   },
 ] satisfies ClientType[];
 

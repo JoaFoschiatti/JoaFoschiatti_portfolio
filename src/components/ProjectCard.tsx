@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/data/portfolio";
-import type { ReactNode } from "react";
 
 type ProjectCardProps = {
   project: Project;
@@ -13,34 +12,6 @@ type ProjectContentVariant = "standard" | "featured" | "horizontal";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
-}
-
-function CardEyebrow({ children }: { children: ReactNode }) {
-  return (
-    <p className="flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[#666666]">
-      <span
-        aria-hidden
-        className="block h-1.5 w-1.5 rounded-full bg-[var(--color-accent-teal)]"
-      />
-      {children}
-    </p>
-  );
-}
-
-function EvidenceBadges({ project }: { project: Project }) {
-  if (!project.evidenceBadges?.length) {
-    return null;
-  }
-
-  return (
-    <div className="flex flex-wrap gap-2">
-      {project.evidenceBadges.map((badge) => (
-        <span key={badge} className="evidence-pill">
-          {badge}
-        </span>
-      ))}
-    </div>
-  );
 }
 
 function ProjectPreview({
@@ -68,6 +39,41 @@ function ProjectPreview({
   );
 }
 
+function ProjectMeta({ project }: { project: Project }) {
+  const meta = [project.projectType ?? project.category, project.status]
+    .filter(Boolean)
+    .join(" · ");
+
+  return (
+    <p className="font-mono text-[0.7rem] uppercase leading-4 tracking-[0.1em] text-[var(--color-muted)]">
+      {meta}
+    </p>
+  );
+}
+
+function ProjectSummaryRow({
+  label,
+  value,
+}: {
+  label: string;
+  value?: string;
+}) {
+  if (!value) {
+    return null;
+  }
+
+  return (
+    <div className="rounded-[8px] bg-[rgba(244,247,245,0.78)] px-2.5 py-2 shadow-[inset_0_0_0_1px_rgba(17,24,32,0.06)] md:px-3 md:py-2.5">
+      <dt className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-[var(--color-subtle)]">
+        {label}
+      </dt>
+      <dd className="mt-1 text-[0.88rem] font-medium leading-5 text-[var(--color-foreground)] md:text-[0.92rem]">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
 function ProjectActions({
   project,
   showRepoLink,
@@ -85,7 +91,7 @@ function ProjectActions({
           className="button-secondary"
           href={project.repoUrl}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           {project.repoLabel ?? "Ver código en GitHub"}
         </a>
@@ -97,99 +103,39 @@ function ProjectActions({
 function ProjectContent({
   project,
   variant,
-  showStack = false,
-  visualPriority = false,
   showRepoLink,
-  mobilePreview,
 }: {
   project: Project;
   variant: ProjectContentVariant;
-  showStack?: boolean;
-  visualPriority?: boolean;
   showRepoLink: boolean;
-  mobilePreview?: ReactNode;
 }) {
   const featured = variant === "featured";
   const standard = variant === "standard";
-  const titleClassName = visualPriority
-    ? "mt-4 max-w-md text-[clamp(1.9rem,3.2vw,2.55rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#171717]"
-    : featured
-      ? "mt-5 max-w-2xl text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#171717]"
-      : standard
-        ? "mt-5 text-[clamp(1.42rem,2vw,1.58rem)] font-semibold tracking-[-0.04em] text-[#171717]"
-        : "mt-5 text-[clamp(1.65rem,3vw,2.15rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[#171717]";
-  const descriptionClassName = visualPriority
-    ? "mt-4 max-w-md text-[0.98rem] leading-7 text-[#4d4d4d]"
-    : featured
-      ? "mt-5 max-w-2xl text-[1.06rem] leading-8 text-[#4d4d4d]"
-      : standard
-        ? "mt-4 text-[1rem] leading-8 text-[#4d4d4d]"
-        : "mt-4 max-w-2xl text-[1.02rem] leading-8 text-[#4d4d4d]";
-  const problemClassName = visualPriority
-    ? "mt-2 max-w-md text-[0.92rem] leading-6 text-[#4d4d4d]"
-    : featured
-      ? "mt-2 max-w-2xl text-[1rem] leading-7 text-[#4d4d4d]"
-      : standard
-        ? "mt-2 text-[0.98rem] leading-7 text-[#4d4d4d]"
-        : "mt-2 max-w-2xl text-[0.98rem] leading-7 text-[#4d4d4d]";
-  const resultClassName = visualPriority
-    ? "mt-2 max-w-md text-[0.92rem] leading-6 text-[#4d4d4d]"
-    : "mt-2 max-w-2xl text-[0.98rem] leading-7 text-[#4d4d4d]";
-  const actionsClassName = visualPriority
-    ? "mt-6"
-    : featured
-    ? "mt-8"
+  const titleClassName = featured
+    ? "mt-3 text-[clamp(1.65rem,4vw,2.4rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-[#171717]"
     : standard
-      ? "mt-auto pt-7"
-      : "mt-7";
-  const metaClassName = visualPriority
-    ? "flex flex-wrap items-center gap-2"
-    : "mt-5 flex flex-wrap items-center gap-3";
-  const problemContainerClassName = visualPriority ? "mt-4" : "mt-5";
-  const moduleContainerClassName = visualPriority ? "mt-5" : "mt-6";
+      ? "mt-3 text-[clamp(1.35rem,2vw,1.55rem)] font-semibold leading-[1.08] tracking-[-0.04em] text-[#171717]"
+      : "mt-3 text-[clamp(1.5rem,3vw,1.95rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[#171717]";
+  const actionsClassName = standard ? "mt-auto pt-4" : "mt-4";
 
   return (
-    <div className={standard ? "mt-6 flex grow flex-col" : "min-w-0"}>
-      {visualPriority ? null : <EvidenceBadges project={project} />}
-      <div className={metaClassName}>
-        <span className="pill">{project.category}</span>
-        <span className="pill">{project.status}</span>
-      </div>
+    <div className={standard ? "mt-5 flex grow flex-col" : "min-w-0"}>
+      <ProjectMeta project={project} />
       <h3 className={titleClassName}>{project.name}</h3>
-      <p className={descriptionClassName}>{project.description}</p>
-      {mobilePreview ? <div className="mt-5 lg:hidden">{mobilePreview}</div> : null}
-      <div className={problemContainerClassName}>
-        <CardEyebrow>{project.problemEyebrow ?? "Qué resuelve"}</CardEyebrow>
-        <p className={problemClassName}>{project.problem}</p>
-      </div>
-      {project.businessGain ? (
-        <div className="mt-4">
-          <CardEyebrow>Qué gana el negocio</CardEyebrow>
-          <p className={resultClassName}>{project.businessGain}</p>
-        </div>
-      ) : null}
-      <div className={moduleContainerClassName}>
-        <CardEyebrow>Módulos</CardEyebrow>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {project.modules.map((module) => (
-            <span key={module} className="pill">
-              {module}
-            </span>
-          ))}
-        </div>
-      </div>
-      {showStack ? (
-        <div className="mt-6">
-          <CardEyebrow>{project.stackLabel}</CardEyebrow>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {project.stack.map((item) => (
-              <span key={item} className="pill">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      ) : null}
+      <dl className="mt-3.5 grid gap-1.5 md:gap-2">
+        <ProjectSummaryRow
+          label="Problema"
+          value={project.homeProblem ?? project.problem}
+        />
+        <ProjectSummaryRow
+          label="Solución"
+          value={project.homeSolution ?? project.solution}
+        />
+        <ProjectSummaryRow
+          label="Resultado"
+          value={project.homeResult ?? project.businessGain}
+        />
+      </dl>
       <div className={actionsClassName}>
         <ProjectActions project={project} showRepoLink={showRepoLink} />
       </div>
@@ -210,15 +156,15 @@ export default function ProjectCard({
     return (
       <article
         className={cn(
-          "surface-card-strong box-border max-w-full min-w-0 p-5",
-          hasHomeVisual ? "md:p-5 lg:p-5" : "md:p-7 lg:p-8",
+          "surface-card-strong box-border max-w-full min-w-0",
+          hasHomeVisual ? "p-4 md:p-5 lg:p-5" : "p-4 md:p-7 lg:p-8",
         )}
       >
         <div
           className={cn(
             "grid min-w-0 lg:items-start",
             hasHomeVisual
-              ? "gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:items-center"
+              ? "gap-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center"
               : "gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]",
           )}
         >
@@ -226,14 +172,7 @@ export default function ProjectCard({
           <ProjectContent
             project={project}
             variant="featured"
-            visualPriority={hasHomeVisual}
             showRepoLink={showRepoLink}
-            mobilePreview={
-              <ProjectPreview
-                project={project}
-                className={hasHomeVisual ? "-mx-4" : undefined}
-              />
-            }
           />
         </div>
       </article>
@@ -244,15 +183,15 @@ export default function ProjectCard({
     return (
       <article
         className={cn(
-          "surface-card-strong box-border max-w-full min-w-0 p-5",
-          hasHomeVisual ? "md:p-5" : "md:p-7",
+          "surface-card-strong box-border max-w-full min-w-0",
+          hasHomeVisual ? "p-4 md:p-5" : "p-4 md:p-7",
         )}
       >
         <div
           className={cn(
             "grid min-w-0",
             hasHomeVisual
-              ? "gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:items-center"
+              ? "gap-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center"
               : "gap-7 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start",
           )}
         >
@@ -260,14 +199,7 @@ export default function ProjectCard({
           <ProjectContent
             project={project}
             variant="horizontal"
-            visualPriority={hasHomeVisual}
             showRepoLink={showRepoLink}
-            mobilePreview={
-              <ProjectPreview
-                project={project}
-                className={hasHomeVisual ? "-mx-4" : undefined}
-              />
-            }
           />
         </div>
       </article>
@@ -275,12 +207,11 @@ export default function ProjectCard({
   }
 
   return (
-    <article className="surface-card-strong box-border flex h-full max-w-full min-w-0 flex-col p-5 md:p-6">
-      <ProjectPreview project={project} />
+    <article className="surface-card-strong box-border flex h-full max-w-full min-w-0 flex-col p-4 md:p-6">
+      <ProjectPreview project={project} className="hidden md:block" />
       <ProjectContent
         project={project}
         variant="standard"
-        showStack
         showRepoLink={showRepoLink}
       />
     </article>
