@@ -33,7 +33,7 @@ function ProjectPreview({
         width={project.homeVisual.width}
         height={project.homeVisual.height}
         className="h-auto w-full rounded-[12px]"
-        sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 2rem)"
+        sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 4rem)"
       />
     </figure>
   );
@@ -64,7 +64,7 @@ function ProjectSummaryRow({
 
   return (
     <div className="rounded-[8px] bg-[rgba(244,247,245,0.78)] px-2.5 py-2 shadow-[inset_0_0_0_1px_rgba(17,24,32,0.06)] md:px-3 md:py-2.5">
-      <dt className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-[var(--color-subtle)]">
+      <dt className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-[var(--color-subtle)]">
         {label}
       </dt>
       <dd className="mt-1 text-[0.88rem] font-medium leading-5 text-[var(--color-foreground)] md:text-[0.92rem]">
@@ -168,7 +168,7 @@ export default function ProjectCard({
               : "gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]",
           )}
         >
-          <ProjectPreview project={project} className="hidden lg:block" />
+          <ProjectPreview project={project} className="min-w-0" />
           <ProjectContent
             project={project}
             variant="featured"
@@ -195,7 +195,7 @@ export default function ProjectCard({
               : "gap-7 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start",
           )}
         >
-          <ProjectPreview project={project} className="hidden lg:block" />
+          <ProjectPreview project={project} className="min-w-0" />
           <ProjectContent
             project={project}
             variant="horizontal"
@@ -208,7 +208,7 @@ export default function ProjectCard({
 
   return (
     <article className="surface-card-strong box-border flex h-full max-w-full min-w-0 flex-col p-4 md:p-6">
-      <ProjectPreview project={project} className="hidden md:block" />
+      <ProjectPreview project={project} className="min-w-0" />
       <ProjectContent
         project={project}
         variant="standard"

@@ -3,12 +3,6 @@ export type NavigationItem = {
   href: string;
 };
 
-export type Service = {
-  title: string;
-  description: string;
-  tags: string[];
-};
-
 export type OfferCard = {
   title: string;
   description: string;
@@ -77,16 +71,6 @@ export type ProcessStep = {
   labelColor?: string;
 };
 
-export type TrustCard = {
-  title: string;
-  description: string;
-};
-
-export type ClientType = {
-  title: string;
-  description: string;
-};
-
 export type StartOption = {
   label: string;
   title: string;
@@ -143,20 +127,15 @@ export const profile = {
   whatsappNumber: "5493482555038",
   whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
-    "Convertí planillas, mensajes de WhatsApp y tareas manuales en una herramienta que ordene tu negocio.",
+    "Convertí planillas y mensajes sueltos en una herramienta que ordene tu negocio.",
   heroSubtitle:
     "Webs, sistemas y automatizaciones para comercios, profesionales y pymes que quieren trabajar con menos desorden.",
-  heroMicrocopy:
-    "No necesitás tener la solución definida. Empezamos por entender qué conviene ordenar primero.",
   heroBadges: [
-    "Webs",
     "Turnos",
     "Stock",
     "Caja",
     "Pedidos",
-    "Reportes",
     "WhatsApp",
-    "Automatización",
   ],
   navigation: [
     { label: "Qué hago", href: "/#que-hago" },
@@ -258,33 +237,6 @@ export const personalTrust = {
     "Acompañamiento después de publicar para ajustar y mejorar.",
   ],
 } satisfies PersonalTrust;
-
-export const services = [
-  {
-    title: "Página web comercial",
-    description:
-      "Landing o sitio institucional claro, rápido y preparado para captar consultas por WhatsApp, formulario o redes.",
-    tags: ["SEO básico", "Responsive", "WhatsApp", "Vercel"],
-  },
-  {
-    title: "Sistema de turnos",
-    description:
-      "Agenda online, clientes, servicios, horarios, recordatorios, pagos y reportes para profesionales o pequeños negocios.",
-    tags: ["Turnos", "Clientes", "Recordatorios", "Pagos"],
-  },
-  {
-    title: "Punto de venta / sistema de gestión",
-    description:
-      "Caja, pedidos, stock, cuentas corrientes, reportes, usuarios, backups y operación diaria en una herramienta a medida.",
-    tags: ["Caja", "Stock", "Reportes", "Usuarios"],
-  },
-  {
-    title: "Automatizaciones",
-    description:
-      "Flujos con WhatsApp, formularios, paneles internos y tareas repetitivas automatizadas.",
-    tags: ["WhatsApp", "Formularios", "Paneles", "Reportes"],
-  },
-] satisfies Service[];
 
 export const systemsStartOptions = [
   {
@@ -838,51 +790,6 @@ export const processSteps = [
     labelColor: "#d92d20",
   },
 ] satisfies ProcessStep[];
-
-export const trustCards = [
-  {
-    title: "Implementación real",
-    description:
-      "Deploy, dominio, base de datos, backups y documentación para que el sistema no quede solo en una demo.",
-  },
-  {
-    title: "Integraciones útiles",
-    description:
-      "Mercado Pago, WhatsApp, formularios, facturación, reportes y automatización de tareas repetitivas.",
-  },
-  {
-    title: "Código mantenible",
-    description:
-      "Arquitectura clara, componentes reutilizables y decisiones técnicas pensadas para poder escalar o modificar.",
-  },
-] satisfies TrustCard[];
-
-export const clientTypes = [
-  {
-    title: "Restaurantes, bares y rotiserías",
-    description: "Mesas, pedidos, cocina, caja y menú QR.",
-  },
-  {
-    title: "Ópticas y comercios con stock",
-    description: "Productos, precios, cuentas corrientes y backups.",
-  },
-  {
-    title: "Profesionales con agenda",
-    description: "Turnos, clientes, horarios y recordatorios.",
-  },
-  {
-    title: "Pymes con procesos administrativos",
-    description: "Documentación, reportes, tareas y vencimientos.",
-  },
-  {
-    title: "Emprendedores que necesitan una web comercial",
-    description: "Landing, WhatsApp, formulario y presencia online.",
-  },
-  {
-    title: "Equipos que quieren automatizar tareas repetitivas",
-    description: "Formularios, paneles internos, reportes y flujos automáticos.",
-  },
-] satisfies ClientType[];
 
 export const featuredProjects: Project[] = projects.filter(
   (project) => project.featured,

@@ -5,7 +5,6 @@ type HeroProps = {
   title: string;
   subtitle: string;
   badges: readonly string[];
-  microcopy: string;
   whatsappHref: string;
 };
 
@@ -13,15 +12,13 @@ export default function Hero({
   title,
   subtitle,
   badges,
-  microcopy,
   whatsappHref,
 }: HeroProps) {
   return (
     <section className="hero-band">
       <div className="section-shell hero-section grid min-w-0 items-center gap-2.5 sm:gap-7 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:gap-x-12 lg:gap-y-7">
         <div className="min-w-0 lg:col-start-1 lg:row-start-1">
-          <p className="section-eyebrow">Webs, sistemas y automatizaciones para negocios reales</p>
-          <h1 className="mt-2.5 max-w-[23rem] text-[clamp(1.78rem,8.15vw,3.55rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#f8fbfb] sm:mt-4 sm:max-w-4xl sm:leading-[1.04]">
+          <h1 className="max-w-[23rem] text-[clamp(1.78rem,8.15vw,3.55rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#f8fbfb] sm:max-w-4xl sm:leading-[1.04]">
             {title}
           </h1>
           <p className="mt-2.5 max-w-[22rem] text-[clamp(0.92rem,3vw,1.15rem)] leading-6 text-[#c6d1da] sm:mt-5 sm:max-w-3xl md:leading-8">
@@ -42,6 +39,10 @@ export default function Hero({
           </div>
         </div>
 
+        <div className="hero-visual-frame home-hero-visual mx-auto w-full min-w-0 max-w-[13.25rem] sm:max-w-[21rem] lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:mx-0 lg:max-w-none">
+          <HeroTransformationPreview />
+        </div>
+
         <div className="min-w-0 lg:col-start-1 lg:row-start-2">
           <p className="sr-only">Áreas que puedo ordenar</p>
           <div className="flex w-full max-w-[22rem] flex-wrap gap-1.5 sm:max-w-none">
@@ -54,13 +55,6 @@ export default function Hero({
               </span>
             ))}
           </div>
-          <p className="mt-2 w-full max-w-[22rem] text-sm leading-6 text-[#aeb9c4] sm:max-w-2xl">
-            {microcopy}
-          </p>
-        </div>
-
-        <div className="hero-visual-frame home-hero-visual mx-auto w-full min-w-0 max-w-[13.25rem] sm:mx-0 sm:max-w-none lg:col-start-2 lg:row-start-1 lg:row-span-2">
-          <HeroTransformationPreview />
         </div>
       </div>
     </section>

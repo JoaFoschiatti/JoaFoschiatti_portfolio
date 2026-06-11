@@ -14,7 +14,7 @@ type StickyMobileCTAProps = {
 
 export default function StickyMobileCTA({
   whatsappHref,
-  hideSelector = "#proyectos, #servicios, #proceso, #faq, #contacto",
+  hideSelector = "#proyectos, #servicios, #proceso, #faq, #contacto, #brief, #formas-de-empezar, .contact-card, footer",
   showThreshold = 760,
   label = "WhatsApp",
 }: StickyMobileCTAProps) {

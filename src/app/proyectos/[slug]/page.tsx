@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CaseScreenshots from "@/components/CaseScreenshots";
 import ProjectModules from "@/components/ProjectModules";
 import SectionHeading from "@/components/SectionHeading";
 import {
@@ -145,8 +144,6 @@ export default async function ProjectPage(props: ProjectPageProps) {
           </p>
         </article>
       </section>
-
-      <CaseScreenshots screenshots={project.screenshots} />
 
       <section className="section-anchor section-block section-shell pt-6">
         <div className="case-modules-gallery">

@@ -36,7 +36,6 @@ export default function Home() {
         title={profile.heroTitle}
         subtitle={profile.heroSubtitle}
         badges={profile.heroBadges}
-        microcopy={profile.heroMicrocopy}
         whatsappHref={whatsappHref}
       />
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type HeaderProps = {
   brandName: string;
@@ -17,8 +17,33 @@ export default function Header({
 }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement | null>(null);
 
   const closeMenu = () => setIsOpen(false);
+
+  // Close the mobile menu with Escape or a tap outside the header.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !headerRef.current?.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [isOpen]);
 
   const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     closeMenu();
@@ -85,7 +110,10 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.96)] backdrop-blur-xl md:bg-[rgba(251,250,247,0.9)]">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-[rgba(17,24,32,0.08)] bg-[rgba(251,250,247,0.96)] backdrop-blur-xl md:bg-[rgba(251,250,247,0.9)]"
+    >
       <div className="section-shell flex min-h-[72px] items-center justify-between gap-6">
         <Link
           href="/"
@@ -108,14 +136,15 @@ export default function Header({
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           <Link
             className="button-primary"
             href={whatsappHref}
             target="_blank"
             rel="noopener"
           >
-            Hablar por WhatsApp
+            <span className="lg:hidden">WhatsApp</span>
+            <span className="hidden lg:inline">Hablar por WhatsApp</span>
           </Link>
         </div>
 
@@ -124,6 +153,7 @@ export default function Header({
           className="surface-card flex h-11 w-11 items-center justify-center md:hidden"
           aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
           aria-expanded={isOpen}
+          aria-controls="menu-mobile"
           onClick={() => setIsOpen((open) => !open)}
         >
           <span className="sr-only">Menú</span>
@@ -148,20 +178,24 @@ export default function Header({
       </div>
 
       {isOpen ? (
-        <div className="border-t border-[var(--color-line)] bg-[var(--color-surface)] md:hidden">
-          <div className="section-shell flex flex-col gap-4 py-5">
+        <nav
+          id="menu-mobile"
+          aria-label="Principal"
+          className="border-t border-[var(--color-line)] bg-[var(--color-surface)] md:hidden"
+        >
+          <div className="section-shell flex flex-col gap-1 py-4">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-base text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+                className="py-2.5 text-base text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
                 onClick={(event) => handleNavigationClick(event, item.href)}
               >
                 {item.label}
               </Link>
             ))}
             <Link
-              className="button-primary mt-2"
+              className="button-primary mt-3"
               href={whatsappHref}
               target="_blank"
               rel="noopener"
@@ -170,7 +204,7 @@ export default function Header({
               Hablar por WhatsApp
             </Link>
           </div>
-        </div>
+        </nav>
       ) : null}
     </header>
   );

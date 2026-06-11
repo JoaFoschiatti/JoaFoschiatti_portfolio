@@ -20,6 +20,7 @@ export default function ProjectModules({
   const stripRef = useRef<HTMLDivElement | null>(null);
   const slideRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const touchStartX = useRef<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const screenshots = useMemo(() => {
     if (!moduleScreenshots) return [] as ProjectModuleScreenshot[];
@@ -89,6 +90,32 @@ export default function ProjectModules({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [activeIndex, closeLightbox, goNext, goPrev]);
+
+  const lightboxOpen = activeIndex !== null;
+
+  // Body-scroll lock + focus management while the lightbox is open
+  // (same pattern as AvatarLightbox).
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const trigger =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const focusTimer = window.setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 0);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.clearTimeout(focusTimer);
+      trigger?.focus();
+    };
+  }, [lightboxOpen]);
 
   useEffect(() => {
     const strip = stripRef.current;
@@ -309,6 +336,7 @@ export default function ProjectModules({
                 ) : null}
               </div>
               <button
+                ref={closeButtonRef}
                 type="button"
                 className="button-secondary shrink-0"
                 onClick={closeLightbox}

@@ -81,7 +81,7 @@ export default function CustomSystemsPage() {
             </div>
           </div>
 
-          <div className="hero-visual-frame custom-systems-hero-visual">
+          <div className="hero-visual-frame custom-systems-hero-visual w-full min-w-0 sm:mx-auto sm:max-w-[30rem] lg:mx-0 lg:max-w-none">
             <Image
               src="/sistemas-a-medida-visual-v2.png"
               alt="Proceso operativo disperso que se transforma en un sistema a medida claro y conectado"

@@ -71,7 +71,7 @@ export default function BackToTopButton() {
       onClick={goTop}
       aria-label="Volver arriba"
       tabIndex={show ? undefined : -1}
-      className={`fixed right-3 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(255,253,248,0.86)] text-[var(--color-foreground)] shadow-[0_8px_22px_-12px_rgba(17,24,32,0.45),inset_0_0_0_1px_rgba(17,24,32,0.1)] backdrop-blur-md transition-all duration-200 hover:bg-[rgba(255,253,248,0.96)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus)] md:hidden ${
+      className={`fixed right-3 z-30 flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(255,253,248,0.86)] text-[var(--color-foreground)] shadow-[0_8px_22px_-12px_rgba(17,24,32,0.45),inset_0_0_0_1px_rgba(17,24,32,0.1)] backdrop-blur-md transition-all duration-200 hover:bg-[rgba(255,253,248,0.96)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus)] md:hidden ${
         show
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"
