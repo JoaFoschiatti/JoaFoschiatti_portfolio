@@ -232,7 +232,7 @@ summary:focus-visible {
   line-height: 1;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent-teal);
+  color: var(--eyebrow-color, var(--color-accent-teal));
 }
 
 .section-title {
@@ -791,29 +791,6 @@ summary:focus-visible {
   color: var(--color-muted);
 }
 
-.home-problem-item {
-  display: grid;
-  gap: 0.55rem;
-  border-radius: 10px;
-  background: rgba(255, 253, 248, 0.86);
-  padding: 1rem;
-  box-shadow: var(--shadow-card);
-}
-
-.home-problem-item h3 {
-  font-size: 1.04rem;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: var(--color-foreground);
-}
-
-.home-problem-item p {
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--color-muted);
-}
-
 .home-personal-card {
   display: grid;
   gap: clamp(1.25rem, 4vw, 2.5rem);
@@ -957,7 +934,6 @@ summary:focus-visible {
   }
 
   .offer-card,
-  .home-problem-item,
   .home-step-row {
     padding: 0.75rem;
   }
@@ -966,20 +942,14 @@ summary:focus-visible {
     gap: 0.42rem;
   }
 
-  .offer-card h3,
-  .home-problem-item h3 {
+  .offer-card h3 {
     font-size: 0.94rem;
     line-height: 1.14;
   }
 
-  .offer-card p,
-  .home-problem-item p {
+  .offer-card p {
     font-size: 0.82rem;
     line-height: 1.35;
-  }
-
-  .home-problem-item {
-    gap: 0.42rem;
   }
 
   .home-step-row {
@@ -1009,6 +979,222 @@ summary:focus-visible {
     linear-gradient(180deg, var(--color-surface) 0%, #f5f1e9 100%);
 }
 
+.status-pill {
+  --status-accent: var(--color-accent-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 9999px;
+  padding: 0.38rem 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: default;
+  user-select: none;
+  background: color-mix(in srgb, var(--status-accent) 9%, transparent);
+  color: color-mix(in srgb, var(--status-accent) 76%, var(--color-foreground));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--status-accent) 24%, transparent);
+}
+
+.status-pill .status-dot {
+  flex: 0 0 auto;
+  background: var(--status-accent);
+}
+
+.status-pill-amber {
+  --status-accent: var(--color-accent-amber);
+}
+
+.status-pill-blue {
+  --status-accent: var(--color-accent-blue);
+}
+
+.status-pill-live .status-dot {
+  animation: status-pulse 2.2s ease-out infinite;
+}
+
+@keyframes status-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--status-accent) 42%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.case-hero-card .status-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: color-mix(in srgb, var(--status-accent) 46%, #f8fbfb);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.button-whatsapp {
+  display: inline-flex;
+  min-height: 2.875rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 6px;
+  padding-inline: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: linear-gradient(180deg, #17936b 0%, #10795a 100%);
+  color: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 14px 30px -18px rgba(16, 121, 90, 0.7),
+    var(--shadow-card);
+}
+
+.button-whatsapp:hover {
+  background: linear-gradient(180deg, #1a9e74 0%, #128463 100%);
+}
+
+.button-whatsapp svg {
+  flex: 0 0 auto;
+}
+
+.sticky-cta-pulse {
+  position: relative;
+}
+
+.sticky-cta-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: cta-pulse 1.8s ease-out 0.6s 2;
+}
+
+@keyframes cta-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(18, 140, 94, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(18, 140, 94, 0);
+  }
+}
+
+.browser-frame {
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.browser-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(180deg, #f2f0ea, #ece9e2);
+  box-shadow: inset 0 -1px 0 rgba(17, 24, 32, 0.07);
+}
+
+.browser-frame-dots {
+  display: inline-flex;
+  gap: 0.32rem;
+}
+
+.browser-frame-dots span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: rgba(17, 24, 32, 0.14);
+}
+
+.browser-frame-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+.browser-frame img {
+  display: block;
+}
+
+.featured-case-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-case-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-coral),
+    color-mix(in srgb, var(--color-accent-coral) 30%, transparent)
+  );
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter-rise {
+  animation: hero-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-1 {
+  animation: hero-fade-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+}
+
+.hero-enter-2 {
+  animation: hero-fade-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) 160ms both;
+}
+
+.hero-enter-3 {
+  animation: hero-fade-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both;
+}
+
+[data-reveal] {
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1018,8 +1204,10 @@ summary:focus-visible {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }

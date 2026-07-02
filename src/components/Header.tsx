@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 type HeaderProps = {
   brandName: string;
@@ -137,15 +138,10 @@ export default function Header({
         </nav>
 
         <div className="hidden md:block">
-          <Link
-            className="button-primary"
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener"
-          >
+          <WhatsAppButton href={whatsappHref}>
             <span className="lg:hidden">WhatsApp</span>
             <span className="hidden lg:inline">Hablar por WhatsApp</span>
-          </Link>
+          </WhatsAppButton>
         </div>
 
         <button
@@ -194,15 +190,13 @@ export default function Header({
                 {item.label}
               </Link>
             ))}
-            <Link
-              className="button-primary mt-3"
+            <WhatsAppButton
+              className="mt-3"
               href={whatsappHref}
-              target="_blank"
-              rel="noopener"
               onClick={closeMenu}
             >
               Hablar por WhatsApp
-            </Link>
+            </WhatsAppButton>
           </div>
         </nav>
       ) : null}

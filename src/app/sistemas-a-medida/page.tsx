@@ -5,6 +5,7 @@ import BriefBuilder from "@/components/BriefBuilder";
 import FaqSection from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
 import StartOptionsSection from "@/components/StartOptionsSection";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import {
   briefBuilderOptions,
   profile,
@@ -55,14 +56,9 @@ export default function CustomSystemsPage() {
               Si hoy dependés de planillas, mensajes sueltos, tareas manuales o sistemas que no acompañan la operación, podemos convertir ese flujo en una herramienta propia.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                className="button-primary"
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener"
-              >
+              <WhatsAppButton href={whatsappHref}>
                 Contame tu proceso por WhatsApp
-              </Link>
+              </WhatsAppButton>
               <Link className="button-secondary" href="/#proyectos">
                 Ver casos reales
               </Link>
@@ -160,14 +156,9 @@ export default function CustomSystemsPage() {
                 Si hay un proceso que ya te está costando tiempo, empecemos por ahí.
               </h2>
             </div>
-            <a
-              className="button-primary shrink-0"
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener"
-            >
+            <WhatsAppButton className="shrink-0" href={whatsappHref}>
               Consultar por WhatsApp
-            </a>
+            </WhatsAppButton>
           </div>
         </div>
       </section>

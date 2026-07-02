@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import type { BriefBuilderOptions, BriefOption } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
 
@@ -192,14 +193,9 @@ export default function BriefBuilder({ options, whatsappNumber }: BriefBuilderPr
       </div>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <a
-          className="button-primary"
-          href={whatsappHref}
-          target="_blank"
-          rel="noopener"
-        >
+        <WhatsAppButton href={whatsappHref}>
           Consultar por WhatsApp
-        </a>
+        </WhatsAppButton>
       </div>
     </article>
   );

@@ -192,6 +192,13 @@ export default function ProjectModules({
                 onClick={() => setActiveIndex(idx)}
                 aria-label={`${screenshot.module} — ver pantalla`}
               >
+                <span className="browser-frame-bar" aria-hidden>
+                  <span className="browser-frame-dots">
+                    <span />
+                    <span />
+                    <span />
+                  </span>
+                </span>
                 <span className="module-screen-preview">
                   <Image
                     src={screenshot.src}
@@ -258,6 +265,13 @@ export default function ProjectModules({
               onClick={() => openLightboxByModule(module)}
               aria-label={`${module} — ver pantalla`}
             >
+              <span className="browser-frame-bar" aria-hidden>
+                <span className="browser-frame-dots">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </span>
               <span className="module-screen-preview">
                 <Image
                   src={screenshot.src}

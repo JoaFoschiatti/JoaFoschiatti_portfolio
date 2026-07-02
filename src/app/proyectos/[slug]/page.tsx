@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProjectModules from "@/components/ProjectModules";
 import SectionHeading from "@/components/SectionHeading";
+import StatusPill from "@/components/StatusPill";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import {
   contactLinks,
   featuredProjects,
@@ -82,7 +84,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
                   </span>
                 ))}
                 <span className="pill">{project.category}</span>
-                <span className="pill">{project.status}</span>
+                <StatusPill status={project.status} />
               </div>
               <Link
                 href="/#proyectos"
@@ -97,27 +99,32 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 {project.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  className="button-primary"
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener"
-                >
+                <WhatsAppButton href={whatsappHref}>
                   Consultar por WhatsApp
-                </Link>
+                </WhatsAppButton>
               </div>
             </div>
             {project.caseHeroVisual ? (
               <div className="case-hero-visual">
-                <Image
-                  src={project.caseHeroVisual.src}
-                  alt={project.caseHeroVisual.alt}
-                  width={project.caseHeroVisual.width}
-                  height={project.caseHeroVisual.height}
-                  className="h-auto w-full rounded-[12px]"
-                  sizes="(min-width: 1024px) 440px, calc(100vw - 2rem)"
-                  priority
-                />
+                <div className="browser-frame">
+                  <span className="browser-frame-bar">
+                    <span className="browser-frame-dots" aria-hidden>
+                      <span />
+                      <span />
+                      <span />
+                    </span>
+                    <span className="browser-frame-label">{project.name}</span>
+                  </span>
+                  <Image
+                    src={project.caseHeroVisual.src}
+                    alt={project.caseHeroVisual.alt}
+                    width={project.caseHeroVisual.width}
+                    height={project.caseHeroVisual.height}
+                    className="h-auto w-full"
+                    sizes="(min-width: 1024px) 440px, calc(100vw - 2rem)"
+                    priority
+                  />
+                </div>
               </div>
             ) : null}
           </div>

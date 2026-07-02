@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 type StickyMobileCTAProps = {
   whatsappHref: string;
@@ -14,7 +14,7 @@ type StickyMobileCTAProps = {
 
 export default function StickyMobileCTA({
   whatsappHref,
-  hideSelector = "#proyectos, #servicios, #proceso, #faq, #contacto, #brief, #formas-de-empezar, .contact-card, footer",
+  hideSelector = "#proyectos, #proceso, #faq, #contacto, #brief, #formas-de-empezar, .contact-card, footer",
   showThreshold = 760,
   label = "WhatsApp",
 }: StickyMobileCTAProps) {
@@ -87,18 +87,16 @@ export default function StickyMobileCTA({
       }}
       aria-hidden={!show}
     >
-      <Link
+      <WhatsAppButton
         href={whatsappHref}
-        target="_blank"
-        rel="noopener"
         aria-label="Consultar por WhatsApp"
-        className={`button-primary w-auto min-w-[8.75rem] max-w-[calc(100%-1.5rem)] px-4 text-[0.88rem] shadow-[0_18px_44px_-14px_rgba(15,118,110,0.55),0_8px_24px_-8px_rgba(0,0,0,0.35)] ${
-          show ? "pointer-events-auto" : "pointer-events-none"
+        className={`w-auto min-w-[8.75rem] max-w-[calc(100%-1.5rem)] px-4 text-[0.88rem] ${
+          show ? "pointer-events-auto sticky-cta-pulse" : "pointer-events-none"
         }`}
         tabIndex={show ? undefined : -1}
       >
         {label}
-      </Link>
+      </WhatsAppButton>
     </div>
   );
 }

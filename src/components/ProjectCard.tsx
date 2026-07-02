@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import StatusPill from "@/components/StatusPill";
 import type { Project } from "@/data/portfolio";
 
 type ProjectCardProps = {
@@ -26,13 +27,21 @@ function ProjectPreview({
   }
 
   return (
-    <figure className={className}>
+    <figure className={cn("browser-frame", className)}>
+      <span className="browser-frame-bar">
+        <span className="browser-frame-dots" aria-hidden>
+          <span />
+          <span />
+          <span />
+        </span>
+        <span className="browser-frame-label">{project.name}</span>
+      </span>
       <Image
         src={project.homeVisual.src}
         alt={project.homeVisual.alt}
         width={project.homeVisual.width}
         height={project.homeVisual.height}
-        className="h-auto w-full rounded-[12px]"
+        className="h-auto w-full"
         sizes="(min-width: 1280px) 720px, (min-width: 1024px) 58vw, calc(100vw - 4rem)"
       />
     </figure>
@@ -40,14 +49,13 @@ function ProjectPreview({
 }
 
 function ProjectMeta({ project }: { project: Project }) {
-  const meta = [project.projectType ?? project.category, project.status]
-    .filter(Boolean)
-    .join(" · ");
-
   return (
-    <p className="font-mono text-[0.7rem] uppercase leading-4 tracking-[0.1em] text-[var(--color-muted)]">
-      {meta}
-    </p>
+    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+      <p className="font-mono text-[0.7rem] uppercase leading-4 tracking-[0.1em] text-[var(--color-muted)]">
+        {project.projectType ?? project.category}
+      </p>
+      <StatusPill status={project.status} />
+    </div>
   );
 }
 
@@ -156,7 +164,7 @@ export default function ProjectCard({
     return (
       <article
         className={cn(
-          "surface-card-strong box-border max-w-full min-w-0",
+          "surface-card-strong featured-case-card box-border max-w-full min-w-0",
           hasHomeVisual ? "p-4 md:p-5 lg:p-5" : "p-4 md:p-7 lg:p-8",
         )}
       >

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 type ContactCTAProps = {
   title: string;
@@ -31,14 +32,9 @@ export default function ContactCTA({
               {description}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link
-                className="button-primary"
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener"
-              >
+              <WhatsAppButton href={whatsappHref}>
                 Contame tu problema por WhatsApp
-              </Link>
+              </WhatsAppButton>
               <a className="button-secondary" href={email}>
                 Enviar email
               </a>

@@ -100,11 +100,6 @@ export type SystemUseCase = {
   description: string;
 };
 
-export type HomeProblem = {
-  title: string;
-  description: string;
-};
-
 export type PersonalTrust = {
   eyebrow: string;
   title: string;
@@ -129,7 +124,7 @@ export const profile = {
   heroTitle:
     "Convertí planillas y mensajes sueltos en una herramienta que ordene tu negocio.",
   heroSubtitle:
-    "Webs, sistemas y automatizaciones para comercios, profesionales y pymes que quieren trabajar con menos desorden.",
+    "Webs, sistemas y automatizaciones para comercios, profesionales y pymes. Uno de mis sistemas se usa todos los días en un comercio real.",
   heroBadges: [
     "Turnos",
     "Stock",
@@ -138,13 +133,14 @@ export const profile = {
     "WhatsApp",
   ],
   navigation: [
-    { label: "Qué hago", href: "/#que-hago" },
     { label: "Casos", href: "/#proyectos" },
+    { label: "Qué hago", href: "/#que-hago" },
+    { label: "Sistemas a medida", href: "/sistemas-a-medida" },
     { label: "Proceso", href: "/#proceso" },
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavigationItem[],
   briefQuestions: [
-    "¿Qué querés ordenar?",
+    "¿Qué querés resolver?",
     "¿Cómo lo manejás hoy?",
     "¿Quién usaría la herramienta?",
   ],
@@ -157,7 +153,7 @@ export const contactLinks = {
   github: "https://github.com/JoaFoschiatti",
   instagram: "https://www.instagram.com/joasanchez02/",
   whatsappMessage:
-    "Hola Joaquín, vi tu portfolio y quiero ordenar un proceso de mi negocio. Hoy lo manejo con WhatsApp, planillas o tareas manuales y quiero ver si se puede simplificar.",
+    "Hola Joaquín, vi tu portfolio. En mi negocio hay algo que hoy manejo con planillas o WhatsApp y quiero ver si se puede simplificar.",
 } as const;
 
 export const valueStrip = [
@@ -165,7 +161,7 @@ export const valueStrip = [
   "Deploy en Vercel / AWS",
   "Integraciones con pagos y herramientas externas",
   "Código mantenible",
-  "Pensado para operación diaria",
+  "Pensado para el uso de todos los días",
 ] as const;
 
 export const offerCards = [
@@ -190,47 +186,12 @@ export const offerCards = [
   },
 ] satisfies OfferCard[];
 
-export const homeProblems = [
-  {
-    title: "Turnos",
-    description: "Agenda y reservas.",
-  },
-  {
-    title: "Stock",
-    description: "Entradas, salidas y alertas.",
-  },
-  {
-    title: "Caja",
-    description: "Ventas, cobros y cierres.",
-  },
-  {
-    title: "Pedidos",
-    description: "Estados y seguimiento.",
-  },
-  {
-    title: "Reportes",
-    description: "Números claros.",
-  },
-  {
-    title: "WhatsApp",
-    description: "Mensajes menos dispersos.",
-  },
-  {
-    title: "Automatizaciones",
-    description: "Menos tareas repetidas.",
-  },
-  {
-    title: "Web comercial",
-    description: "Servicio y consultas.",
-  },
-] satisfies HomeProblem[];
-
 export const personalTrust = {
   eyebrow: "Quién está detrás",
   title:
-    "Soy Joaquín. Diseño herramientas simples para problemas reales de operación.",
+    "Soy Joaquín. Diseño herramientas simples para problemas reales de negocios.",
   description:
-    "Soy Ingeniero en Sistemas y trabajo el software desde el uso real del negocio.",
+    "Soy Ingeniero en Sistemas. Construyo cada herramienta a partir de cómo se trabaja de verdad en el negocio.",
   points: [
     "Ingeniería aplicada a negocios reales.",
     "Herramientas pensadas para uso diario, no para mostrar tecnología.",
@@ -254,10 +215,10 @@ export const systemsStartOptions = [
     label: "Opción 02",
     title: "Sistema de gestión a medida",
     description:
-      "Para centralizar operación diaria, usuarios, datos, permisos, reportes e integraciones en un sistema propio.",
+      "Para juntar en un solo sistema el trabajo de todos los días: usuarios, datos, permisos, reportes e integraciones.",
     items: [
       "Módulos pensados para tu operación",
-      "Panel interno y flujos de trabajo",
+      "Panel interno para cargar y consultar datos",
       "Base técnica para mantener y escalar",
     ],
   },
@@ -333,7 +294,7 @@ export const systemsFaqs = [
       "Después de publicar el sistema, puedo acompañarte con mantenimiento, ajustes y nuevas mejoras si lo necesitás.",
   },
   {
-    question: "¿Cómo se define el alcance?",
+    question: "¿Cómo decidimos qué entra en la primera versión?",
     answer:
       "Primero se entiende el proceso y después se decide qué entra en la primera versión para que sea útil sin volverse pesada.",
   },
@@ -353,7 +314,7 @@ export const homeFaqs = [
   {
     question: "¿Hacés sistemas desde cero o mejorás algo existente?",
     answer:
-      "Puedo construir una herramienta desde cero o mejorar procesos existentes, siempre empezando por un alcance claro.",
+      "Puedo construir una herramienta desde cero o mejorar procesos existentes, siempre definiendo primero qué entra y qué no.",
   },
   {
     question: "¿Qué pasa después de publicar?",
@@ -398,10 +359,10 @@ export const projects = [
     businessGain:
       "Pedidos claros, cocina visible y cierre de caja al instante para reducir errores y acelerar la mesa.",
     solution:
-      "Reúne front de salón, cocina, caja, pedidos remotos y menú QR en una base operativa única, con foco en tiempos, cobro y visibilidad de cada pedido.",
+      "Reúne salón, cocina, caja, pedidos remotos y menú QR en un solo sistema, con foco en tiempos, cobro y visibilidad de cada pedido.",
     homeProblem: "Pedidos, cocina y caja estaban separados.",
     homeSolution: "Un panel une salón, cocina, caja y pedidos.",
-    homeResult: "Menos errores y cierre de caja más claro.",
+    homeResult: "Menos errores entre salón y cocina. Caja clara al cierre.",
     problemEyebrow: "Qué unifica",
     modules: ["Dashboard", "Mesas", "Pedidos", "Cocina", "Caja", "Menú", "Pagos"],
     stackLabel: "Stack visible",
@@ -526,7 +487,7 @@ export const projects = [
       "Aplicación de escritorio orientada a caja y administración interna: stock por marca y graduación, listas de precios por laboratorio, cuenta corriente por cliente y backups automáticos.",
     homeProblem: "Stock, precios y cuentas estaban dispersos.",
     homeSolution: "Una app centraliza productos, clientes y respaldos.",
-    homeResult: "Atención más rápida y datos al día.",
+    homeResult: "Se usa todos los días en el mostrador de la óptica.",
     problemEyebrow: "Qué controla",
     modules: ["Inicio", "Stock", "Precios", "Cuenta corriente", "Reportes", "Backups"],
     stackLabel: "Stack visible",
@@ -632,7 +593,7 @@ export const projects = [
       "Plataforma SaaS para que un profesional administre agenda, clientes y cobros desde la web, con recordatorios automáticos por WhatsApp y reportes simples de actividad e ingresos.",
     homeProblem: "Los turnos dependían de mensajes y planillas.",
     homeSolution: "Agenda web con clientes, horarios y recordatorios.",
-    homeResult: "Menos ida y vuelta y agenda más ordenada.",
+    homeResult: "Menos ida y vuelta por WhatsApp para dar un turno.",
     problemEyebrow: "Qué automatiza",
     modules: [
       "Turnos",
@@ -770,7 +731,7 @@ export const processSteps = [
   {
     label: "PRIORIZAR",
     title: "Definimos una primera versión",
-    description: "Elegimos qué ordenar primero.",
+    description: "Elegimos qué resolver primero.",
     color: "#0f766e",
     labelColor: "#0f766e",
   },
