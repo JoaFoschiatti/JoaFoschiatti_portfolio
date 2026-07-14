@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useId,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import type { ProjectModuleScreenshot } from "@/data/portfolio";
 
 type ProjectModulesProps = {
@@ -9,375 +14,199 @@ type ProjectModulesProps = {
   moduleScreenshots?: readonly ProjectModuleScreenshot[];
 };
 
-const SWIPE_THRESHOLD = 50;
-
 export default function ProjectModules({
   modules,
-  moduleScreenshots,
+  moduleScreenshots = [],
 }: ProjectModulesProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
-  const stripRef = useRef<HTMLDivElement | null>(null);
-  const slideRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const touchStartX = useRef<number | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-
-  const screenshots = useMemo(() => {
-    if (!moduleScreenshots) return [] as ProjectModuleScreenshot[];
-    const byModule = new Map(
-      moduleScreenshots.map((screenshot) => [screenshot.module, screenshot]),
-    );
-    return modules
-      .map((module) => byModule.get(module))
-      .filter((screenshot): screenshot is ProjectModuleScreenshot =>
-        Boolean(screenshot),
-      );
-  }, [modules, moduleScreenshots]);
-
-  const screenshotsByModule = useMemo(
-    () =>
-      new Map(
-        moduleScreenshots?.map((screenshot) => [
-          screenshot.module,
-          screenshot,
-        ]) ?? [],
-      ),
-    [moduleScreenshots],
+  const galleryId = useId();
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const screenshotsByModule = new Map(
+    moduleScreenshots.map((screenshot) => [screenshot.module, screenshot]),
   );
+  const screenshots = modules
+    .map((module) => screenshotsByModule.get(module))
+    .filter((item): item is ProjectModuleScreenshot => Boolean(item));
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeScreenshot = screenshots[activeIndex];
 
-  const activeScreenshot =
-    activeIndex !== null ? (screenshots[activeIndex] ?? null) : null;
-
-  const closeLightbox = useCallback(() => setActiveIndex(null), []);
-
-  const openLightboxByModule = useCallback(
-    (module: string) => {
-      const index = screenshots.findIndex((s) => s.module === module);
-      if (index >= 0) setActiveIndex(index);
-    },
-    [screenshots],
-  );
-
-  const goPrev = useCallback(() => {
-    setActiveIndex((current) => {
-      if (current === null) return current;
-      return Math.max(0, current - 1);
-    });
-  }, []);
-
-  const goNext = useCallback(() => {
-    setActiveIndex((current) => {
-      if (current === null) return current;
-      return Math.min(screenshots.length - 1, current + 1);
-    });
-  }, [screenshots.length]);
-
-  useEffect(() => {
-    if (activeIndex === null) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeLightbox();
-      } else if (event.key === "ArrowRight") {
-        goNext();
-      } else if (event.key === "ArrowLeft") {
-        goPrev();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [activeIndex, closeLightbox, goNext, goPrev]);
-
-  const lightboxOpen = activeIndex !== null;
-
-  // Body-scroll lock + focus management while the lightbox is open
-  // (same pattern as AvatarLightbox).
-  useEffect(() => {
-    if (!lightboxOpen) return;
-
-    const trigger =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const focusTimer = window.setTimeout(() => {
-      closeButtonRef.current?.focus();
-    }, 0);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.clearTimeout(focusTimer);
-      trigger?.focus();
-    };
-  }, [lightboxOpen]);
-
-  useEffect(() => {
-    const strip = stripRef.current;
-    if (!strip || screenshots.length <= 1) {
-      return;
-    }
-    const slides = slideRefs.current.filter(
-      (el): el is HTMLButtonElement => el !== null,
+  if (!activeScreenshot) {
+    return (
+      <div className="module-tags-only">
+        {modules.map((module) => (
+          <span key={module}>{module}</span>
+        ))}
+      </div>
     );
-    if (slides.length === 0) {
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-            const idx = slides.indexOf(entry.target as HTMLButtonElement);
-            if (idx !== -1) {
-              setMobileActiveIndex(idx);
-            }
-          }
-        }
-      },
-      { root: strip, threshold: 0.6 },
-    );
-    slides.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [screenshots]);
+  }
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (event.touches.length !== 1) {
-      touchStartX.current = null;
-      return;
-    }
-    touchStartX.current = event.touches[0].clientX;
+  const showPrevious = () => {
+    setActiveIndex((current) => Math.max(0, current - 1));
   };
 
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    const startX = touchStartX.current;
-    touchStartX.current = null;
-    if (startX === null) return;
-    const endX = event.changedTouches[0]?.clientX;
-    if (endX === undefined) return;
-    const delta = endX - startX;
-    if (delta > SWIPE_THRESHOLD) {
-      goPrev();
-    } else if (delta < -SWIPE_THRESHOLD) {
-      goNext();
-    }
+  const showNext = () => {
+    setActiveIndex((current) => Math.min(screenshots.length - 1, current + 1));
   };
 
-  const scrollToSlide = (index: number) => {
-    const slide = slideRefs.current[index];
-    slide?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+  const activateAndFocus = (index: number) => {
+    setActiveIndex(index);
+    requestAnimationFrame(() => tabRefs.current[index]?.focus());
+  };
+
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    let nextIndex: number | undefined;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        nextIndex = (index + 1) % screenshots.length;
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        nextIndex = (index - 1 + screenshots.length) % screenshots.length;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = screenshots.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    activateAndFocus(nextIndex);
+  };
+
+  const openDialog = () => {
+    dialogRef.current?.showModal();
   };
 
   return (
-    <>
-      {screenshots.length > 0 ? (
-        <div className="mt-10 md:hidden">
-          <div ref={stripRef} className="modules-mobile-strip">
-            {screenshots.map((screenshot, idx) => (
-              <button
-                key={screenshot.module}
-                ref={(el) => {
-                  slideRefs.current[idx] = el;
-                }}
-                type="button"
-                className="module-screen-card modules-mobile-slide group flex flex-col overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus)]"
-                onClick={() => setActiveIndex(idx)}
-                aria-label={`${screenshot.module} — ver pantalla`}
-              >
-                <span className="browser-frame-bar" aria-hidden>
-                  <span className="browser-frame-dots">
-                    <span />
-                    <span />
-                    <span />
-                  </span>
-                </span>
-                <span className="module-screen-preview">
-                  <Image
-                    src={screenshot.src}
-                    alt=""
-                    width={screenshot.width}
-                    height={screenshot.height}
-                    sizes="86vw"
-                    className="h-full w-full object-cover"
-                  />
-                </span>
-                <span className="flex w-full items-end justify-between gap-4 px-5 py-4">
-                  <span className="text-[1rem] font-medium text-[#171717]">
-                    {screenshot.module}
-                  </span>
-                  <span className="shrink-0 font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-[#666666] group-hover:text-[#171717]">
-                    Ver pantalla
-                  </span>
-                </span>
-              </button>
-            ))}
-          </div>
-          {screenshots.length > 1 ? (
-            <>
-              <div className="modules-mobile-dots">
-                {screenshots.map((screenshot, idx) => (
-                  <button
-                    key={screenshot.module}
-                    type="button"
-                    className="modules-mobile-dot"
-                    data-active={mobileActiveIndex === idx ? "true" : "false"}
-                    aria-label={`Ir a pantalla ${screenshot.module}`}
-                    aria-current={mobileActiveIndex === idx ? "true" : undefined}
-                    onClick={() => scrollToSlide(idx)}
-                  />
-                ))}
-              </div>
-              <p className="modules-mobile-counter" aria-live="polite">
-                {mobileActiveIndex + 1} / {screenshots.length}
-              </p>
-            </>
-          ) : null}
-        </div>
-      ) : null}
-
-      <div className="mt-10 hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-4">
-        {modules.map((module) => {
-          const screenshot = screenshotsByModule.get(module);
-
-          if (!screenshot) {
-            return (
-              <article key={module} className="surface-card p-5">
-                <p className="text-[1rem] font-medium text-[#171717]">
-                  {module}
-                </p>
-              </article>
-            );
-          }
-
-          return (
-            <button
-              key={module}
-              type="button"
-              className="module-screen-card group flex w-full flex-col overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus)]"
-              onClick={() => openLightboxByModule(module)}
-              aria-label={`${module} — ver pantalla`}
-            >
-              <span className="browser-frame-bar" aria-hidden>
-                <span className="browser-frame-dots">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </span>
-              <span className="module-screen-preview">
-                <Image
-                  src={screenshot.src}
-                  alt=""
-                  width={screenshot.width}
-                  height={screenshot.height}
-                  sizes="(min-width: 1280px) 280px, (min-width: 768px) 50vw, 86vw"
-                  className="h-full w-full object-cover"
-                />
-              </span>
-              <span className="flex w-full items-end justify-between gap-4 px-5 py-4">
-                <span className="text-[1rem] font-medium text-[#171717]">
-                  {module}
-                </span>
-                <span className="shrink-0 font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-[#666666] group-hover:text-[#171717]">
-                  Ver pantalla
-                </span>
-              </span>
-            </button>
-          );
-        })}
+    <div className="module-gallery">
+      <div className="module-selector" role="tablist" aria-label="Módulos del sistema">
+        {screenshots.map((screenshot, index) => (
+          <button
+            ref={(element) => {
+              tabRefs.current[index] = element;
+            }}
+            key={screenshot.module}
+            id={`${galleryId}-tab-${index}`}
+            type="button"
+            role="tab"
+            aria-selected={activeIndex === index}
+            aria-controls={`${galleryId}-panel`}
+            tabIndex={activeIndex === index ? 0 : -1}
+            onClick={() => setActiveIndex(index)}
+            onKeyDown={(event) => handleTabKeyDown(event, index)}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{screenshot.module}</strong>
+            <i aria-hidden>↗</i>
+          </button>
+        ))}
       </div>
 
-      {activeScreenshot ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-3 backdrop-blur-sm sm:p-6"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="module-screenshot-title"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              closeLightbox();
-            }
-          }}
+      <div
+        id={`${galleryId}-panel`}
+        className="module-stage"
+        role="tabpanel"
+        aria-labelledby={`${galleryId}-tab-${activeIndex}`}
+      >
+        <div className="project-browser-bar" aria-hidden>
+          <span><i /><i /><i /></span>
+          <small>{activeScreenshot.module}</small>
+        </div>
+        <button
+          ref={openButtonRef}
+          className="module-stage-image"
+          type="button"
+          onClick={openDialog}
+          aria-label={`Ampliar ${activeScreenshot.title}`}
         >
-          {screenshots.length > 1 ? (
-            <>
-              <button
-                type="button"
-                className="lightbox-arrow lightbox-arrow-prev"
-                onClick={goPrev}
-                disabled={activeIndex === 0}
-                aria-label="Pantalla anterior"
-              >
-                <span aria-hidden>‹</span>
-              </button>
-              <button
-                type="button"
-                className="lightbox-arrow lightbox-arrow-next"
-                onClick={goNext}
-                disabled={activeIndex === screenshots.length - 1}
-                aria-label="Pantalla siguiente"
-              >
-                <span aria-hidden>›</span>
-              </button>
-            </>
-          ) : null}
-          <div className="max-h-[calc(100vh-1.5rem)] w-full max-w-6xl overflow-hidden rounded-[12px] bg-white shadow-[0_24px_80px_rgba(0,0,0,0.25)] sm:max-h-[calc(100vh-3rem)]">
-            <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-5">
-              <div>
-                <p className="section-eyebrow">Pantalla del sistema</p>
-                <h3
-                  id="module-screenshot-title"
-                  className="mt-2 text-[1.35rem] font-semibold tracking-[-0.04em] text-[#171717]"
-                  aria-live="polite"
-                >
-                  {activeScreenshot.title}
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-[#4d4d4d]">
-                  {activeScreenshot.description}
-                </p>
-                {screenshots.length > 1 ? (
-                  <p className="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-[#666666]">
-                    {(activeIndex ?? 0) + 1} / {screenshots.length}
-                  </p>
-                ) : null}
-              </div>
-              <button
-                ref={closeButtonRef}
-                type="button"
-                className="button-secondary shrink-0"
-                onClick={closeLightbox}
-              >
-                Cerrar
-              </button>
-            </div>
-            <div
-              className="border-t border-[#ebebeb] p-3 sm:p-4"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+          <Image
+            key={activeScreenshot.src}
+            src={activeScreenshot.src}
+            alt={activeScreenshot.alt}
+            width={activeScreenshot.width}
+            height={activeScreenshot.height}
+            sizes="(min-width: 1024px) 900px, 96vw"
+          />
+          <span>Ampliar pantalla <i aria-hidden>↗</i></span>
+        </button>
+        <div className="module-stage-caption">
+          <div>
+            <span>{activeScreenshot.module}</span>
+            <h3>{activeScreenshot.title}</h3>
+            <p>{activeScreenshot.description}</p>
+          </div>
+          <div
+            className="module-controls"
+            aria-label="Navegar pantallas"
+            aria-live="polite"
+          >
+            <button type="button" onClick={showPrevious} disabled={activeIndex === 0} aria-label="Pantalla anterior">
+              ←
+            </button>
+            <span>{activeIndex + 1} / {screenshots.length}</span>
+            <button
+              type="button"
+              onClick={showNext}
+              disabled={activeIndex === screenshots.length - 1}
+              aria-label="Pantalla siguiente"
             >
-              <div className="overflow-hidden rounded-[8px] bg-[#fafafa] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]">
-                <Image
-                  src={activeScreenshot.src}
-                  alt={activeScreenshot.alt}
-                  width={activeScreenshot.width}
-                  height={activeScreenshot.height}
-                  sizes="(min-width: 1024px) 1040px, calc(100vw - 2rem)"
-                  className="h-auto max-h-[calc(100vh-14rem)] w-full object-contain"
-                  style={{ touchAction: "pinch-zoom" }}
-                />
-              </div>
-            </div>
+              →
+            </button>
           </div>
         </div>
-      ) : null}
-    </>
+      </div>
+
+      <dialog
+        ref={dialogRef}
+        className="media-dialog"
+        aria-labelledby={`${galleryId}-dialog-title`}
+        aria-describedby={`${galleryId}-dialog-description`}
+        onClose={() => openButtonRef.current?.focus()}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) dialogRef.current?.close();
+        }}
+      >
+        <div className="media-dialog-panel">
+          <header>
+            <div>
+              <span>{activeScreenshot.module}</span>
+              <h2 id={`${galleryId}-dialog-title`}>{activeScreenshot.title}</h2>
+              <p id={`${galleryId}-dialog-description`}>{activeScreenshot.description}</p>
+            </div>
+            <form method="dialog">
+              <button type="submit">Cerrar <span aria-hidden>×</span></button>
+            </form>
+          </header>
+          <div className="media-dialog-image">
+            <Image
+              src={activeScreenshot.src}
+              alt={activeScreenshot.alt}
+              width={activeScreenshot.width}
+              height={activeScreenshot.height}
+              sizes="96vw"
+            />
+          </div>
+          <div className="media-dialog-controls">
+            <button type="button" onClick={showPrevious} disabled={activeIndex === 0}>
+              ← Anterior
+            </button>
+            <span>{activeIndex + 1} / {screenshots.length}</span>
+            <button type="button" onClick={showNext} disabled={activeIndex === screenshots.length - 1}>
+              Siguiente →
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </div>
   );
 }

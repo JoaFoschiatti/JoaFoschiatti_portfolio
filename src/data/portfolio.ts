@@ -83,6 +83,8 @@ export type BriefOption = {
   value: string;
 };
 
+export type ContactService = BriefOption;
+
 export type BriefBuilderOptions = {
   industries: readonly BriefOption[];
   needs: readonly BriefOption[];
@@ -122,9 +124,9 @@ export const profile = {
   whatsappNumber: "5493482555038",
   whatsappDisplayNumber: "+54 9 3482 555038",
   heroTitle:
-    "Convertí planillas y mensajes sueltos en una herramienta que ordene tu negocio.",
+    "Diseño sistemas que convierten procesos dispersos en una operación clara.",
   heroSubtitle:
-    "Webs, sistemas y automatizaciones para comercios, profesionales y pymes. Uno de mis sistemas se usa todos los días en un comercio real.",
+    "Ingeniería, diseño y desarrollo para comercios, profesionales y pymes. Desde una web comercial hasta una herramienta de gestión que acompañe el trabajo de todos los días.",
   heroBadges: [
     "Turnos",
     "Stock",
@@ -133,11 +135,11 @@ export const profile = {
     "WhatsApp",
   ],
   navigation: [
-    { label: "Casos", href: "/#proyectos" },
-    { label: "Qué hago", href: "/#que-hago" },
+    { label: "Proyectos", href: "/#proyectos" },
+    { label: "Servicios", href: "/#que-hago" },
     { label: "Sistemas a medida", href: "/sistemas-a-medida" },
     { label: "Proceso", href: "/#proceso" },
-    { label: "Contacto", href: "/#contacto" },
+    { label: "Sobre mí", href: "/#sobre-mi" },
   ] satisfies NavigationItem[],
   briefQuestions: [
     "¿Qué querés resolver?",
@@ -145,7 +147,7 @@ export const profile = {
     "¿Quién usaría la herramienta?",
   ],
   footerSummary:
-    "Webs, sistemas y automatizaciones para negocios.",
+    "Ingeniería y desarrollo digital para negocios que necesitan trabajar con más claridad.",
 } as const;
 
 export const contactLinks = {
@@ -157,12 +159,20 @@ export const contactLinks = {
 } as const;
 
 export const valueStrip = [
-  "Sistemas en producción",
-  "Deploy en Vercel / AWS",
+  "Un sistema en uso real",
+  "Deploy en Vercel y AWS",
   "Integraciones con pagos y herramientas externas",
   "Código mantenible",
   "Pensado para el uso de todos los días",
 ] as const;
+
+export const contactServices = [
+  { label: "Sistema a medida", value: "sistema-a-medida" },
+  { label: "Web comercial", value: "web-comercial" },
+  { label: "Automatización", value: "automatizacion" },
+  { label: "Mejora de un sistema", value: "mejora-sistema" },
+  { label: "Todavía no lo sé", value: "a-definir" },
+] as const satisfies readonly ContactService[];
 
 export const offerCards = [
   {

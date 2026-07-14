@@ -1,5 +1,4 @@
 import Link from "next/link";
-import AvatarLightbox from "@/components/AvatarLightbox";
 import ContactCTA from "@/components/ContactCTA";
 import FaqSection from "@/components/FaqSection";
 import Hero from "@/components/Hero";
@@ -9,26 +8,28 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import {
   contactLinks,
+  contactServices,
   featuredProjects,
   homeFaqs,
   offerCards,
   personalTrust,
   processSteps,
   profile,
+  securityProjects,
+  valueStrip,
 } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
-import type { CSSProperties } from "react";
+
+const projectPriority = ["optica-focus", "comanda", "turnos-online"];
 
 export default function Home() {
   const whatsappHref =
     createWhatsAppLink(profile.whatsappNumber, contactLinks.whatsappMessage) ??
     "/#contacto";
-  const primaryProject = featuredProjects.find(
-    (project) => project.slug === "comanda",
+  const orderedProjects = [...featuredProjects].sort(
+    (a, b) => projectPriority.indexOf(a.slug) - projectPriority.indexOf(b.slug),
   );
-  const secondaryProjects = featuredProjects.filter(
-    (project) => project.slug !== "comanda",
-  );
+  const technicalProject = securityProjects[0];
 
   return (
     <>
@@ -39,148 +40,137 @@ export default function Home() {
         whatsappHref={whatsappHref}
       />
 
-      <section
-        id="proyectos"
-        className="section-anchor section-block section-shell"
-      >
-        <div className="home-projects-panel">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Casos reales"
-              title="Así resuelvo problemas como el tuyo."
-              description="El sistema de la óptica se usa todos los días en el mostrador. Entrá a cada caso para ver las pantallas."
-              accent="var(--color-accent-coral)"
-            />
-          </Reveal>
-          <div className="mt-8 space-y-6 md:mt-10">
-            {primaryProject ? (
-              <Reveal>
-                <ProjectCard
-                  project={primaryProject}
-                  variant="featured"
-                  showRepoLink={false}
-                />
-              </Reveal>
-            ) : null}
-            <div className="grid gap-6">
-              {secondaryProjects.map((project, index) => (
-                <Reveal key={project.slug} delay={index * 60}>
-                  <ProjectCard
-                    project={project}
-                    variant="horizontal"
-                    showRepoLink={false}
-                  />
-                </Reveal>
-              ))}
-            </div>
-          </div>
+      <section className="proof-rail" aria-label="Criterios de trabajo">
+        <div className="section-shell proof-rail-grid">
+          {valueStrip.map((item, index) => (
+            <p key={item}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              {item}
+            </p>
+          ))}
         </div>
       </section>
 
-      <OfferOverview offers={offerCards} />
-
-      <section className="section-shell pb-16 md:pb-20">
-        <Reveal>
-        <div className="home-personal-card">
-          <AvatarLightbox
-            src="/projects/quien-esta-detras.png"
-            alt="Foto de Joaquín Sánchez Foschiatti"
-            width={1254}
-            height={1254}
+      <section id="proyectos" className="section-anchor projects-section">
+        <div className="section-shell section-block">
+          <SectionHeading
+            index="01"
+            eyebrow="Proyectos seleccionados"
+            title="Software que se entiende antes de explicarse."
+            description="Tres sistemas con objetivos y estados distintos. Cada caso muestra el problema, la decisión de producto y las pantallas que sostienen la operación."
           />
-          <div className="min-w-0">
-            <p
-              className="section-eyebrow"
-              style={
-                { "--eyebrow-color": "var(--color-accent-amber)" } as CSSProperties
-              }
-            >
-              {personalTrust.eyebrow}
-            </p>
-            <h2 className="section-title mt-4">{personalTrust.title}</h2>
-            <p className="section-copy mt-5">{personalTrust.description}</p>
-            <div className="mt-6 grid gap-3">
-              {personalTrust.points.map((point) => (
-                <div key={point} className="home-personal-point">
-                  <span className="status-dot text-[var(--color-accent-teal)]" aria-hidden />
-                  <span>{point}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        </Reveal>
-      </section>
 
-      <section
-        id="proceso"
-        className="section-anchor section-shell pb-16 md:pb-20"
-      >
-        <div className="home-compact-proof">
-          <Reveal>
-          <div>
-            <p className="section-eyebrow">Cómo trabajo</p>
-            <h2 className="section-title mt-4">
-              Del problema a una primera versión usable.
-            </h2>
-            <p className="section-copy mt-5">
-              Primero entendemos el flujo. Después construimos lo mínimo útil.
-            </p>
-            <div className="mt-7">
-              <Link className="button-secondary" href="/sistemas-a-medida">
-                Ver qué puedo construir
-              </Link>
-            </div>
-          </div>
-          </Reveal>
-
-          <div className="grid gap-4">
-            {processSteps.map((step, index) => (
-              <Reveal key={step.label} delay={index * 60}>
-                <article
-                  className="home-step-row"
-                  style={{ "--process-color": step.color } as CSSProperties}
-                >
-                  <span className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-[var(--color-subtle)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p
-                      className="font-mono text-[0.72rem] uppercase tracking-[0.16em]"
-                      style={{ color: step.labelColor ?? step.color }}
-                    >
-                      {step.label}
-                    </p>
-                    <h3 className="mt-2 text-[1.08rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-[0.95rem] leading-7 text-[var(--color-muted)]">
-                      {step.description}
-                    </p>
-                  </div>
-                </article>
+          <div className="projects-list">
+            {orderedProjects.map((project, index) => (
+              <Reveal key={project.slug} delay={index * 70}>
+                <ProjectCard project={project} index={index} />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      <OfferOverview offers={offerCards} />
+
+      <section id="sobre-mi" className="section-anchor about-section">
+        <div className="section-shell section-block">
+          <SectionHeading
+            index="03"
+            eyebrow={personalTrust.eyebrow}
+            title="La tecnología importa cuando mejora el trabajo real."
+            description="Trabajo de forma directa: entiendo la operación, diseño el flujo y construyo una base técnica que pueda mantenerse después del lanzamiento."
+          />
+
+          <div className="about-grid">
+            <article className="about-statement">
+              <p className="about-quote">“{personalTrust.title}”</p>
+              <p>{personalTrust.description}</p>
+              <ul>
+                {personalTrust.points.map((point) => (
+                  <li key={point}>
+                    <span aria-hidden>↳</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {technicalProject ? (
+              <aside className="technical-note">
+                <div className="technical-note-topline">
+                  <span>Criterio técnico</span>
+                  <small>GitHub / repositorio público</small>
+                </div>
+                <h3>{technicalProject.name}</h3>
+                <p>{technicalProject.description}</p>
+                <div className="technical-tags">
+                  {technicalProject.stack.slice(0, 5).map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+                {technicalProject.repoUrl ? (
+                  <a
+                    className="text-link text-link-light"
+                    href={technicalProject.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ver repositorio <span aria-hidden>↗</span>
+                  </a>
+                ) : null}
+              </aside>
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso" className="section-anchor process-section">
+        <div className="section-shell section-block">
+          <SectionHeading
+            index="04"
+            eyebrow="Proceso"
+            title="Del problema a una primera versión usable."
+            description="Un recorrido corto, visible y con decisiones concretas. Primero se entiende; después se construye."
+          />
+
+          <ol className="process-list">
+            {processSteps.map((step, index) => (
+              <li key={step.label}>
+                <div className="process-number">{String(index + 1).padStart(2, "0")}</div>
+                <div className="process-content">
+                  <span>{step.label}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="process-link-row">
+            <p>¿Querés ver qué puede entrar en una primera versión?</p>
+            <Link className="text-link" href="/sistemas-a-medida">
+              Explorar sistemas a medida <span aria-hidden>↗</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <FaqSection
         id="faq"
-        title="Dudas normales antes de escribir."
-        description="Abrí solo lo que necesites resolver antes de consultar."
+        title="Antes de empezar, estas son las dudas más comunes."
+        description="Respuestas directas sobre alcance, punto de partida y continuidad después de publicar."
         faqs={homeFaqs}
       />
 
-      <Reveal>
-        <ContactCTA
-          title="¿Hay algo de tu negocio que querés simplificar?"
-          description="Mandame el problema. No hace falta que tengas definida la solución."
-          whatsappHref={whatsappHref}
-          email={`mailto:${contactLinks.email}`}
-          briefQuestions={profile.briefQuestions}
-        />
-      </Reveal>
+      <ContactCTA
+        title="Empecemos por el proceso que hoy te quita claridad."
+        description="No hace falta llegar con una solución definida. Contame cómo trabajás hoy y preparo el contexto para continuar por WhatsApp o email."
+        whatsappHref={whatsappHref}
+        whatsappDisplayNumber={profile.whatsappDisplayNumber}
+        email={contactLinks.email}
+        location={profile.location}
+        services={contactServices}
+      />
     </>
   );
 }

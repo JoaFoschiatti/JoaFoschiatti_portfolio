@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import BriefBuilder from "@/components/BriefBuilder";
+import ContactCTA from "@/components/ContactCTA";
 import FaqSection from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
 import StartOptionsSection from "@/components/StartOptionsSection";
+import StatusPill from "@/components/StatusPill";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import {
-  briefBuilderOptions,
+  contactLinks,
+  contactServices,
+  getProjectBySlug,
   profile,
   systemsFaqs,
   systemsStartOptions,
@@ -22,18 +25,13 @@ const pageDescription =
 export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
-  alternates: {
-    canonical: `${profile.siteUrl}/sistemas-a-medida`,
-  },
+  alternates: { canonical: `${profile.siteUrl}/sistemas-a-medida` },
   openGraph: {
     title: pageTitle,
     description: pageDescription,
     url: `${profile.siteUrl}/sistemas-a-medida`,
   },
-  twitter: {
-    title: pageTitle,
-    description: pageDescription,
-  },
+  twitter: { title: pageTitle, description: pageDescription },
 };
 
 export default function CustomSystemsPage() {
@@ -42,70 +40,78 @@ export default function CustomSystemsPage() {
       profile.whatsappNumber,
       "Hola Joaquín, vi tu portfolio y quiero ordenar un proceso de mi negocio con una web, sistema o automatización.",
     ) ?? "/#contacto";
+  const proofProject = getProjectBySlug("optica-focus");
 
   return (
     <>
-      <section className="hero-band">
-        <div className="section-shell hero-section grid min-w-0 items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <div className="min-w-0">
-            <p className="section-eyebrow">Sistemas a medida</p>
-            <h1 className="mt-5 max-w-[20.5rem] text-[clamp(2.2rem,5vw,3.65rem)] font-semibold leading-[1.02] tracking-[-0.05em] text-[#f8fbfb] sm:max-w-4xl">
-              Ordená un proceso real en un sistema simple de usar.
-            </h1>
-            <p className="mt-6 max-w-3xl text-[clamp(1.05rem,1.9vw,1.22rem)] leading-8 text-[#c6d1da]">
-              Si hoy dependés de planillas, mensajes sueltos, tareas manuales o sistemas que no acompañan la operación, podemos convertir ese flujo en una herramienta propia.
+      <section className="systems-hero">
+        <div className="hero-grid-lines" aria-hidden />
+        <div className="section-shell systems-hero-grid">
+          <div className="systems-hero-copy">
+            <p className="hero-kicker">
+              <span aria-hidden />
+              Sistemas a medida
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <WhatsAppButton href={whatsappHref}>
-                Contame tu proceso por WhatsApp
-              </WhatsAppButton>
-              <Link className="button-secondary" href="/#proyectos">
-                Ver casos reales
+            <h1>Una herramienta propia para una forma de trabajar propia.</h1>
+            <p>
+              Cuando las planillas, los mensajes y las tareas manuales empiezan
+              a frenar la operación, diseño un sistema que ordena el flujo sin
+              agregar complejidad innecesaria.
+            </p>
+            <div className="hero-actions">
+              <Link className="button-accent" href="#contacto">
+                Contar mi proceso <span aria-hidden>↓</span>
               </Link>
+              <WhatsAppButton className="button-whatsapp-quiet" href={whatsappHref}>
+                Consultar por WhatsApp
+              </WhatsAppButton>
             </div>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {["Stock", "Turnos", "Caja", "Pedidos", "Reportes", "WhatsApp", "Pagos"].map(
-                (item) => (
-                  <span
-                    key={item}
-                    className="inline-flex cursor-default select-none items-center rounded-full bg-white/[0.08] px-3 py-1.5 font-mono text-[0.76rem] font-medium leading-none text-[#c8d8d6] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)]"
-                  >
-                    {item}
-                  </span>
-                ),
-              )}
+            <div className="systems-tags">
+              {[
+                "Stock",
+                "Turnos",
+                "Caja",
+                "Pedidos",
+                "Reportes",
+                "WhatsApp",
+                "Pagos",
+              ].map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </div>
           </div>
 
-          <div className="hero-visual-frame custom-systems-hero-visual w-full min-w-0 sm:mx-auto sm:max-w-[30rem] lg:mx-0 lg:max-w-none">
+          <div className="systems-hero-visual">
+            <div className="project-browser-bar" aria-hidden>
+              <span><i /><i /><i /></span>
+              <small>proceso → sistema</small>
+            </div>
             <Image
               src="/sistemas-a-medida-visual-v2.png"
               alt="Proceso operativo disperso que se transforma en un sistema a medida claro y conectado"
               width={1448}
               height={1086}
               priority
-              sizes="(min-width: 1024px) 46vw, 100vw"
+              sizes="(min-width: 1024px) 48vw, 100vw"
             />
           </div>
         </div>
       </section>
 
-      <section className="section-band section-band-cool hero-adjacent-band hero-adjacent-content-band">
-        <div className="section-block section-shell">
+      <section className="systems-usecases">
+        <div className="section-shell section-block">
           <SectionHeading
-            eyebrow="Qué puede resolver"
-            title="Un sistema a medida tiene sentido cuando el proceso ya importa."
-            description="La idea no es informatizar todo: es encontrar qué parte del negocio genera fricción y convertirla en una herramienta que el equipo pueda usar todos los días."
+            index="01"
+            eyebrow="Dónde aporta valor"
+            title="El punto no es digitalizar todo. Es resolver la fricción correcta."
+            description="Un sistema a medida tiene sentido cuando el proceso ya es importante, se repite y necesita una forma más clara de funcionar."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {systemsUseCases.map((useCase) => (
-              <article key={useCase.title} className="surface-card p-5">
-                <h3 className="text-[1.16rem] font-semibold tracking-[-0.03em] text-[var(--color-foreground)]">
-                  {useCase.title}
-                </h3>
-                <p className="mt-3 text-[0.96rem] leading-7 text-[var(--color-muted)]">
-                  {useCase.description}
-                </p>
+          <div className="systems-usecase-list">
+            {systemsUseCases.map((useCase, index) => (
+              <article key={useCase.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{useCase.title}</h3>
+                <p>{useCase.description}</p>
               </article>
             ))}
           </div>
@@ -114,54 +120,53 @@ export default function CustomSystemsPage() {
 
       <StartOptionsSection
         id="formas-de-empezar"
-        title="Podemos empezar chico o ir directo a ordenar un proceso completo."
-        description="No hace falta cerrar todo de entrada. Primero se entiende el problema, después se define qué versión aporta valor real y qué queda para una etapa siguiente."
+        title="La escala se define después de entender el proceso."
+        description="Podemos validar una primera versión, construir un sistema completo o mejorar lo que ya existe. El alcance responde a la necesidad real."
         options={systemsStartOptions}
-        ctaHref={whatsappHref}
-        ctaLabel="Consultar por WhatsApp"
+        ctaHref="#contacto"
+        ctaLabel="Preparar una consulta"
       />
 
-      <section id="brief" className="section-anchor section-band section-band-muted">
-        <div className="section-block section-shell">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
-            <div className="max-w-2xl">
-              <p className="section-eyebrow">Brief interactivo</p>
-              <h2 className="section-title mt-4">
-                Convertí una idea suelta en una consulta concreta.
-              </h2>
-              <p className="section-copy mt-5">
-                El primer mensaje no tiene que ser perfecto. Con cuatro datos alcanza para entender si conviene una web, un sistema interno, una automatización o una primera versión usable.
-              </p>
+      {proofProject?.homeVisual ? (
+        <section className="systems-proof-section">
+          <div className="section-shell systems-proof-grid">
+            <div className="systems-proof-copy">
+              <p className="section-eyebrow">Prueba de uso real</p>
+              <StatusPill status={proofProject.status} />
+              <h2>Óptica Focus ordena el trabajo diario de un comercio real.</h2>
+              <p>{proofProject.description}</p>
+              <Link className="text-link text-link-light" href={`/proyectos/${proofProject.slug}`}>
+                Ver el caso completo <span aria-hidden>↗</span>
+              </Link>
             </div>
-            <BriefBuilder
-              options={briefBuilderOptions}
-              whatsappNumber={profile.whatsappNumber}
-            />
+            <div className="systems-proof-visual">
+              <Image
+                src={proofProject.homeVisual.src}
+                alt={proofProject.homeVisual.alt}
+                width={proofProject.homeVisual.width}
+                height={proofProject.homeVisual.height}
+                sizes="(min-width: 1024px) 52vw, 100vw"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <FaqSection
-        title="Dudas normales antes de empezar."
-        description="Estas respuestas ayudan a ubicar el alcance sin convertir la consulta inicial en una reunión larga."
+        title="Preguntas antes de construir."
+        description="Algunas definiciones útiles para ubicar el alcance sin convertir la primera conversación en una reunión interminable."
         faqs={systemsFaqs}
       />
 
-      <section className="section-shell pb-20 md:pb-24">
-        <div className="surface-card-strong contact-card p-6 md:p-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="max-w-2xl">
-              <p className="section-eyebrow">Siguiente paso</p>
-              <h2 className="mt-4 text-[clamp(1.8rem,3vw,2.35rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[var(--color-foreground)]">
-                Si hay un proceso que ya te está costando tiempo, empecemos por ahí.
-              </h2>
-            </div>
-            <WhatsAppButton className="shrink-0" href={whatsappHref}>
-              Consultar por WhatsApp
-            </WhatsAppButton>
-          </div>
-        </div>
-      </section>
+      <ContactCTA
+        title="Contame cómo funciona hoy. El sistema se define después."
+        description="Con una descripción corta del proceso, las personas que lo usan y el problema principal alcanza para empezar."
+        whatsappHref={whatsappHref}
+        whatsappDisplayNumber={profile.whatsappDisplayNumber}
+        email={contactLinks.email}
+        location={profile.location}
+        services={contactServices}
+      />
     </>
   );
 }

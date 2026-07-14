@@ -7,7 +7,6 @@ import SectionHeading from "@/components/SectionHeading";
 import StatusPill from "@/components/StatusPill";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import {
-  contactLinks,
   featuredProjects,
   getProjectBySlug,
   profile,
@@ -18,10 +17,10 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return featuredProjects.map((project) => ({
-    slug: project.slug,
-  }));
+  return featuredProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata(
@@ -30,16 +29,12 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const project = getProjectBySlug(slug);
 
-  if (!project) {
-    return {};
-  }
+  if (!project) return {};
 
   return {
     title: `${project.name} — ${project.category}`,
     description: project.description,
-    alternates: {
-      canonical: `${profile.siteUrl}/proyectos/${project.slug}`,
-    },
+    alternates: { canonical: `${profile.siteUrl}/proyectos/${project.slug}` },
     openGraph: {
       title: `${project.name} — ${project.category}`,
       description: project.description,
@@ -59,107 +54,114 @@ export default async function ProjectPage(props: ProjectPageProps) {
   const { slug } = await props.params;
   const project = getProjectBySlug(slug);
 
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   const whatsappHref =
-    createWhatsAppLink(profile.whatsappNumber, contactLinks.whatsappMessage) ??
-    "/#contacto";
-
+    createWhatsAppLink(
+      profile.whatsappNumber,
+      `Hola Joaquín, vi el caso ${project.name} en tu portfolio y quiero conversar sobre un proyecto similar.`,
+    ) ?? "/#contacto";
   const otherProjects = featuredProjects.filter(
     (other) => other.slug !== project.slug,
   );
+  const resultLabel =
+    project.status === "En uso real" ? "Evidencia en operación" : "Impacto esperado";
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.name,
+    description: project.description,
+    applicationCategory: "BusinessApplication",
+    creator: {
+      "@type": "Person",
+      name: profile.fullName,
+      url: profile.siteUrl,
+    },
+    url: `${profile.siteUrl}/proyectos/${project.slug}`,
+  };
 
   return (
     <>
-      <section className="section-block section-shell pt-12 md:pt-20">
-        <div className="case-hero-card p-6 md:p-8 lg:p-10">
-          <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
-            <div>
-              <div className="flex flex-wrap items-center gap-3">
-                {project.evidenceBadges?.map((badge) => (
-                  <span key={badge} className="evidence-pill">
-                    {badge}
-                  </span>
-                ))}
-                <span className="pill">{project.category}</span>
-                <StatusPill status={project.status} />
+      <section className="case-hero">
+        <div className="hero-grid-lines" aria-hidden />
+        <div className="section-shell case-hero-grid">
+          <div className="case-hero-copy">
+            <Link className="case-breadcrumb" href="/#proyectos">
+              <span aria-hidden>←</span> Proyectos
+            </Link>
+            <div className="case-labels">
+              <span>{project.category}</span>
+              <StatusPill status={project.status} />
+            </div>
+            <h1>{project.name}</h1>
+            <p className="case-hero-description">{project.description}</p>
+
+            <dl className="case-hero-facts">
+              <div>
+                <dt>Tipo de proyecto</dt>
+                <dd>{project.projectType ?? project.category}</dd>
               </div>
-              <Link
-                href="/#proyectos"
-                className="mt-6 inline-flex text-sm text-[#b7c5d0] hover:text-white"
-              >
-                Volver a proyectos
-              </Link>
-              <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[#f8fbfb]">
-                {project.name}
-              </h1>
-              <p className="mt-5 max-w-3xl text-[1.08rem] leading-8 text-[#c6d1da]">
-                {project.description}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <WhatsAppButton href={whatsappHref}>
-                  Consultar por WhatsApp
-                </WhatsAppButton>
+              <div>
+                <dt>Pensado para</dt>
+                <dd>{project.idealFor ?? "Negocios con operación diaria"}</dd>
+              </div>
+            </dl>
+
+            <WhatsAppButton className="button-whatsapp-quiet" href={whatsappHref}>
+              Consultar por un proyecto similar
+            </WhatsAppButton>
+          </div>
+
+          {project.caseHeroVisual ? (
+            <div className="case-hero-visual">
+              <div className="project-browser-bar" aria-hidden>
+                <span><i /><i /><i /></span>
+                <small>{project.name}</small>
+              </div>
+              <Image
+                src={project.caseHeroVisual.src}
+                alt={project.caseHeroVisual.alt}
+                width={project.caseHeroVisual.width}
+                height={project.caseHeroVisual.height}
+                priority
+                sizes="(min-width: 1024px) 470px, 92vw"
+              />
+              <div className="case-evidence-badge">
+                {project.evidenceBadges?.[0] ?? "Pantallas del sistema"}
               </div>
             </div>
-            {project.caseHeroVisual ? (
-              <div className="case-hero-visual">
-                <div className="browser-frame">
-                  <span className="browser-frame-bar">
-                    <span className="browser-frame-dots" aria-hidden>
-                      <span />
-                      <span />
-                      <span />
-                    </span>
-                    <span className="browser-frame-label">{project.name}</span>
-                  </span>
-                  <Image
-                    src={project.caseHeroVisual.src}
-                    alt={project.caseHeroVisual.alt}
-                    width={project.caseHeroVisual.width}
-                    height={project.caseHeroVisual.height}
-                    className="h-auto w-full"
-                    sizes="(min-width: 1024px) 440px, calc(100vw - 2rem)"
-                    priority
-                  />
-                </div>
-              </div>
-            ) : null}
-          </div>
+          ) : null}
         </div>
       </section>
 
-      <section className="section-shell grid gap-6 pb-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <article className="case-context-card case-context-card-problem p-6 md:p-7">
-          <p className="section-eyebrow">Problema</p>
-          <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
-            Qué ordena este sistema
-          </h2>
-          <p className="mt-4 text-[1rem] leading-8 text-[#4d4d4d]">
-            {project.problem}
-          </p>
-        </article>
-        <article className="case-context-card case-context-card-solution p-6 md:p-7">
-          <p className="section-eyebrow">Solución</p>
-          <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
-            Cómo lo planteo
-          </h2>
-          <p className="mt-4 text-[1rem] leading-8 text-[#4d4d4d]">
-            {project.solution}
-          </p>
-        </article>
+      <section className="case-impact-section">
+        <div className="section-shell case-impact-grid">
+          <article>
+            <span>01 — Problema</span>
+            <h2>Qué necesitaba ordenarse</h2>
+            <p>{project.problem}</p>
+          </article>
+          <article>
+            <span>02 — Intervención</span>
+            <h2>Cómo se resolvió</h2>
+            <p>{project.solution}</p>
+          </article>
+          <article>
+            <span>03 — {resultLabel}</span>
+            <h2>{project.status === "En uso real" ? "Qué sostiene hoy" : "Qué busca mejorar"}</h2>
+            <p>{project.businessGain ?? project.homeResult ?? project.solution}</p>
+          </article>
+        </div>
       </section>
 
-      <section className="section-anchor section-block section-shell pt-6">
-        <div className="case-modules-gallery">
-          <div className="case-modules-heading">
-            <SectionHeading
-              title="Módulos principales"
-              description="La idea no es sumar pantallas por sumar, sino cubrir los puntos que hacen falta en la operación diaria."
-            />
-          </div>
+      <section className="case-modules-section">
+        <div className="section-shell section-block">
+          <SectionHeading
+            index="04"
+            eyebrow="Producto en detalle"
+            title="Pantallas que responden a una tarea concreta."
+            description="Las interfaces se muestran con datos demo cuando el caso es privado. Podés abrir cada pantalla para revisar el detalle."
+          />
           <ProjectModules
             modules={project.modules}
             moduleScreenshots={project.moduleScreenshots}
@@ -167,77 +169,81 @@ export default async function ProjectPage(props: ProjectPageProps) {
         </div>
       </section>
 
-      <section className="section-shell grid gap-6 pb-8 md:grid-cols-[1.1fr_0.9fr]">
-        <article className="surface-card p-6 md:p-7">
-          <p className="section-eyebrow">{project.stackLabel}</p>
-          <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
-            Stack o capacidades visibles
-          </h2>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.stack.map((item) => (
-              <span key={item} className="pill">
-                {item}
-              </span>
-            ))}
-          </div>
-          {project.repoUrl ? (
-            <div className="mt-6">
-              <a
-                className="button-secondary"
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Repositorio técnico
-              </a>
+      <section className="case-details-section">
+        <div className="section-shell case-details-grid">
+          <article>
+            <p className="section-eyebrow">{project.stackLabel}</p>
+            <h2>Base técnica y capacidades</h2>
+            <div className="case-tags">
+              {project.stack.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </div>
-          ) : null}
-        </article>
-        <article className="surface-card p-6 md:p-7">
-          <p className="section-eyebrow">Notas</p>
-          <h2 className="mt-4 text-[1.4rem] font-semibold tracking-[-0.04em] text-[#171717]">
-            Criterio de presentación
-          </h2>
-          <ul className="mt-5 space-y-4 text-[1rem] leading-8 text-[#4d4d4d]">
-            {project.notes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
-        </article>
+            {project.repoUrl ? (
+              <a className="text-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+                Ver repositorio <span aria-hidden>↗</span>
+              </a>
+            ) : null}
+          </article>
+
+          <article>
+            <p className="section-eyebrow">Privacidad y evidencia</p>
+            <h2>Qué se muestra y qué se protege</h2>
+            <ul>
+              {project.notes.map((note) => (
+                <li key={note}>
+                  <span aria-hidden>↳</span>
+                  {note}
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
       </section>
 
-      {otherProjects.length > 0 ? (
-        <section className="section-block section-shell">
-          <p className="section-eyebrow">Otros casos</p>
-          <h2 className="section-title mt-4">
-            Seguí explorando otros procesos ordenados.
-          </h2>
-          <p className="section-copy mt-5">
-            Cada negocio tiene su propio cuello de botella. Estos son los otros
-            sistemas que armé.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <section className="related-projects">
+        <div className="section-shell section-block">
+          <SectionHeading
+            eyebrow="Otros proyectos"
+            title="Distintos negocios, el mismo criterio de claridad."
+            description="Cada caso empieza en un flujo diferente y termina en una herramienta pensada para su operación."
+          />
+          <div className="related-projects-grid">
             {otherProjects.map((other) => (
-              <Link
-                key={other.slug}
-                href={`/proyectos/${other.slug}`}
-                className="surface-card-strong group flex flex-col p-6 transition-all hover:-translate-y-0.5"
-              >
-                <p className="section-eyebrow">{other.category}</p>
-                <h3 className="mt-4 text-[1.25rem] font-semibold tracking-[-0.04em] text-[var(--color-foreground)]">
-                  {other.name}
-                </h3>
-                <p className="mt-3 text-[0.96rem] leading-7 text-[var(--color-muted)]">
-                  {other.problem}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-1 font-mono text-[0.72rem] font-medium uppercase tracking-[0.16em] text-[var(--color-accent-teal)] transition-all group-hover:gap-2">
-                  Ver caso <span aria-hidden>→</span>
-                </span>
+              <Link key={other.slug} href={`/proyectos/${other.slug}`}>
+                <span>{other.category}</span>
+                <h3>{other.name}</h3>
+                <p>{other.problem}</p>
+                <i aria-hidden>↗</i>
               </Link>
             ))}
           </div>
-        </section>
-      ) : null}
+        </div>
+      </section>
+
+      <section className="case-final-cta">
+        <div className="section-shell case-final-cta-inner">
+          <div>
+            <p>¿Hay un proceso parecido en tu negocio?</p>
+            <h2>Podemos empezar por entenderlo.</h2>
+          </div>
+          <div>
+            <Link className="button-accent" href="/#contacto">
+              Preparar una consulta <span aria-hidden>↗</span>
+            </Link>
+            <WhatsAppButton className="button-whatsapp-quiet" href={whatsappHref}>
+              WhatsApp directo
+            </WhatsAppButton>
+          </div>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
     </>
   );
 }

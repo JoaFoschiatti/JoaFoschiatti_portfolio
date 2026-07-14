@@ -1,6 +1,31 @@
 # JoaFoschiatti Portfolio
 
-Portfolio en Next.js (App Router + TypeScript) con página principal one-page y páginas de caso por proyecto.
+Portfolio editorial en Next.js 16 (App Router + TypeScript) con portada, página de servicios y casos de estudio por proyecto.
+
+## Incluye
+
+- Diseño responsive con tipografía editorial, navegación accesible y foco visible.
+- Casos de Óptica Focus, Comanda y Turnos online con galerías ampliables.
+- Metadata, datos estructurados, Open Graph, sitemap, robots y manifest.
+- Formulario de contacto con validación en cliente y servidor.
+- Fallback nativo `POST`: los datos no se guardan ni se exponen en la URL; la API solo prepara enlaces de WhatsApp y email.
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+Abrir [http://localhost:3000](http://localhost:3000).
+
+Comandos de verificación:
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
 
 ## Deploy en Vercel
 

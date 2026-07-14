@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [];
   }
 
-  const lastModified = new Date();
+  const lastModified = new Date("2026-07-14T00:00:00.000Z");
 
   return [
     {

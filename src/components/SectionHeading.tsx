@@ -1,31 +1,28 @@
-import type { CSSProperties } from "react";
-
 type SectionHeadingProps = {
   title: string;
   description: string;
   eyebrow?: string;
-  /** CSS color for the eyebrow, e.g. "var(--color-accent-coral)". */
-  accent?: string;
+  index?: string;
+  light?: boolean;
 };
 
 export default function SectionHeading({
   title,
   description,
   eyebrow,
-  accent,
+  index,
+  light = false,
 }: SectionHeadingProps) {
   return (
-    <div
-      className="max-w-3xl"
-      style={
-        accent ? ({ "--eyebrow-color": accent } as CSSProperties) : undefined
-      }
-    >
-      {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
-      <h2 className={eyebrow ? "section-title mt-4" : "section-title"}>
-        {title}
-      </h2>
-      <p className="section-copy mt-5">{description}</p>
+    <div className="section-heading" data-theme={light ? "dark" : "light"}>
+      <div className="section-heading-label">
+        {index ? <span>{index}</span> : null}
+        {eyebrow ? <p>{eyebrow}</p> : null}
+      </div>
+      <div>
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
     </div>
   );
 }

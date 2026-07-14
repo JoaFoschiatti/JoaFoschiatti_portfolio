@@ -1,3 +1,4 @@
+import SectionHeading from "@/components/SectionHeading";
 import type { FaqItem } from "@/data/portfolio";
 
 type FaqSectionProps = {
@@ -20,38 +21,26 @@ export default function FaqSection({
   return (
     <section
       id={id}
-      className={
-        compact
-          ? "section-anchor section-shell py-14 md:py-16"
-          : "section-anchor section-block section-shell"
-      }
+      className={`section-anchor faq-section ${compact ? "faq-section-compact" : ""}`}
     >
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start">
-        <div className="max-w-2xl">
-          <p className="section-eyebrow">{eyebrow}</p>
-          <h2 className="section-title mt-4">{title}</h2>
-          <p className="section-copy mt-5">{description}</p>
-        </div>
-
-        <div className="grid gap-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="faq-item group">
-              <summary className="faq-summary">
+      <div className="section-shell section-block">
+        <SectionHeading
+          index="05"
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+        />
+        <div className="faq-list">
+          {faqs.map((faq, index) => (
+            <details key={faq.question} className="faq-row" name="portfolio-faq">
+              <summary>
+                <span className="faq-index">{String(index + 1).padStart(2, "0")}</span>
                 <span>{faq.question}</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
-                  aria-hidden
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+                <i aria-hidden>+</i>
               </summary>
-              <p className="faq-answer">{faq.answer}</p>
+              <div className="faq-answer">
+                <p>{faq.answer}</p>
+              </div>
             </details>
           ))}
         </div>
