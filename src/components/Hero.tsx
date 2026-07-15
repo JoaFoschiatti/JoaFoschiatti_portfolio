@@ -46,23 +46,23 @@ export default function Hero({
           </div>
         </div>
 
-        <div className="hero-portrait-column">
-          <div className="portrait-orbit portrait-orbit-one" aria-hidden />
-          <div className="portrait-orbit portrait-orbit-two" aria-hidden />
-          <figure className="hero-portrait">
-            <div className="portrait-image-wrap">
+        <div className="hero-visual-column">
+          <div className="hero-visual-orbit hero-visual-orbit-one" aria-hidden />
+          <div className="hero-visual-orbit hero-visual-orbit-two" aria-hidden />
+          <figure className="hero-visual-card">
+            <div className="hero-visual-image-wrap">
               <Image
-                src="/projects/quien-esta-detras.png"
-                alt="Retrato de Joaquín Sánchez Foschiatti"
-                width={1254}
-                height={1254}
-                priority
-                sizes="(min-width: 1024px) 430px, (min-width: 640px) 55vw, 86vw"
+                src="/hero-operacion-clara-sketch-v3.png"
+                alt="Boceto a lápiz de procesos dispersos que convergen en una operación ordenada"
+                width={1024}
+                height={1536}
+                preload
+                sizes="(min-width: 1024px) 480px, (min-width: 640px) 82vw, 86vw"
               />
             </div>
             <figcaption>
-              <span>Ingeniero en Sistemas</span>
-              <span>Diseño + Desarrollo</span>
+              <span>Procesos dispersos</span>
+              <span>Operación clara</span>
             </figcaption>
           </figure>
         </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ContactCTA from "@/components/ContactCTA";
 import FaqSection from "@/components/FaqSection";
@@ -15,7 +16,6 @@ import {
   personalTrust,
   processSteps,
   profile,
-  securityProjects,
   valueStrip,
 } from "@/data/portfolio";
 import { createWhatsAppLink } from "@/lib/whatsapp";
@@ -29,8 +29,6 @@ export default function Home() {
   const orderedProjects = [...featuredProjects].sort(
     (a, b) => projectPriority.indexOf(a.slug) - projectPriority.indexOf(b.slug),
   );
-  const technicalProject = securityProjects[0];
-
   return (
     <>
       <Hero
@@ -95,31 +93,24 @@ export default function Home() {
               </ul>
             </article>
 
-            {technicalProject ? (
-              <aside className="technical-note">
-                <div className="technical-note-topline">
-                  <span>Criterio técnico</span>
-                  <small>GitHub / repositorio público</small>
+            <figure className="about-portrait">
+              <div className="about-portrait-image">
+                <Image
+                  src="/projects/quien-esta-detras.png"
+                  alt="Retrato de Joaquín Sánchez Foschiatti"
+                  width={1254}
+                  height={1254}
+                  sizes="(min-width: 1024px) 500px, (min-width: 640px) 82vw, 86vw"
+                />
+              </div>
+              <figcaption>
+                <div>
+                  <strong>Joaquín Sánchez Foschiatti</strong>
+                  <span>Ingeniero en Sistemas</span>
                 </div>
-                <h3>{technicalProject.name}</h3>
-                <p>{technicalProject.description}</p>
-                <div className="technical-tags">
-                  {technicalProject.stack.slice(0, 5).map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-                {technicalProject.repoUrl ? (
-                  <a
-                    className="text-link text-link-light"
-                    href={technicalProject.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Ver repositorio <span aria-hidden>↗</span>
-                  </a>
-                ) : null}
-              </aside>
-            ) : null}
+                <span>Rosario, Argentina</span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
